@@ -78,7 +78,7 @@ CREATE TABLE UserTransactions (
     ,FOREIGN KEY (BuyerID)
         REFERENCES Users(UserID)
         ON DELETE CASCADE
-)
+);
 
 -- CompanyTransaction Table --
 CREATE TABLE CompanyTransactions (
@@ -94,4 +94,4 @@ CREATE TABLE CompanyTransactions (
     ,FOREIGN KEY (BuyerID)
         REFERENCES Users(UserID)
         ON DELETE CASCADE
-)
+);

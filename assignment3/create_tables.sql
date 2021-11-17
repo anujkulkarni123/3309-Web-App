@@ -9,7 +9,7 @@ CREATE TABLE Users (
     ,Address VARCHAR(100)
     ,Rating INT CHECK(Rating IN (1, 2, 3, 4, 5))
     ,PRIMARY KEY (UserID)
-)
+);
 
 -- Tool Table --
 CREATE TABLE AvailableTools (

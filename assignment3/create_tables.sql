@@ -18,7 +18,7 @@ CREATE TABLE Companies (
     ,Address VARCHAR(100)
     ,Rating INT CHECK(Rating IN (1, 2, 3, 4, 5))
     ,PRIMARY KEY (CompanyID)
-)
+);
 
 -- AvailableTools Table --
 CREATE TABLE AvailableTools (

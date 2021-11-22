@@ -3,9 +3,9 @@
 -- Users Table --
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT
-    ,Username VARCHAR(50)
-    ,Password VARCHAR(50)
-    ,CreditCardNo VARCHAR(16)
+    ,Username VARCHAR(50) NOT NULL
+    ,Password VARCHAR(50) NOT NULL
+    ,CreditCardNo VARCHAR(16) CONSTRAINT CreditCardNoLen CHECK(LEN(CreditCardNo) = 16)
     ,Address VARCHAR(100)
     ,Rating INT DEFAULT 3
     ,PRIMARY KEY (UserID)
@@ -15,7 +15,7 @@ CREATE TABLE Users (
 -- Companies Table --
 CREATE TABLE Companies (
     CompanyID INT AUTO_INCREMENT
-    ,Name VARCHAR(50)
+    ,Name VARCHAR(50) NOT NULL
     ,Address VARCHAR(100)
     ,Rating INT DEFAULT 3
     ,PRIMARY KEY (CompanyID)
@@ -26,10 +26,10 @@ CREATE TABLE Companies (
 CREATE TABLE AvailableTools (
     ToolID INT AUTO_INCREMENT
     ,ToolType VARCHAR(50)
-    ,ToolName VARCHAR(50)
-    ,UserID INT
+    ,ToolName VARCHAR(50) NOT NULL
+    ,UserID INT NOT NULL
     ,CompanyID INT
-    ,Price DECIMAL(10, 2)
+    ,Price DECIMAL(10, 2) NOT NULL
     ,ForSale BOOLEAN
     ,ForRent BOOLEAN
     ,PRIMARY KEY (ToolID)
@@ -43,9 +43,9 @@ CREATE TABLE AvailableTools (
 
 -- UnavialableTools Table --
 CREATE TABLE UnavialableTools (
-    ToolID INT
-    ,UserID INT
-    ,ReturnDate DATE
+    ToolID INT NOT NULL
+    ,UserID INT NOT NULL
+    ,ReturnDate DATE NOT NULL
     ,FOREIGN KEY (ToolID)
         REFERENCES AvailableTools(ToolID)
         ON DELETE CASCADE

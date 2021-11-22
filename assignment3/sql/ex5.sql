@@ -10,7 +10,7 @@ FROM
 --shows how many tools is listed by an user --
 SELECT
     u.UserID
-    Username
+    ,Username
     ,COUNT(*) AS ToolCount
 FROM
     Users u
@@ -23,7 +23,7 @@ GROUP BY
 --shows how many times a tool has been rented out
 SELECT
     t.ToolID
-    Count(*) AS #OfRents
+    ,Count(*) AS #OfRents
 FROM
     AvailableTools a
 JOIN UserTransactions t

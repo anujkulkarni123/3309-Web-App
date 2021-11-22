@@ -8,6 +8,7 @@ CREATE TABLE Users (
     ,CreditCardNo VARCHAR(16) CONSTRAINT CreditCardNoLen CHECK(LEN(CreditCardNo) = 16)
     ,Address VARCHAR(100)
     ,Rating INT DEFAULT 3
+    ,TransDone INT DEFAULT 0 CONSTRAINT TransDoneMin CHECK(TransDone >= 0)
     ,PRIMARY KEY (UserID)
     ,CHECK(Rating IN (1, 2, 3, 4, 5))
 );

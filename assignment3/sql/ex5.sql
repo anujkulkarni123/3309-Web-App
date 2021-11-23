@@ -44,8 +44,17 @@ FROM
     CompanyTransactions ct, UserTransactions ut;
 
 -- Complex Selcte Statement IV --
--- shows all tools and how many users have favourited them --
-
+-- allow users to search for specific tools and see information on the tool and its owner --
+SELECT 
+	t.toolName, 
+    t.Price, 
+    t.toolType,
+    u.Username,
+    u.Rating
+FROM
+	Users u, Tools t
+WHERE
+	u.UserID = t.UserID
 
 
 -- Complex Selcte Statement V --

@@ -85,4 +85,5 @@ FROM
     JOIN UserTransactions ut
         ON (u.UserID = ut.SellerID)
 ORDER BY
-    TransDone
+    TransactionDate
+    ,TransDone

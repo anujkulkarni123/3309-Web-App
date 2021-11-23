@@ -43,9 +43,18 @@ SELECT
 FROM
     CompanyTransactions ct, UserTransactions ut;
 
--- Complex Select Statement IV --
--- shows all tools and how many users have favourited them --
-
+-- Complex Selcte Statement IV --
+-- allow users to search for specific tools and see information on the tool and its owner --
+SELECT
+	t.toolName,
+    t.Price,
+    t.toolType,
+    u.Username,
+    u.Rating
+FROM
+	Users u, Tools t
+WHERE
+	u.UserID = t.UserID
 
 
 -- Complex Select Statement V --
@@ -77,7 +86,3 @@ FROM
         ON (u.UserID = ut.SellerID)
 ORDER BY
     TransDone
-
-
--- Complex Selcte Statement VII --
--- find a tool and all the companies and users that have it available for rent --

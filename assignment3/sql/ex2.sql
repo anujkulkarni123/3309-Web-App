@@ -24,7 +24,7 @@ CREATE TABLE Companies (
 );
 
 -- AvailableTools Table --
-CREATE TABLE AvailableTools (
+CREATE TABLE Tools (
     ToolID INT AUTO_INCREMENT
     ,ToolType VARCHAR(50)
     ,ToolName VARCHAR(50) NOT NULL

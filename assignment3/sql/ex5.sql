@@ -14,24 +14,24 @@ SELECT
     ,COUNT(*) AS ToolCount
 FROM
     Users u
-JOIN AvailableTools a
+JOIN Tools a
     ON (u.UserID = a.UserID)
 GROUP BY
     u.UserID;
 
--- Complex Selcte Statement II --
+-- Complex Select Statement II --
 --shows how many times a tool has been rented out
 SELECT
     t.ToolID
     ,Count(*) AS #OfRents
 FROM
-    AvailableTools a
+    Tools a
 JOIN UserTransactions t
     ON (t.ToolID = a.ToolID)
 GROUP By
     t.ToolID;
 
--- Complex Selcte Statement III --
+-- Complex Select Statement III --
 -- shows all transactions whether they're user transactions or company transactions --
 SELECT
     ct.CompanyID
@@ -43,20 +43,40 @@ SELECT
 FROM
     CompanyTransactions ct, UserTransactions ut;
 
--- Complex Selcte Statement IV --
+-- Complex Select Statement IV --
 -- shows all tools and how many users have favourited them --
 
 
 
--- Complex Selcte Statement V --
--- show all unavailable tools and when will they be available again and who's currently renting it out and when did they start renting it out  --
+-- Complex Select Statement V --
+-- shows all tools and how many users have favourited them  --
+SELECT
+    t.ToolName AS Tool
+    ,COUNT(*) AS UsersFav
+FROM
+    FavouriteTools ft
+    JOIN Users u
+        ON (ft.UserID = u.UserID)
+    JOIN Tools t
+        ON (ft.ToolID = t.ToolID)
+GROUP BY
+    u.ToolID
 
 
-
--- Complex Selcte Statement VI --
--- lists the rating in decending order for all users and companies --
-
-
+-- Complex Select Statement VI --
+-- shows the most popular users based on recent transactions --
+SELECT
+    TOP 20
+    Username
+    ,Address
+    ,Rating
+    ,TransDone
+FROM
+    Users u
+    JOIN UserTransactions ut
+        ON (u.UserID = ut.SellerID)
+ORDER BY
+    TransDone
 
 
 -- Complex Selcte Statement VII --

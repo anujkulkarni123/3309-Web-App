@@ -1,11 +1,17 @@
 package com.company;
 import java.util.Random;
-import java.util.Scanner;
+import java.util.Scanner;
+import java.io.PrintStream;
 import java.lang.System;
+import java.io.FileNotFoundException;
 
 public class Main {
+    // file to write the sql queries on
+    static PrintStream fileOut;
 
-    public static void main(String[] args) {
+    static PrintStream originalOut = System.out;
+
+    public static void main(String[] args) throws FileNotFoundException {
 
         // Initialize the scanner
         Scanner sc = new Scanner(System.in);
@@ -22,60 +28,76 @@ public class Main {
         System.out.println("How many tuples would you like to generate?");
         tuples = sc.nextInt();
 
+
+
         // Generate the table based on the name
-        System.out.println("INSERT INTO " + tName + " (");
+        originalOut.println("INSERT INTO " + tName + " (");
         if (tName.equalsIgnoreCase("users")) {
+            // set the file to write the sql queries on
+            fileOut = new PrintStream("../../../out/files/" + tName + ".sql");
+            System.setOut(fileOut);
+
             // Variables to be used by users table
-            System.out.println("Username, Password, CreditCardNo, Address, Rating");
-            System.out.print(") VALUES");
+            originalOut.println("Username, Password, CreditCardNo, Address, Rating");
+            originalOut.print(") VALUES");
             // For loop for users table
             for (int i = 0; i < tuples; i++) {
-                System.out.println("\n( '" + RandomString(10) + "', '");
-                System.out.println(RandomString(10) + "', '");
+                originalOut.println("\n( '" + RandomString(10) + "', '");
+                originalOut.println(RandomString(10) + "', '");
                 RandomCreditCardNo();
-                System.out.print("' ,\n '");
-                System.out.println(RandomString(20) + "',");
-                System.out.print((int)Math.floor(Math.random()*(5+1)) + " )");
+                originalOut.print("' ,\n '");
+                originalOut.println(RandomString(20) + "',");
+                originalOut.print((int)Math.floor(Math.random()*(5+1)) + " )");
                 if (i != tuples - 1) {
-                    System.out.print(", ");
+                    originalOut.print(", ");
                 }
             }
-            System.out.print(";");
+            originalOut.print(";");
         } else if (tName.equalsIgnoreCase("Companies")) {
+            // set the file to write the sql queries on
+            fileOut = new PrintStream("../../../out/files/" + tName + ".sql");
+            System.setOut(fileOut);
+
             // Values for companies
-            System.out.println("Name, Address, Rating");
-            System.out.print(") VALUES");
+            originalOut.println("Name, Address, Rating");
+            originalOut.print(") VALUES");
             // For loop for companies table
             for (int i = 0; i < tuples; i++) {
-                System.out.println("\n( '" + RandomString(10) + "', '");
-                System.out.println(RandomString(20) + "',");
-                System.out.print((int)Math.floor(Math.random()*(5+1)) + " )");
+                originalOut.println("\n( '" + RandomString(10) + "', '");
+                originalOut.println(RandomString(20) + "',");
+                originalOut.print((int)Math.floor(Math.random()*(5+1)) + " )");
                 if (i != tuples - 1) {
-                    System.out.print(", ");
+                    originalOut.print(", ");
                 }
             }
-            System.out.print(";");
+            originalOut.print(";");
         } else if (tName.equalsIgnoreCase("Tools")) {
-            System.out.println("ToolType, ToolName, UserID, Price, ForSale, ForRent");
-            System.out.print(") VALUES");
+            // set the file to write the sql queries on
+            fileOut = new PrintStream("../../../out/files/" + tName + ".sql");
+            System.setOut(fileOut);
+
+            originalOut.println("ToolType, ToolName, UserID, Price, ForSale, ForRent");
+            originalOut.print(") VALUES");
             // For loop for users table
             for (int i = 0; i < tuples; i++) {
-                System.out.println("\n( '" + RandomString(10) + "', '");
-                System.out.println(RandomString(10) + "',");
+                originalOut.println("\n( '" + RandomString(10) + "', '");
+                originalOut.println(RandomString(10) + "',");
                 RandomID(tuples);
-                System.out.print(",\n");
+                originalOut.print(",\n");
                 RandomPrice();
-                System.out.print(",\n");
+                originalOut.print(",\n");
                 RandomBool();
-                System.out.print(",\n");
+                originalOut.print(",\n");
                 RandomBool();
-                System.out.print(" )");
+                originalOut.print(" )");
                 if (i != tuples - 1) {
-                    System.out.print(", ");
+                    originalOut.print(", ");
                 }
             }
-            System.out.print(";");
+            originalOut.print(";");
         }
+
+        System.setOut(originalOut);
     }
 
     public static String RandomString(int length) {
@@ -92,23 +114,23 @@ public class Main {
 
     public static void RandomCreditCardNo() {
         for (int i = 0; i < 16; i++) {
-            System.out.print((int)Math.floor(Math.random()*(9+1)));
+            originalOut.print((int)Math.floor(Math.random()*(9+1)));
         }
     }
 
     public static void RandomID(int size) {
-        System.out.print((int)Math.floor(Math.random()*(size) + 1));
+        originalOut.print((int)Math.floor(Math.random()*(size) + 1));
     }
 
     public static void RandomBool() {
         if ((int)Math.floor(Math.random()*(1+1)) == 1) {
-            System.out.print("true");
+            originalOut.print("true");
         } else {
-            System.out.print("false");
+            originalOut.print("false");
         }
     }
 
     public static void RandomPrice() {
-        System.out.printf("%.2f", (float)(Math.random()*(300 - 10 + 1)+10));
+        originalOut.printf("%.2f", (float)(Math.random()*(300 - 10 + 1)+10));
     }
 }

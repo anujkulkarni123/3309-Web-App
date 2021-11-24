@@ -35,7 +35,7 @@ INSERT INTO UnavialableTools (
     SELECT
         ToolID
         ,UserID
-        ,DATE_ADD(CURDATE(), INTERVAL 10 DAY) AS ReturnDate
+        ,CURDATE() + INTERVAL 10 DAY AS ReturnDate
     FROM
         Tools
     WHERE

@@ -5,12 +5,14 @@ CREATE TABLE Users (
     UserID INT AUTO_INCREMENT
     ,Username VARCHAR(50) NOT NULL
     ,Password VARCHAR(50) NOT NULL
-    ,CreditCardNo VARCHAR(16) CONSTRAINT CreditCardNoLen CHECK(LEN(CreditCardNo) = 16)
+    ,CreditCardNo VARCHAR(16) 
     ,Address VARCHAR(100)
     ,Rating INT DEFAULT 3
-    ,TransDone INT DEFAULT 0 CONSTRAINT TransDoneMin CHECK(TransDone >= 0)
+    ,TransDone INT DEFAULT 0 
     ,PRIMARY KEY (UserID)
     ,CHECK(Rating IN (1, 2, 3, 4, 5))
+    ,CHECK(LEN(CreditCardNo) = 16)
+    ,CHECK(TransDone >= 0)
 );
 
 -- Companies Table --

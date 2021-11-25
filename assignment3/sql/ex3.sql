@@ -8,6 +8,7 @@ INSERT INTO Users VALUES (
     ,'0584573226377491'
     ,'3085 Kuhl Avenue, Atlanta, GA, 30305'
     ,4
+    ,4
 );
 
 -- Insert Statement for Users Table - VERSION II --
@@ -18,8 +19,7 @@ INSERT INTO Users (
     ,Address
     ,Rating
 ) VALUES (
-    NULL
-    ,'jayson'
+	'jayson'
     ,'Allen@03'
     ,'4080336091246025'
     ,'1779 Windy Ridge Road, Fort Wayne, IN, 46804'

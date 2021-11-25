@@ -28,7 +28,7 @@ ORDER BY
     TransactionDate
     ,TransDone
     
-  
+  -- View of all users --
 CREATE VIEW(Users)
 AS SELECT
     *

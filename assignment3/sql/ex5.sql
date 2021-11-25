@@ -1,13 +1,14 @@
 -- SELECT STATEMENTS --
 
 -- Less Complex Select Statement --
+-- Select all users --
 SELECT
     *
 FROM
     Users;
 
 -- Complex Select Statement I --
---shows how many tools is listed by an user --
+-- shows how many tools are listed by a user --
 SELECT
     u.UserID
     ,Username
@@ -20,10 +21,10 @@ GROUP BY
     u.UserID;
 
 -- Complex Select Statement II --
---shows how many times a tool has been rented out
+-- shows how many times a tool has been rented out --
 SELECT
     t.ToolID
-    ,Count(*) AS #OfRents
+    ,Count(*) AS numOfRents
 FROM
     Tools a
 JOIN UserTransactions t
@@ -54,7 +55,7 @@ SELECT
 FROM
 	Users u, Tools t
 WHERE
-	u.UserID = t.UserID
+	u.UserID = t.UserID;
 
 
 -- Complex Select Statement V --
@@ -69,13 +70,13 @@ FROM
     JOIN Tools t
         ON (ft.ToolID = t.ToolID)
 GROUP BY
-    u.ToolID
+    u.ToolID;
 
 
 -- Complex Select Statement VI --
 -- shows the most popular users based on recent transactions --
 SELECT
-    TOP 20
+    TOP(20)
     Username
     ,Address
     ,Rating
@@ -86,4 +87,4 @@ FROM
         ON (u.UserID = ut.SellerID)
 ORDER BY
     TransactionDate
-    ,TransDone
+    ,TransDone;

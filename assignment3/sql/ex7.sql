@@ -15,7 +15,6 @@ WHERE
 -- View of rows which show the most popular users based on recent transactions --
 CREATE VIEW popularTransactions(Username, Address, Rating, TransDone)
 AS SELECT
-    TOP 20
     Username
     ,Address
     ,Rating
@@ -27,10 +26,14 @@ FROM
 ORDER BY
     TransactionDate
     ,TransDone
-    
+    LIMIT 20;
   
-CREATE VIEW(Users)
+CREATE VIEW UserView
 AS SELECT
-    *
+    UserID
+    ,Username
+    ,Address
+    ,Rating
+    ,TransDone
 FROM
     Users;

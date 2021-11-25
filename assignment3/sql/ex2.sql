@@ -45,7 +45,7 @@ CREATE TABLE Tools (
 );
 
 -- UnavialableTools Table --
-CREATE TABLE UnavialableTools (
+CREATE TABLE UnavailableTools (
     ToolID INT NOT NULL
     ,UserID INT NOT NULL
     ,ReturnDate DATE NOT NULL

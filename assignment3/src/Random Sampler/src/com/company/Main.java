@@ -1,7 +1,6 @@
 package com.company;
 import java.util.Random;
 import java.util.Scanner;
-import java.lang.System;
 
 public class Main {
 
@@ -30,11 +29,11 @@ public class Main {
             System.out.print(") VALUES");
             // For loop for users table
             for (int i = 0; i < tuples; i++) {
-                System.out.println("\n( '" + RandomString(10) + "', '");
-                System.out.println(RandomString(10) + "', '");
+                System.out.println("\n( '" + RandomString(10) + "' ,");
+                System.out.println("'" + RandomString(10) + "' ,");
                 RandomCreditCardNo();
-                System.out.print("' ,\n '");
-                System.out.println(RandomString(20) + "',");
+                System.out.print(",\n");
+                System.out.println("'" + RandomString(20) + "' ,");
                 System.out.print((int)Math.floor(Math.random()*(5+1)) + " )");
                 if (i != tuples - 1) {
                     System.out.print(", ");
@@ -47,8 +46,8 @@ public class Main {
             System.out.print(") VALUES");
             // For loop for companies table
             for (int i = 0; i < tuples; i++) {
-                System.out.println("\n( '" + RandomString(10) + "', '");
-                System.out.println(RandomString(20) + "',");
+                System.out.println("\n( '" + RandomString(10) + "' ,");
+                System.out.println("'" + RandomString(20) + "' ,");
                 System.out.print((int)Math.floor(Math.random()*(5+1)) + " )");
                 if (i != tuples - 1) {
                     System.out.print(", ");
@@ -60,8 +59,8 @@ public class Main {
             System.out.print(") VALUES");
             // For loop for users table
             for (int i = 0; i < tuples; i++) {
-                System.out.println("\n( '" + RandomString(10) + "', '");
-                System.out.println(RandomString(10) + "',");
+                System.out.println("\n( '" + RandomString(10) + "' ,");
+                System.out.println("'" + RandomString(10) + "' ,");
                 RandomID(tuples);
                 System.out.print(",\n");
                 RandomPrice();
@@ -91,9 +90,11 @@ public class Main {
     }
 
     public static void RandomCreditCardNo() {
+        System.out.print("'");
         for (int i = 0; i < 16; i++) {
             System.out.print((int)Math.floor(Math.random()*(9+1)));
         }
+        System.out.print("'");
     }
 
     public static void RandomID(int size) {

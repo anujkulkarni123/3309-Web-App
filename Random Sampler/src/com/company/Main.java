@@ -1,20 +1,22 @@
 package com.company;
 import java.util.Random;
-import java.util.Scanner;
-import java.io.PrintStream;
+import java.util.Scanner;
 import java.lang.System;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main {
-    // file to write the sql queries on
-    static PrintStream fileOut;
 
-    static PrintStream originalOut = System.out;
+    // rite the insert queries in a separate file for execution
+    static FileWriter sqlFileWriter;
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         // Initialize the scanner
         Scanner sc = new Scanner(System.in);
+
+        // set the file to write the insert queries on
+        sqlFileWriter = new FileWriter("../../../out/files/insertQueries.sql");
 
         // String for the table name
         String tName;
@@ -24,80 +26,73 @@ public class Main {
         // Get the name of the table
         System.out.println("Enter the table name: ");
         tName = sc.nextLine();
+
         // How many tuples to be generated
         System.out.println("How many tuples would you like to generate?");
         tuples = sc.nextInt();
 
-
-
         // Generate the table based on the name
-        originalOut.println("INSERT INTO " + tName + " (");
+        sqlFileWriter.write("INSERT INTO " + tName + " (");
         if (tName.equalsIgnoreCase("users")) {
             // set the file to write the sql queries on
-            fileOut = new PrintStream("../../../out/files/" + tName + ".sql");
-            System.setOut(fileOut);
 
             // Variables to be used by users table
-            originalOut.println("Username, Password, CreditCardNo, Address, Rating");
-            originalOut.print(") VALUES");
+            sqlFileWriter.write("Username, Password, CreditCardNo, Address, Rating");
+            sqlFileWriter.write(") VALUES");
             // For loop for users table
             for (int i = 0; i < tuples; i++) {
-                originalOut.println("\n( '" + RandomString(10) + "', '");
-                originalOut.println(RandomString(10) + "', '");
+                sqlFileWriter.write("\n( '" + RandomString(10) + "', '");
+                sqlFileWriter.write(RandomString(10) + "', '");
                 RandomCreditCardNo();
-                originalOut.print("' ,\n '");
-                originalOut.println(RandomString(20) + "',");
-                originalOut.print((int)Math.floor(Math.random()*(5+1)) + " )");
+                sqlFileWriter.write("' ,\n '");
+                sqlFileWriter.write(RandomString(20) + "',");
+                sqlFileWriter.write((int)Math.floor(Math.random()*(5+1)) + " )");
                 if (i != tuples - 1) {
-                    originalOut.print(", ");
+                    sqlFileWriter.write(", ");
                 }
             }
-            originalOut.print(";");
+            sqlFileWriter.write(";");
         } else if (tName.equalsIgnoreCase("Companies")) {
-            // set the file to write the sql queries on
-            fileOut = new PrintStream("../../../out/files/" + tName + ".sql");
-            System.setOut(fileOut);
 
             // Values for companies
-            originalOut.println("Name, Address, Rating");
-            originalOut.print(") VALUES");
+            sqlFileWriter.write("Name, Address, Rating");
+            sqlFileWriter.write(") VALUES");
             // For loop for companies table
             for (int i = 0; i < tuples; i++) {
-                originalOut.println("\n( '" + RandomString(10) + "', '");
-                originalOut.println(RandomString(20) + "',");
-                originalOut.print((int)Math.floor(Math.random()*(5+1)) + " )");
+                sqlFileWriter.write("\n( '" + RandomString(10) + "', '");
+                sqlFileWriter.write(RandomString(20) + "',");
+                sqlFileWriter.write((int)Math.floor(Math.random()*(5+1)) + " )");
                 if (i != tuples - 1) {
-                    originalOut.print(", ");
+                    sqlFileWriter.write(", ");
                 }
             }
-            originalOut.print(";");
+            sqlFileWriter.write(";");
         } else if (tName.equalsIgnoreCase("Tools")) {
-            // set the file to write the sql queries on
-            fileOut = new PrintStream("../../../out/files/" + tName + ".sql");
-            System.setOut(fileOut);
 
-            originalOut.println("ToolType, ToolName, UserID, Price, ForSale, ForRent");
-            originalOut.print(") VALUES");
+            sqlFileWriter.write("ToolType, ToolName, UserID, Price, ForSale, ForRent");
+            sqlFileWriter.write(") VALUES");
             // For loop for users table
             for (int i = 0; i < tuples; i++) {
-                originalOut.println("\n( '" + RandomString(10) + "', '");
-                originalOut.println(RandomString(10) + "',");
+                sqlFileWriter.write("\n( '" + RandomString(10) + "', '");
+                sqlFileWriter.write(RandomString(10) + "',");
                 RandomID(tuples);
-                originalOut.print(",\n");
+                sqlFileWriter.write(",\n");
                 RandomPrice();
-                originalOut.print(",\n");
+                sqlFileWriter.write(",\n");
                 RandomBool();
-                originalOut.print(",\n");
+                sqlFileWriter.write(",\n");
                 RandomBool();
-                originalOut.print(" )");
+                sqlFileWriter.write(" )");
                 if (i != tuples - 1) {
-                    originalOut.print(", ");
+                    sqlFileWriter.write(", ");
                 }
             }
-            originalOut.print(";");
+            sqlFileWriter.write(";");
         }
 
-        System.setOut(originalOut);
+        // close the file writer
+        sqlFileWriter.close();
+        sc.close();
     }
 
     public static String RandomString(int length) {
@@ -112,25 +107,25 @@ public class Main {
                 .toString();
     }
 
-    public static void RandomCreditCardNo() {
+    public static void RandomCreditCardNo() throws IOException {
         for (int i = 0; i < 16; i++) {
-            originalOut.print((int)Math.floor(Math.random()*(9+1)));
+            sqlFileWriter.write((int)Math.floor(Math.random()*(9+1)));
         }
     }
 
-    public static void RandomID(int size) {
-        originalOut.print((int)Math.floor(Math.random()*(size) + 1));
+    public static void RandomID(int size) throws IOException {
+        sqlFileWriter.write((int)Math.floor(Math.random()*(size) + 1));
     }
 
-    public static void RandomBool() {
+    public static void RandomBool() throws IOException {
         if ((int)Math.floor(Math.random()*(1+1)) == 1) {
-            originalOut.print("true");
+            sqlFileWriter.write("true");
         } else {
-            originalOut.print("false");
+            sqlFileWriter.write("false");
         }
     }
 
-    public static void RandomPrice() {
-        originalOut.printf("%.2f", (float)(Math.random()*(300 - 10 + 1)+10));
+    public static void RandomPrice() throws IOException {
+        sqlFileWriter.write(String.format("%.2f", (float)(Math.random()*(300 - 10 + 1)+10)));
     }
 }

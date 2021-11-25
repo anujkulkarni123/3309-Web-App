@@ -10,7 +10,7 @@ CREATE TABLE Users (
     ,Rating INT DEFAULT 3
     ,TransDone INT DEFAULT 0
     ,PRIMARY KEY (UserID)
-    ,CHECK(Rating IN (1, 2, 3, 4, 5))
+    ,CHECK(Rating IN (0, 1, 2, 3, 4, 5))
     ,CHECK(LENGTH(CreditCardNo) = 16)
     ,CHECK(TransDone >= 0)
 );
@@ -22,7 +22,7 @@ CREATE TABLE Companies (
     ,Address VARCHAR(100)
     ,Rating INT DEFAULT 3
     ,PRIMARY KEY (CompanyID)
-    ,CHECK(Rating IN (1, 2, 3, 4, 5))
+    ,CHECK(Rating IN (0, 1, 2, 3, 4, 5))
 );
 
 -- AvailableTools Table --

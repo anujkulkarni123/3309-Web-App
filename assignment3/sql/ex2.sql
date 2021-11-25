@@ -5,13 +5,13 @@ CREATE TABLE Users (
     UserID INT AUTO_INCREMENT
     ,Username VARCHAR(50) NOT NULL
     ,Password VARCHAR(50) NOT NULL
-    ,CreditCardNo VARCHAR(16) 
+    ,CreditCardNo VARCHAR(16)
     ,Address VARCHAR(100)
     ,Rating INT DEFAULT 3
-    ,TransDone INT DEFAULT 0 
+    ,TransDone INT DEFAULT 0
     ,PRIMARY KEY (UserID)
     ,CHECK(Rating IN (1, 2, 3, 4, 5))
-    ,CHECK(LEN(CreditCardNo) = 16)
+    ,CHECK(LENGTH(CreditCardNo) = 16)
     ,CHECK(TransDone >= 0)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE UnavialableTools (
     ,UserID INT NOT NULL
     ,ReturnDate DATE NOT NULL
     ,FOREIGN KEY (ToolID)
-        REFERENCES AvailableTools(ToolID)
+        REFERENCES Tools(ToolID)
         ON DELETE CASCADE
     ,FOREIGN KEY (UserID)
         REFERENCES Users(UserID)
@@ -62,7 +62,7 @@ CREATE TABLE FavouriteTools (
     ToolID INT
     ,UserID INT
     ,FOREIGN KEY (ToolID)
-        REFERENCES AvailableTools(ToolID)
+        REFERENCES Tools(ToolID)
         ON DELETE CASCADE
     ,FOREIGN KEY (UserID)
         REFERENCES Users(UserID)
@@ -76,7 +76,7 @@ CREATE TABLE UserTransactions (
     ,BuyerID INT
     ,TransactionDate DATE
     ,FOREIGN KEY (ToolID)
-        REFERENCES AvailableTools(ToolID)
+        REFERENCES Tools(ToolID)
         ON DELETE CASCADE
     ,FOREIGN KEY (SellerID)
         REFERENCES Users(UserID)
@@ -93,7 +93,7 @@ CREATE TABLE CompanyTransactions (
     ,BuyerID INT
     ,TransactionDate DATE
     ,FOREIGN KEY (ToolID)
-        REFERENCES AvailableTools(ToolID)
+        REFERENCES Tools(ToolID)
         ON DELETE CASCADE
     ,FOREIGN KEY (CompanyID)
         REFERENCES Companies(CompanyID)

@@ -27,7 +27,7 @@ INSERT INTO Users (
 );
 
 -- Insert Statement for Users Table - VERSION III --
-INSERT INTO UnavialableTools (
+INSERT INTO UnavailableTools (
     ToolID
     ,UserID
     ,ReturnDate

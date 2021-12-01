@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { FaSearch } from 'react-icons/fa';
-import Expand from 'react-expand-animated'
+import $ from "jquery";
 import './header.css';
 
 
@@ -9,24 +9,29 @@ function handleClick()  {
     alert("Label Clicked")
 }
 
+$(function()    {
+    $(".icon").click(function() {
+        $(".input").toggleClass("active");
+    });
+});
+
 class Header extends Component{
     
     state = { open: false };
 
     toggle = () => {
         this.setState(prevState => ({ open: !prevState.open }));
-      };
+    };
 
     render()    {
         return( 
             <div className="container">
-                <div className="icon-div">
-                    <label className="icon" onClick={this.toggle}>
+                
+                <div className="search-div">
+                    <label className="icon" class="icon" onClick={this.toggle}>
                         <FaSearch/>
                     </label>
-                    <form>
-                        <input className="input" placeholder="search"></input>
-                    </form>
+                    <input className="input" class="input" type="search" placeholder="search"></input>
                 </div>
 
                 <div className="title" onClick={handleClick}>

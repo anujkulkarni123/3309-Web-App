@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './Header'
 import './App.css';
 import Login from './Login'
 import Table from './Table/Table';
 
 
-function App() {
-
-      return (
+class App extends Component {
+  render()  {
+    return (
       <div className="App">
         <Header/>
-
         <div className="body">
           <div className="Test">
             Hello
@@ -22,6 +21,7 @@ function App() {
           */}
       </div>
     );
+  }
 }
 
 export default App;

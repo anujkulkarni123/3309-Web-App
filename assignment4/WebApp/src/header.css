@@ -35,6 +35,16 @@
 
 .input  {
     width: 150px;
-    height: 20px;
-    background-color: #1c3334;
+    height: 25px;
+    background-color: transparent;
+    border: 0px;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.input:hover    {
+    background-color: var(--background);
+
 }

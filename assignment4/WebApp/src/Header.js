@@ -24,14 +24,14 @@ class Header extends Component{
                     <label className="icon" onClick={this.toggle}>
                         <FaSearch/>
                     </label>
-                    <div>
-                        <input className="input" ></input>
-                    </div>
+                    <form>
+                        <input className="input" placeholder="search"></input>
+                    </form>
                 </div>
 
                 <div className="title" onClick={handleClick}>
                     <label style={{ fontSize: 30, }}>
-                        TORENTA
+                        RENTRABBIT
                     </label>
                 </div>         
             </div>

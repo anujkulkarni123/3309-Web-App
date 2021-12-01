@@ -3,7 +3,6 @@
     height: 100px;
     display: flex;
     justify-content: space-between;
-    background-color: #1c3334;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     padding-left: 10px;
@@ -46,5 +45,5 @@
 
 .input:hover    {
     background-color: var(--background);
-
+    color:var(--secondary-text-color);
 }

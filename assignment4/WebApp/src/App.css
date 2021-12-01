@@ -23,7 +23,7 @@
   background-color: var(--div-background);
   height: 300px;
   width: 300px;
-  color: var(--text-color);
+  color: var(--secondary-text-color);
   border-radius: 35px;
   border: 5px solid var(--border);
 }

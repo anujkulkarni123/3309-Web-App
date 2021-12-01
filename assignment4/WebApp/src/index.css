@@ -14,9 +14,10 @@ code {
 }
 
 :root{
-  --background: #2f4454; 
-  --header: #1c3334;
-  --div-background: #2e151b;
-  --border: #da7b93;
+  --background: #fffdf6; 
+  --header: #5297c3;
+  --div-background: #a0d7ff;
+  --border: #5297c3;
   --text-color: white;
+  --secondary-text-color: #3c2323;
 }

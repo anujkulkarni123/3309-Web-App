@@ -11,14 +11,23 @@ const createConnection = require('./db/connection');
 // constant variables
 const port = 5000;
 
-//
-router.get('/', (req, res) => {
+// route to get all the tools in the database
+router.get('/tools/:search', (req, res) => {
+  const search = req.params.search;
+
   const conn = createConnection();
 
-  conn.query(`SELECT * FROM users`, (err, rows) => {
+  conn.query(`
+    SELECT
+      *
+    FROM
+      tools
+    WHERE
+      ToolName LIKE '%${search}%';
+    `, (err, rows) => {
     if (err) throw err
 
-    res.send({ status: 'pass', message: 'db server running successfully', results: rows });
+    res.json({ tools: rows });
   });
 
   conn.end();
@@ -28,9 +37,7 @@ router.get('/', (req, res) => {
 app.use('/', router);
 
 // start the app
-app.listen(port, (err) => {
-  if (err) throw err;
+app.listen(port)
 
-  // message that the server started successfully
-  console.log(`express server started at http://localhost:${port}/`);
-});
+// message that the server started successfully
+console.log(`express server started at http://localhost:${port}/`);

@@ -1,9 +1,40 @@
 .container  {
-    background-color: aqua;
-    height: 60px;
+    background:var(--header);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1c3334;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .title  {
-    padding: 20px;
+    padding: 30px;
+    color: var(--text-color);
 }
 
+.icon {
+    color: var(--text-color);
+    margin: 15px;
+    height: 30px;
+    width: 30px;
+}
+
+.icon-div   {
+    margin: 20px;
+    height: 50px;
+    width: 230px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    border-radius: 13px;
+    flex-direction: row;
+}
+
+.input  {
+    width: 150px;
+    height: 20px;
+    background-color: #1c3334;
+}

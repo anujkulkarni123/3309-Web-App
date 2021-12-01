@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header'
 import './App.css';
-import Login from './Login';
 
 function App() {
 

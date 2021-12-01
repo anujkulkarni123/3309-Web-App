@@ -11,7 +11,7 @@ function Table()
         const [ search, setSearch ] = useState(' ')
 
         const [pagination, setPagination] = useState({
-            data: new Array(1000).fill().map((value, index) => (({
+            data: new Array().fill().map((value, index) => (({
                 id: tools,
                 title: tools.name,
                 body: tools.price

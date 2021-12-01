@@ -9,7 +9,7 @@ function createConnection() {
     host: '146.148.64.4',
     user: 'root',
     password: 'Password#1234',
-    database: 'toolrental'
+    database: '3309db'
   });
 
   return connection;

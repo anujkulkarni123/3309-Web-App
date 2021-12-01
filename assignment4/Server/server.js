@@ -12,13 +12,13 @@ const createConnection = require('./db/connection');
 const port = 5000;
 
 //
-router.get('/check-conn', (req, res) => {
+router.get('/', (req, res) => {
   const conn = createConnection();
 
-  conn.query('SELECT 1 + 1 AS solution', function (err) {
+  conn.query(`SELECT * FROM users`, (err, rows) => {
     if (err) throw err
 
-    res.send({ status: 'pass', message: 'db server running successfully' });
+    res.send({ status: 'pass', message: 'db server running successfully', results: rows });
   });
 
   conn.end();
@@ -32,5 +32,5 @@ app.listen(port, (err) => {
   if (err) throw err;
 
   // message that the server started successfully
-  console.log(`express server started at https://localhost:${port}/`);
+  console.log(`express server started at http://localhost:${port}/`);
 });

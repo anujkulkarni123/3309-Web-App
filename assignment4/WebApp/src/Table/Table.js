@@ -1,6 +1,8 @@
-import './table.css'
+// import './table.css'
 import React, { useState, useEffect, useContext } from 'react';
 import ReactPaginate from 'react-paginate';
+import { FaSearch } from 'react-icons/fa';
+import axios from 'axios';
 
 function Table()
 {
@@ -10,11 +12,16 @@ function Table()
         //initializing use state
         const [ search, setSearch ] = useState(' ')
 
-        const [pagination, setPagination] = useState({
-            data: new Array().fill().map((value, index) => (({
-                id: tools,
-                title: tools.name,
-                body: tools.price
+  const [pagination, setPagination] = useState({
+            data: tools.map(({ ToolID, ToolType, ToolName, UserID, CompanyID, Price, ForSale, ForRent }, index) => (({
+                id: ToolID,
+                name: ToolName,
+                type: ToolType,
+                user: UserID,
+                company: CompanyID,
+                price: Price,
+                forSale: ForSale,
+                forRent: ForRent
               }))),
             offset: 0,
             numberPerPage: 10,
@@ -29,7 +36,7 @@ function Table()
               currentData: prevState.data.slice(pagination.offset, pagination.offset + pagination.numberPerPage)
             }))
           }, [pagination.numberPerPage, pagination.offset])
-          
+
           const handlePageClick = event => {
             const selected = event.selected;
             const offset = selected * pagination.numberPerPage
@@ -38,20 +45,46 @@ function Table()
 
             //handling change in input
         const handleChange = e =>   {
+          if (e.target.value) {
             setSearch(e.target.value);
+            console.log(search);
+            axios.get(`http://localhost:5000/tools/${search}`)
+              .then((response) => {
+                const tools = response.data.tools;
+                setTools([...tools]);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          }
         }
 
     //filters through coins
         const filteredTools = tools.filter(tools =>
-            tools.name.toLowerCase().includes(search.toLowerCase())
+            axios(`http://localhost:5000/tools/${search}`)
+              .then((response) => {
+                console.log(response);
+                setTools(response.tools);
+              })
         )
 
         return (
             <div>
-              {pagination.currentData && pagination.currentData.map(((item, index) => (
-                <div className="post">
-                  <h3>{`${item.title} - ${item.id}`}</h3>
-                  <p>{item.body}</p>
+                <div className="icon-div">
+                    <label className="icon">
+                        <FaSearch/>
+                    </label>
+                    <form>
+                        <input className="input" placeholder="search" onChange={handleChange}></input>
+                    </form>
+                </div>
+            {pagination.currentData && pagination.currentData.map(((item, index) => (
+              <div className="post" key={item.id}>
+                  <h3>{`${item.name} - ${item.price}`}</h3>
+                  <p>{item.toolType}</p>
+                  <p>
+                    { item.forSale ? 'Sale' : 'Rent' }
+                  </p>
                 </div>
               )))
               }
@@ -69,5 +102,6 @@ function Table()
             </div>
           );
 
-    export default Table;
 }
+
+export default Table;

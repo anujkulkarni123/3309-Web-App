@@ -1,5 +1,6 @@
 // import required modules
 const express = require('express');
+const cors = require('cors');
 
 // create the app and router
 const app = express();
@@ -10,6 +11,9 @@ const createConnection = require('./db/connection');
 
 // constant variables
 const port = 5000;
+
+// middlewares
+app.use(cors());
 
 // route to get all the tools in the database
 router.get('/tools/:search', (req, res) => {

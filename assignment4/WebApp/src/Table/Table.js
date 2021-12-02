@@ -59,7 +59,7 @@ function Table()
           }
         }
 
-    //filters through coins
+    //filters through tools
         const filteredTools = tools.filter(tools =>
             axios(`http://localhost:5000/tools/${search}`)
               .then((response) => {

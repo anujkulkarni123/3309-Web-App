@@ -38,7 +38,12 @@ class Header extends Component{
                     <label style={{ fontSize: 30, }}>
                         RENTRABBIT
                     </label>
-                </div>         
+                </div>     
+
+                <div>
+                    <button className="logout-btn">LogOut</button>
+                </div>  
+                    
             </div>
         );
     };

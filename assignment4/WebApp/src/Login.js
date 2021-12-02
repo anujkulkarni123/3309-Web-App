@@ -16,17 +16,16 @@ function Login() {
                   </label>
                   <input type="text" placeholder="username" style={{ marginLeft: 20}}></input>
                 </div>
-                  
+
                 <div class="inputs">
                   <label style={{ fontSize: 14, }}>
                       Enter Your Password: 
                   </label>
-                  <input type="text" placeholder="*********" style={{ marginLeft: 20}}></input>
-
+                  <input type="text" placeholder="*********" style={{ marginLeft: 24}}></input>
                 </div>
                 
               </div>
-            <button style={{marginTop:122}}>Submit</button>
+            <button style={{marginTop:136}}>Submit</button>
 
             </div>
 
@@ -43,31 +42,30 @@ function Login() {
                 </div>
                   
                 <div class="inputs">
-                  <label style={{ fontSize: 14, }}>
+                  <label style={{ fontSize: 14}}>
                       Enter Your Password: 
                   </label>
-                  <input type="text" placeholder="*********" style={{ marginLeft: 20}}></input>
-
+                  <input type="text" placeholder="*********" style={{ marginLeft: 25}}></input>
                 </div>
+
                 <div class="inputs">
-                  <label style={{ fontSize: 14, }}>
-                      Enter Your CreditCardNo.: 
+                  <label style={{ fontSize: 14, marginLeft: 35}}>
+                      CreditCardNo.: 
                   </label>
-                  <input type="text" placeholder="*********" style={{ marginLeft: 20}}></input>
-
+                  <input type="text" placeholder="creditcardNo." style={{ marginLeft: 27}}></input>
                 </div>
+
                 <div class="inputs">
-                  <label style={{ fontSize: 14, }}>
+                  <label style={{ fontSize: 14, marginLeft: 10 }}>
                       Enter Your Address: 
                   </label>
-                  <input type="text" placeholder="address" style={{ marginLeft: 20}}></input>
-
+                  <input type="text" placeholder="address" style={{ marginLeft: 24}}></input>
                 </div>
               </div>
-            <button onClick={event =>  window.location.href='/App'}>Submit</button>
 
-            </div>
-          
+            <button style={{marginTop:50}}>Submit</button>
+
+            </div>          
         </div>
     )
 }

@@ -4,6 +4,7 @@ import $ from "jquery";
 import './tableview.css'
 import axios from 'axios';
 import ToolView from './ToolView';
+import Paginate from './paginateTable';
 
 
 $(function()    {
@@ -79,5 +80,6 @@ class TableView extends Component {
         );
     }
 }
+
 
 export default TableView;

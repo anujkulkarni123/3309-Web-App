@@ -1,8 +1,8 @@
-// import './table.css'
 import React, { useState, useEffect, useContext } from 'react';
 import ReactPaginate from 'react-paginate';
 import { FaSearch } from 'react-icons/fa';
 import axios from 'axios';
+import './table.css'
 
 function Table()
 {
@@ -48,7 +48,7 @@ function Table()
           if (e.target.value) {
             setSearch(e.target.value);
             console.log(search);
-            axios.get(`http://localhost:5000/tools/${search}`)
+            axios.get(`http://localhost:3000/tools/${search}`)
               .then((response) => {
                 const tools = response.data.tools;
                 setTools([...tools]);
@@ -59,9 +59,9 @@ function Table()
           }
         }
 
-    //filters through coins
+    //filters through tools
         const filteredTools = tools.filter(tools =>
-            axios(`http://localhost:5000/tools/${search}`)
+            axios(`http://localhost:3000/tools/${search}`)
               .then((response) => {
                 console.log(response);
                 setTools(response.tools);
@@ -70,7 +70,7 @@ function Table()
 
         return (
             <div>
-                <div className="icon-div">
+                <div className="search-div">
                     <label className="icon">
                         <FaSearch/>
                     </label>

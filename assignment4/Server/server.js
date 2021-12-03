@@ -16,22 +16,18 @@ const port = 5000;
 app.use(cors());
 
 // route to get all the tools in the database
-router.get('/tools/:search', (req, res) => {
+router.get('/tools', (req, res) => {
   const search = req.params.search;
 
   const conn = createConnection();
 
-  conn.query(`
-    SELECT
-      *
-    FROM
-      tools
-    WHERE
-      ToolName LIKE '%${search}%';
-    `, (err, rows) => {
+  const Select_All_Tools_Query = 'SELECT * FROM tools';
+
+  conn.query(Select_All_Tools_Query, (err, rows) => {
     if (err) throw err
 
-    res.json({ tools: rows });
+    //could be tools: rows
+    res.json({ data: rows });
   });
 
   conn.end();

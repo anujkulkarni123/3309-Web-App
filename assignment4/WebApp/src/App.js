@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header'
 import './App.css';
 import TableView from './Table/TableView';
+import PopUsersTable from './popRenters/PopUsersTable';
 
 
 class App extends Component {
@@ -10,10 +11,15 @@ class App extends Component {
       <div className="App">
         <Header/>
         
-        <div className="body">
-            <div>
+        <div className="app-body">
+            <div className="table-View">
               <TableView/>
             </div>
+            
+            <div className="pop-users-view">
+              <PopUsersTable/>
+            </div>
+          
         </div>
         
       </div>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Header'
 import './App.css';
-import Login from './Login'
 import Table from './Table/Table';
+import TableView from './Table/TableView';
 
 
 class App extends Component {
@@ -10,15 +10,13 @@ class App extends Component {
     return (
       <div className="App">
         <Header/>
+        
         <div className="body">
-          <div className="Test">
-            Hello
-          </div>
+            <div>
+              <TableView/>
+            </div>
         </div>
-
-        {/*
-          <Table />
-          */}
+        
       </div>
     );
   }

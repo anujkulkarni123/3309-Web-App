@@ -15,12 +15,12 @@ class TableView extends Component {
     
     /** //initializing states
     const [ tools, setTools ] = useState([]);
-
+//localhost:5000/tools`)
+            .then(res =>
     const [ search, setSearch] = useState(' ')
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/tools`)
-            .then(res =>    {
+        axios.get(`http:    {
                 setTools(res.data)
             }).catch(err => console.log(err))
     }, []);
@@ -52,15 +52,29 @@ class TableView extends Component {
 
     renderTool = ({ ToolID, ToolName}) => <div key={ToolID} name={ToolName}>{ToolName}</div>
 
+    hangleToolSearch = (e) => {
+        this.filterTools(e.target.value);
+    }
+    filterTools = (search) => {
+        const { tools } = this.state;
+
+        const results = tools.filter((tool) => {
+            tool.ToolName.toLowerCase().includes(search.toLowerCase());
+        });
+
+        this.setState({ tools: results });
+    }
+
     render()    {
         const { tools } = this.state;
         return (
         <div className="body">
+            
             <div className="search-div">
                 <label className="icon" class="icon">
                     <FaSearch/>
                 </label>
-                <input className="input" class="input" type="search" placeholder="search"></input>
+                <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
             </div>
 
             <div>

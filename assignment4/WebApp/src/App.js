@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from './Header'
 import './App.css';
 import TableView from './Table/TableView';
+import PopUsersTable from './popRenters/popUsersTable';
 import Login from './Login';
-import PopUsersTable from './popRenters/PopUsersTable';
 
 
 class App extends Component {

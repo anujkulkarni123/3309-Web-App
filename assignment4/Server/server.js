@@ -124,20 +124,20 @@ router.get('/companyTransactions', (req, res) => {
 
 // router to login user
 router.get('/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const username = req.query.username;
+  const password = req.query.password;
 
   const conn = createConnection();
 
   const query = `
     SELECT
-      username
-      ,password
+      Username
+      ,Password
     FROM
-      user
+      users
     WHERE
-      username = ${username} AND
-      password = ${password}`;
+      Username = '${username}' AND
+      Password = '${password}'`;
 
   conn.query(query, (err, rows) => {
     if (err) throw err;

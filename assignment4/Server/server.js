@@ -36,9 +36,9 @@ router.get('/users', (req, res) => {
   const conn = createConnection();
 
   // query to get all the users
-  const query = 'SELECT * FROM users;';
+  const usersQuery = 'SELECT * FROM users;';
 
-  conn.query(query, (err, rows) => {
+  conn.query(usersQuery, (err, rows) => {
     if (err) throw err;
 
     res.json({ data: rows });
@@ -51,9 +51,9 @@ router.get('/users', (req, res) => {
 router.get('/companies', (req, res) => {
   const conn = createConnection();
 
-  const query = 'SELECT * FROM companies;';
+  const companyQuery = 'SELECT * FROM companies;';
 
-  conn.query(query, (err, rows) => {
+  conn.query(companyQuery, (err, rows) => {
     if (err) throw err;
 
     res.json({ data: rows });
@@ -66,9 +66,9 @@ router.get('/companies', (req, res) => {
 router.get('/favTools', (req, res) => {
   const conn = createConnection();
 
-  const query = 'SELECT * FROM favouritetools;';
+  const favQuery = 'SELECT * FROM favouritetools;';
 
-  conn.query(query, (err, rows) => {
+  conn.query(favQuery, (err, rows) => {
     if (err) throw err;
 
     res.json({ data: rows });
@@ -81,9 +81,9 @@ router.get('/favTools', (req, res) => {
 router.get('/unavTools', (req, res) => {
   const conn = createConnection();
 
-  const query = 'SELECT * FROM unavailabletools;';
+  const unavQuery = 'SELECT * FROM unavailabletools;';
 
-  conn.query(query, (err, rows) => {
+  conn.query(unavQuery, (err, rows) => {
     if (err) throw err;
 
     res.json({ data: rows });
@@ -96,9 +96,9 @@ router.get('/unavTools', (req, res) => {
 router.get('/userTransactions', (req, res) => {
   const conn = createConnection();
 
-  const query = 'SELECT * FROM usertransactions;';
+  const userTransQuery = 'SELECT * FROM usertransactions;';
 
-  conn.query(query, (err, rows) => {
+  conn.query(userTransQuery, (err, rows) => {
     if (err) throw err;
 
     res.json({ data: rows });
@@ -111,9 +111,9 @@ router.get('/userTransactions', (req, res) => {
 router.get('/companyTransactions', (req, res) => {
   const conn = createConnection();
 
-  const query = 'SELECT * FROM companytransactions;';
+  const compTransQuery = 'SELECT * FROM companytransactions;';
 
-  conn.query(query, (err, rows) => {
+  conn.query(compTransQuery, (err, rows) => {
     if (err) throw err;
 
     res.json({ data: rows });

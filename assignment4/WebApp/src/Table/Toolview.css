@@ -1,0 +1,20 @@
+.tool-container {
+    height: fit-content;
+    width: fit-content;
+    padding: 20px;
+}
+
+.tool-div   {
+    height: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 30px;
+}
+
+.tool-div:hover   {
+    background-color: var(--header);
+}
+

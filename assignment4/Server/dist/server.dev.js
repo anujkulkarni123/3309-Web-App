@@ -32,8 +32,8 @@ router.get('/tools', function (req, res) {
 router.get('/users', function (req, res) {
   var conn = createConnection(); // query to get all the users
 
-  var query = 'SELECT * FROM users;';
-  conn.query(query, function (err, rows) {
+  var usersQuery = 'SELECT * FROM users;';
+  conn.query(usersQuery, function (err, rows) {
     if (err) throw err;
     res.json({
       data: rows
@@ -44,8 +44,8 @@ router.get('/users', function (req, res) {
 
 router.get('/companies', function (req, res) {
   var conn = createConnection();
-  var query = 'SELECT * FROM companies;';
-  conn.query(query, function (err, rows) {
+  var companyQuery = 'SELECT * FROM companies;';
+  conn.query(companyQuery, function (err, rows) {
     if (err) throw err;
     res.json({
       data: rows
@@ -56,8 +56,8 @@ router.get('/companies', function (req, res) {
 
 router.get('/favTools', function (req, res) {
   var conn = createConnection();
-  var query = 'SELECT * FROM favouritetools;';
-  conn.query(query, function (err, rows) {
+  var favQuery = 'SELECT * FROM favouritetools;';
+  conn.query(favQuery, function (err, rows) {
     if (err) throw err;
     res.json({
       data: rows
@@ -68,8 +68,8 @@ router.get('/favTools', function (req, res) {
 
 router.get('/unavTools', function (req, res) {
   var conn = createConnection();
-  var query = 'SELECT * FROM unavailabletools;';
-  conn.query(query, function (err, rows) {
+  var unavQuery = 'SELECT * FROM unavailabletools;';
+  conn.query(unavQuery, function (err, rows) {
     if (err) throw err;
     res.json({
       data: rows
@@ -80,8 +80,8 @@ router.get('/unavTools', function (req, res) {
 
 router.get('/userTransactions', function (req, res) {
   var conn = createConnection();
-  var query = 'SELECT * FROM usertransactions;';
-  conn.query(query, function (err, rows) {
+  var userTransQuery = 'SELECT * FROM usertransactions;';
+  conn.query(userTransQuery, function (err, rows) {
     if (err) throw err;
     res.json({
       data: rows
@@ -92,8 +92,8 @@ router.get('/userTransactions', function (req, res) {
 
 router.get('/companyTransactions', function (req, res) {
   var conn = createConnection();
-  var query = 'SELECT * FROM companytransactions;';
-  conn.query(query, function (err, rows) {
+  var compTransQuery = 'SELECT * FROM companytransactions;';
+  conn.query(compTransQuery, function (err, rows) {
     if (err) throw err;
     res.json({
       data: rows

@@ -1,48 +1,38 @@
 import React, { useState, useEffect, Component } from 'react'
 import { FaSearch } from 'react-icons/fa';
 import $ from "jquery";
-import './tableview.css'
 import axios from 'axios';
-import ToolView from './ToolView';
-import Paginate from './paginateTable';
 
-
-$(function()    {
-        $(".icon").click(function() {
-            $(".input").toggleClass("active");
-        });
-    });
-
-class TableView extends Component {
+class popUsersTable extends Component {
 
     state = {
-        tools: [],
+        users: [],
         results: [],
         displayResults: false
     }
 
     componentDidMount() {
-        this.getTools();
+        this.getUsers();
     }
 
-    getTools = _ => {
-        axios.get('http://localhost:5000/tools')
+    getUsers = _ => {
+        axios.get('http://localhost:5000/users')
             .then(({data}) => {
                 console.log(data.data);
-                this.setState({tools: data.data});
+                this.setState({users: data.data});
             })
             .catch((err) => {
                 console.error(err);
             });
     }
 
-    renderTool = ({ ToolID, ToolName, Price, ToolType}) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType}></ToolView>
+    renderUsers= ({ Username, Rating}) => <div key={UserID} name={Username} rating={Rating}>NAME: {Username} RATING: {Rating}</div>
 
-    hangleToolSearch = (e) => {
-        this.filterTools(e.target.value);
+    hangleUsersSearch = (e) => {
+        this.filterUsers(e.target.value);
     }
 
-    filterTools = (search) => {
+    filterUsers = (search) => {
         if (!search) {
             this.setState({ displayResults: false });
             return;
@@ -58,7 +48,7 @@ class TableView extends Component {
     }
 
     render()    {
-        const { tools, results, displayResults } = this.state;
+        const { users, results, displayResults } = this.state;
         return (
         <div className="body">
         
@@ -68,12 +58,12 @@ class TableView extends Component {
                         <FaSearch/>
                     </label>
                     <form>
-                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
+                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleUsersSearch}></input>
                     </form> 
                 </div>
 
                 <div>
-                    {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
+                    {!displayResults ? users.map(this.renderTool) : results.map(this.renderTool)}
                 </div>
             </div>
         </div>
@@ -81,5 +71,4 @@ class TableView extends Component {
     }
 }
 
-
-export default TableView;
+export default popUsersTable;

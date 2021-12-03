@@ -18,7 +18,7 @@ app.use(cors()); // route to get all the tools in the database
 
 router.get('/tools', function (req, res) {
   var conn = createConnection();
-  var Select_All_Tools_Query = 'SELECT * FROM tools';
+  var Select_All_Tools_Query = 'SELECT * FROM tools;';
   conn.query(Select_All_Tools_Query, function (err, rows) {
     if (err) throw err; //could be tools: rows
 
@@ -45,6 +45,54 @@ router.get('/users', function (req, res) {
 router.get('/companies', function (req, res) {
   var conn = createConnection();
   var query = 'SELECT * FROM companies;';
+  conn.query(query, function (err, rows) {
+    if (err) throw err;
+    res.json({
+      data: rows
+    });
+  });
+  conn.end();
+}); // query to get all the favourite tools
+
+router.get('/favTools', function (req, res) {
+  var conn = createConnection();
+  var query = 'SELECT * FROM favouritetools;';
+  conn.query(query, function (err, rows) {
+    if (err) throw err;
+    res.json({
+      data: rows
+    });
+  });
+  conn.end();
+}); // query to get all the unavailable tools
+
+router.get('/unavTools', function (req, res) {
+  var conn = createConnection();
+  var query = 'SELECT * FROM unavailabletools;';
+  conn.query(query, function (err, rows) {
+    if (err) throw err;
+    res.json({
+      data: rows
+    });
+  });
+  conn.end();
+}); // query to get all the user transactions
+
+router.get('/userTransactions', function (req, res) {
+  var conn = createConnection();
+  var query = 'SELECT * FROM usertransactions;';
+  conn.query(query, function (err, rows) {
+    if (err) throw err;
+    res.json({
+      data: rows
+    });
+  });
+  conn.end();
+}); // query to get all the company transactions
+
+router.get('/companyTransactions', function (req, res) {
+  var conn = createConnection();
+  var query = 'SELECT * FROM companytransactions;';
   conn.query(query, function (err, rows) {
     if (err) throw err;
     res.json({

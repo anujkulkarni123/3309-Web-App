@@ -35,7 +35,7 @@ class TableView extends Component {
             });
     }
 
-    renderTool = ({ ToolID, ToolName}) => <div key={ToolID} name={ToolName}>{ToolName}</div>
+    renderTool = ({ ToolID, ToolName, Price}) => <div key={ToolID} name={ToolName} price={Price}>NAME: {ToolName} PRICE: {Price}</div>
 
     hangleToolSearch = (e) => {
         this.filterTools(e.target.value);

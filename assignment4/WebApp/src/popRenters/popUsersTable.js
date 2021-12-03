@@ -26,7 +26,7 @@ class popUsersTable extends Component {
             });
     }
 
-    renderUsers= ({ Username, Rating}) => <div key={UserID} name={Username} rating={Rating}>NAME: {Username} RATING: {Rating}</div>
+    renderUsers= ({ UserID, Username, Rating}) => <div key={UserID} name={Username} rating={Rating}>NAME: {Username} RATING: {Rating}</div>
 
     hangleUsersSearch = (e) => {
         this.filterUsers(e.target.value);

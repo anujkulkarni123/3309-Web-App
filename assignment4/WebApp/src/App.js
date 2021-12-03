@@ -11,18 +11,18 @@ class App extends Component {
     return (
       <div className="App">
         <Header/>
-        
+
         <div className="app-body">
             <div className="table-View">
               <TableView/>
             </div>
-            
+
             <div className="pop-users-view">
               <PopUsersTable/>
             </div>
-          
+
         </div>
-        
+
       </div>
     );
   }

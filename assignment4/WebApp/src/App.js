@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header'
 import './App.css';
-import Table from './Table/Table';
 import TableView from './Table/TableView';
 
 

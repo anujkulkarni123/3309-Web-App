@@ -5,6 +5,7 @@ import './tableview.css'
 import axios from 'axios';
 import ToolView from './ToolView';
 
+
 $(function()    {
         $(".icon").click(function() {
             $(".input").toggleClass("active");
@@ -14,7 +15,9 @@ $(function()    {
 class TableView extends Component {
 
     state = {
-        tools: []
+        tools: [],
+        results: [],
+        displayResults: false
     }
 
     componentDidMount() {
@@ -37,18 +40,24 @@ class TableView extends Component {
     hangleToolSearch = (e) => {
         this.filterTools(e.target.value);
     }
+
     filterTools = (search) => {
+        if (!search) {
+            this.setState({ displayResults: false });
+            return;
+        }
+
         const { tools } = this.state;
 
         const results = tools.filter((tool) => {
             return tool.ToolName.toLowerCase().includes(search.toLowerCase());
         });
 
-        this.setState({ tools: results });
+        this.setState({ results: results, displayResults: true });
     }
 
     render()    {
-        const { tools } = this.state;
+        const { tools, results, displayResults } = this.state;
         return (
         <div className="body">
         
@@ -57,11 +66,13 @@ class TableView extends Component {
                     <label className="icon" class="icon">
                         <FaSearch/>
                     </label>
-                    <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
+                    <form>
+                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
+                    </form> 
                 </div>
 
                 <div>
-                    {tools.map(this.renderTool)}
+                    {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
                 </div>
             </div>
         </div>

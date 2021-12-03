@@ -19,7 +19,7 @@ app.use(cors());
 router.get('/tools', (req, res) => {
   const conn = createConnection();
 
-  const Select_All_Tools_Query = 'SELECT * FROM tools';
+  const Select_All_Tools_Query = 'SELECT * FROM tools;';
 
   conn.query(Select_All_Tools_Query, (err, rows) => {
     if (err) throw err
@@ -52,6 +52,66 @@ router.get('/companies', (req, res) => {
   const conn = createConnection();
 
   const query = 'SELECT * FROM companies;';
+
+  conn.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
+// query to get all the favourite tools
+router.get('/favTools', (req, res) => {
+  const conn = createConnection();
+
+  const query = 'SELECT * FROM favouritetools;';
+
+  conn.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
+// query to get all the unavailable tools
+router.get('/unavTools', (req, res) => {
+  const conn = createConnection();
+
+  const query = 'SELECT * FROM unavailabletools;';
+
+  conn.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
+// query to get all the user transactions
+router.get('/userTransactions', (req, res) => {
+  const conn = createConnection();
+
+  const query = 'SELECT * FROM usertransactions;';
+
+  conn.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
+// query to get all the company transactions
+router.get('/companyTransactions', (req, res) => {
+  const conn = createConnection();
+
+  const query = 'SELECT * FROM companytransactions;';
 
   conn.query(query, (err, rows) => {
     if (err) throw err;

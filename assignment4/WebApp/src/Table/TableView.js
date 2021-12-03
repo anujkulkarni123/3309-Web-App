@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component, } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import { FaSearch } from 'react-icons/fa';
 import $ from "jquery";
 import './tableview.css'
@@ -12,24 +12,6 @@ $(function()    {
     });
 
 class TableView extends Component {
-    
-    /** //initializing states
-    const [ tools, setTools ] = useState([]);
-//localhost:5000/tools`)
-            .then(res =>
-    const [ search, setSearch] = useState(' ')
-
-    useEffect(() => {
-        axios.get(`http:    {
-                setTools(res.data)
-            }).catch(err => console.log(err))
-    }, []);
-    
-    const filteredTools = tools.filter(tool =>
-        tool.name.toLowerCase().includes(search.toLowerCase())
-    )
-
-    */
 
     state = {
         tools: []
@@ -40,14 +22,14 @@ class TableView extends Component {
     }
 
     getTools = _ => {
-        fetch('http://localhost:5000/tools')
-            .then(response => response.json())
-            .then(({ data }) => {
-                console.log("hello");
-                console.log(data)
-                
+        axios.get('http://localhost:5000/tools')
+            .then(({data}) => {
+                console.log(data.data);
+                this.setState({tools: data.data});
             })
-            .catch(err => console.error(err))
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     renderTool = ({ ToolID, ToolName}) => <div key={ToolID} name={ToolName}>{ToolName}</div>
@@ -59,7 +41,7 @@ class TableView extends Component {
         const { tools } = this.state;
 
         const results = tools.filter((tool) => {
-            tool.ToolName.toLowerCase().includes(search.toLowerCase());
+            return tool.ToolName.toLowerCase().includes(search.toLowerCase());
         });
 
         this.setState({ tools: results });
@@ -69,23 +51,22 @@ class TableView extends Component {
         const { tools } = this.state;
         return (
         <div className="body">
-            
-            <div className="search-div">
-                <label className="icon" class="icon">
-                    <FaSearch/>
-                </label>
-                <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
-            </div>
+        
+            <div className="results-container">
+                <div className="search-div">
+                    <label className="icon" class="icon">
+                        <FaSearch/>
+                    </label>
+                    <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
+                </div>
 
-            <div>
-                {tools.map(this.renderTool)}
+                <div>
+                    {tools.map(this.renderTool)}
+                </div>
             </div>
         </div>
-    );
+        );
     }
-    
-    
-    
 }
 
 export default TableView;

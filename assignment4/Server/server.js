@@ -17,8 +17,6 @@ app.use(cors());
 
 // route to get all the tools in the database
 router.get('/tools', (req, res) => {
-  const search = req.params.search;
-
   const conn = createConnection();
 
   const Select_All_Tools_Query = 'SELECT * FROM tools';
@@ -33,11 +31,42 @@ router.get('/tools', (req, res) => {
   conn.end();
 });
 
+// route to get all the users
+router.get('/users', (req, res) => {
+  const conn = createConnection();
+
+  // query to get all the users
+  const query = 'SELECT * FROM users;';
+
+  conn.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
+// query to get all the companies
+router.get('/companies', (req, res) => {
+  const conn = createConnection();
+
+  const query = 'SELECT * FROM companies;';
+
+  conn.query(query, (err, rows) => {
+    if (err) throw err;
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
 // enable app to use the router
 app.use('/', router);
 
 // start the app
-app.listen(port)
+app.listen(port);
 
 // message that the server started successfully
 console.log(`express server started at http://localhost:${port}/`);

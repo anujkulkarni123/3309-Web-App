@@ -163,8 +163,8 @@ router.get('/popularUsers', (req, res) => {
       ,Rating
       ,TransDone
     FROM
-      Users u
-      JOIN UserTransactions ut
+      users u
+      JOIN usertransactions ut
         ON (u.UserID = ut.SellerID)
     ORDER BY
       TransactionDate

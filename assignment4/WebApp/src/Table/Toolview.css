@@ -9,7 +9,7 @@
     padding: 40px;
     display: flex;
     justify-content: space-between;
-    min-width: 1100px;
+    width: 800px;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
 }
@@ -18,12 +18,12 @@
     background-color: var(--header);
 }
 
-.expandDiv{
-    border: 2px solid var(--secondary-text-color);
+.icon-chevron  {
+    height: 20px;
 }
 
-.downClick.active {
-    width: 200px;
-    height: 300px;
+.expand {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
 }
-

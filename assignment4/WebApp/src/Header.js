@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import { FaSearch } from 'react-icons/fa';
-import $ from "jquery";
 import './header.css';
 import { MenuItems } from "./MenuItems";
 
@@ -18,17 +16,17 @@ class Header extends Component{
                 </div>  
 
                 <nav className="NavbarItems">
-                    <ul className="nav-menu">
+                    <div className="nav-menu">
                         {MenuItems.map((item, index) => {
                             return (
-                                <li key={index}>
-                                    <a className={item.cName} href={item.url}>
-                                        {item.title}
+                                <div key={index} className="nav-icon-div">
+                                    <a className="nav-icon" href={item.url}>
+                                        {item.icon}
                                     </a>
-                                </li>
+                                </div>
                             )
                         })}
-                    </ul>
+                    </div>
                 </nav>       
             </div>
         );

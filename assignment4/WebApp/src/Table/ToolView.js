@@ -4,8 +4,11 @@ import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 
-const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}) => {
 
+
+
+
+const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
 
@@ -14,13 +17,28 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
 
         axios.get(`http://localhost:5000/tools/${UserID}`)
             .then(({data}) => {
-                if (data) {
-                    setToolSpecifics(data);
+                if (data.row) {
+                    setToolSpecifics(data.row);
+                    console.log(data.row);
                 }
             })
             .catch((err) => {
-                setToolSpecifics(err.message);
+                // setToolSpecifics(err.message);
+                console.error(err);
             });
+    }
+
+    
+    function renderInfo({ Username, ForSale, ForRent, Address })  {
+        return  (
+            <div key={UserID}>
+                <label>{Username}</label>
+                <label>{ForRent}</label>
+                <label>{Address}</label>
+                <label>{ForSale}</label>
+            </div>
+        );
+
     }
 
     return (
@@ -35,9 +53,9 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
 
             <Expand className="expand" open={clicked}>
                 <div className="expandDiv" style={{height: '400px', color: 'red' }}>
-                    <div>{toolSpecifics.Username}</div>
-                    <div>{toolSpecifics.Address}</div>
+                    {renderInfo(toolSpecifics)}
                 </div>
+
             </Expand>
 
         </div>

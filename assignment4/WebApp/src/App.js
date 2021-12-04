@@ -24,10 +24,6 @@ class App extends Component {
               <TableView/>
             </div>
 
-            <div>
-              <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
-            </div>
-
             <div className="pop-users-view">
               <h1>Popular Users</h1>
               <h1>Near You</h1>

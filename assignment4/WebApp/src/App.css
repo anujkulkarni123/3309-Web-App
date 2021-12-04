@@ -28,25 +28,7 @@
   border-left: 5px solid ;
 }
 
-.addtool-btn{
-  text-decoration: none;
-  font-size: medium;
-  color: white;
-  width: max-content;
-  border-radius: 5px;
-  text-align: center;
-  margin: 10px;
-  padding: 5px;
-  border: none;
-  background-color: var(--header);
-  transition-duration: 0.3s;
-}
 
-.addtool-btn > * {
-  text-decoration: none;
-  color: white;
-  padding: 5px;
-}
 
 .addtool-btn:hover {
   filter: brightness(85%);

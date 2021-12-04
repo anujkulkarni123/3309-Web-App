@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header';
 import './User.css';
 import Cookies from 'js-cookie';
+import UserTableView from './Table/UserTableView';
 
 class User extends Component {
     state = {User: Cookies.get('user')};
@@ -10,10 +11,11 @@ class User extends Component {
         return(
             <div className="profile-page">
                 <Header />
-                <div className="profile-body">
-                    <h1>
-                        Welcome, {this.state.User}
-                    </h1>
+                <div className="app-body">
+                    <div className="table-View">
+                        <UserTableView/>
+                     </div>
+
                 </div>
             </div>
         );

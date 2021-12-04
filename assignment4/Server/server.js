@@ -143,7 +143,7 @@ router.get('/companyTransactions', (req, res) => {
 // router to login user
 router.post('/login', (req, res) => {
   // check if user is logged in
-  if (res.cookies.user) {
+  if (req.cookies.user) {
     res.json({ loggedIn: true });
     return;
   }

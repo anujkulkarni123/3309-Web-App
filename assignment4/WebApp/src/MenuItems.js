@@ -1,4 +1,4 @@
-import {FaTools, FaSignInAlt, FaUser} from "react-icons/fa";
+import {FaTools, FaSignInAlt, FaUser, FaHeart} from "react-icons/fa";
 import axios from 'axios';
 
 export const MenuItems = [

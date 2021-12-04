@@ -4,6 +4,7 @@ import './index.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import App from './App';
 import Login from './Login';
+import TableView from './Table/TableView';
 
 ReactDOM.render(
   <React.StrictMode>

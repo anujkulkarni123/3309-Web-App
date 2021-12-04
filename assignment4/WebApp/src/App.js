@@ -13,7 +13,7 @@ class App extends Component {
         
         <div className="body">
             <div>
-              <Login/>
+              <TableView/>
             </div>
         </div>
         

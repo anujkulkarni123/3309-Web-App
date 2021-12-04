@@ -22,14 +22,15 @@ function Login() {
   const SubmitForm = (e) => {
     e.preventDefault();
   
-    axios.get(`http://localhost/login?username=${username}&password=${password}`)
+    axios.get(`http://localhost:5000/login?username=${username.value}&password=${password.value}`)
       .then(({ data }) => {
-        if (!data.success) {
-          setErrMsg(data.message);
-        } else {
+        console.log(data);
+        if (data.success) {
           console.log('redirecting...');
           setErrMsg('');
           navigate('/App');
+        } else {
+          setErrMsg(data.message);
         }
       })
       .catch((err) => { throw err })
@@ -38,7 +39,7 @@ function Login() {
       <div class="login-container">
         
 
-          <form class="login" action="auth" onSubmit={SubmitForm}>
+          <form className="login" action="auth" onSubmit={SubmitForm}>
             <label style={{ fontSize: 40, fontWeight: 700, }}>Login As Current User</label>
 
             <div class="input-box">
@@ -58,6 +59,7 @@ function Login() {
               
             </div>
           <button style={{marginTop:136}}>Submit</button>
+          { errMsg ? <div className="err-msg">{errMsg}</div> : undefined } 
           </form>
           
 

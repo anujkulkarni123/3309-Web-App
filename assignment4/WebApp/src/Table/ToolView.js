@@ -12,7 +12,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
     const displayToolData = (id) => {
         setClicked(!clicked);
 
-        axios.get(`http://localhost:5000/tools/${ID}`)
+        axios.get(`http://localhost:5000/tools/${UserID}`)
             .then(({data}) => {
                 if (data) {
                     setToolSpecifics(data);

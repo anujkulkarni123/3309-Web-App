@@ -247,9 +247,9 @@ router.get('/popularUsers', (req, res) => {
 });
 
 // route to get info on a tool and its user
-router.get('/tools/:id', (req, res) => {
+router.get('/users/:id', (req, res) => {
   // get the params
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.UserID);
 
   const conn = createConnection();
   conn.connect();

@@ -33,7 +33,7 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
                 <FaChevronCircleDown className="user-chevron" onClick={() => displayUserData(ID)}/>
             </div>
 
-            <Expand className="expand" open={clicked}>
+            <Expand className="expandUser" open={clicked}>
                 <div className="expandDiv" style={{height: '400px', color: 'red' }}>
                     <div>{userSpecifics.Username}</div>
                     <div>{userSpecifics.Address}</div>

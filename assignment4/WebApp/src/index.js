@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Login from './Login';
 import User from './User';
-import InsertTools from './insertTools/InsertTool';
+import InsertTools from './insertTools/insertTool';
 
 ReactDOM.render(
   <React.StrictMode>

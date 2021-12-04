@@ -16,6 +16,7 @@ class TableView extends Component {
 
     state = {
         tools: [],
+        users: [],
         results: [],
         displayResults: false
     }
@@ -35,9 +36,24 @@ class TableView extends Component {
             });
     }
 
+    getUsers = _ => {
+        axios.get('http://localhost:5000/users')
+            .then(({data}) => {
+                console.log(data.data);
+                this.setState({users: data.data});
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
     renderTool = ({ ToolID, ToolName, Price, ToolType}) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType}></ToolView>
 
     hangleToolSearch = (e) => {
+        this.filterTools(e.target.value);
+    }
+
+    handleUserSearch = (e) => {
         this.filterTools(e.target.value);
     }
 
@@ -55,6 +71,21 @@ class TableView extends Component {
 
         this.setState({ results: results, displayResults: true });
     }
+
+    // filterUsers = (search) => {
+    //     if (!search) {
+    //         this.setState({ displayResults: false });
+    //         return;
+    //     }
+
+    //     const { tools } = this.state;
+
+    //     const results = tools.filter((tool) => {
+    //         return tool.Username.toLowerCase().includes(search.toLowerCase());
+    //     });
+
+    //     this.setState({ results: results, displayResults: true });
+    // }
 
     render()    {
         const { tools, results, displayResults } = this.state;

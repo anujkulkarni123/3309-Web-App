@@ -324,6 +324,28 @@ router.get('/user/:username', (req, res) => {
   conn.end();
 });
 
+router.get('/tools/:column', (req, res) => {
+  const column = req.params.column;
+
+  const conn = createConnection();
+  conn.connect();
+
+  conn.query(`
+      SELECT
+        *
+      FROM
+        tools
+      ORDER BY
+        ${column}
+    `, (err, rows) => {
+      if (err) throw err;
+
+      res.json({ data: rows });
+    });
+
+  conn.end();
+})
+
 // route to logout user
 router.get('logout', (req, res) => {
   // clear the cookie if it exists

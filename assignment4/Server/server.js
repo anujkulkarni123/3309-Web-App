@@ -300,7 +300,6 @@ router.get('/tools/:id', (req, res) => {
     res.json({ row: rows[0] });
   });
 
-
   conn.end()
 });
 

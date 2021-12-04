@@ -1,8 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { FaChevronCircleDown } from 'react-icons/fa';
+import Expand from 'react-expand-animated';
 import './Toolview.css';
+import $ from "jquery";
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}) => {
+
+
+    $(function()    {
+        $(".iconChevron").click(function() {
+            $(".downClick").toggleClass("active");
+        });
+    });
     
     
     return (
@@ -12,8 +21,9 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
                 <label className="name">{Name}</label>
                 <label className="price">{Price}</label>
                 <label className="type">{Type}</label>
-                <FaChevronCircleDown className="drop-icon" />
+                <FaChevronCircleDown className="iconChevron" class="downClick"/>
             </div>
+
            
         </div>
     );

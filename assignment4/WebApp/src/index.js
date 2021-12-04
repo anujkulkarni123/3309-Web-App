@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import App from './App';
 import Login from './Login';
 import User from './User';
-// import InsertTools from './insertTools/InsertTool';
+import InsertTools from './insertTools/InsertTool';
 import TableView from './Table/TableView';
 
 ReactDOM.render(
@@ -14,7 +14,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/App" element={<App />}></Route>
         <Route path="/" element={<Login />}></Route>
-        {/*<Route path='/InsertTool' element={<InsertTools />}></Route>*/}
+        <Route path="/InsertTool" element={<InsertTools />}></Route>
         <Route path="/User" element={<User />}></Route>
       </Routes>
     </Router>

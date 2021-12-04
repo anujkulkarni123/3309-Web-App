@@ -10,6 +10,7 @@ const router = express.Router();
 // import db connection and other functions
 const createConnection = require('./db/connection');
 const { registerUser } = require('./db/asyncFunctions');
+const { insertTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -220,6 +221,23 @@ router.post('/register', (req, res) => {
     });
 });
 
+// router to insert a new tool (runs and insert query)
+router.post('/insertTool', (req, res) => {
+  const toolname = req.body.toolname;
+  const toolprice = req.body.toolprice;
+  const tooltype = req.body.tooltype;
+
+  // async method to insert tool imported
+  insertTool(toolname, toolprice, tooltype)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: err.message, success: false });
+    });
+});
+
 // router query to get all the popular users
 router.get('/popularUsers', (req, res) => {
   const conn = createConnection();
@@ -252,7 +270,7 @@ router.get('/popularUsers', (req, res) => {
 // route to get info on a tool and its user
 router.get('/tools/:id', (req, res) => {
   // get the params
-  const id = parseInt(req.params.id);
+  const UserID = parseInt(req.params.id);
 
   const conn = createConnection();
   conn.connect();
@@ -272,7 +290,7 @@ router.get('/tools/:id', (req, res) => {
     JOIN users u
       ON (t.UserID = u.UserID)
     WHERE
-      t.ToolID = ${id}
+      t.ToolID = ${UserID}
   `;
 
   conn.query(query, (err, rows) => {

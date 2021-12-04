@@ -1,6 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import './Toolview.css';
+import Expand from 'react-expand-animated';
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}) => {
 
@@ -14,7 +15,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
                 <label className="name">{Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">{Type}</label>
-                <FaChevronCircleDown className="icon" onClick={() => setClicked(!clicked)}/>
+                <FaChevronCircleDown className="icon-chevron" onClick={() => setClicked(!clicked)}/>
             </div>
 
             <Expand className="expand" open={clicked}>

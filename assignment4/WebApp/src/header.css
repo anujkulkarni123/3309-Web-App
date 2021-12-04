@@ -15,14 +15,31 @@
 }
 
 .NavbarItems {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-gap: 20px;
-    list-style: none;
-    text-align: center;
-    width: 70vw;
-    justify-content: end;
+    display: flex;
+    width: 200px;
+    border-radius: 20px;
+    height: 40px;
+    margin: 30px;
+    justify-content: space-between;
 }
+
+.nav-menu   {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nac-icon-div   {
+    height: 50px;
+}
+
+.nav-icon  {
+    color: white;
+    font-size: 20px;
+}
+
 
 .logout-btn{
     padding: 10px;

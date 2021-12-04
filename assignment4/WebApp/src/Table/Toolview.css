@@ -18,3 +18,12 @@
     background-color: var(--header);
 }
 
+.icon-chevron  {
+    height: 20px;
+}
+
+.expand {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}

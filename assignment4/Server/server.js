@@ -17,14 +17,17 @@ const port = 5000;
 // variable to store the user
 
 // middlewares
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000'
+}));
+app.use(cookieParser());
 
 // router middlewares
 router.use(express.urlencoded({
   extended: true
 }));
 router.use(express.json());
-router.use(cookieParser());
 
 // route to get all the tools in the database
 router.get('/tools', (req, res) => {
@@ -171,11 +174,10 @@ router.post('/login', (req, res) => {
       // use cookies to store user
       res.cookie('user', username, {
         maxAge: 60 * 60 * 1000, // 1 hour
-        httpOnly: true,
-        secure: true,
-        sameSite: true,
-      });
-      res.json({ message: 'Login Successful!', user: username, success: true });
+        httpOnly: false,
+        secure: false
+      })
+      res.send({message: 'Login Successful!', success: true});
     } else {
       res.send({ message: 'Login Unsuccessful!', success: false });
     }
@@ -207,7 +209,8 @@ router.post('/register', (req, res) => {
           httpOnly: true,
           secure: true,
           sameSite: true,
-        });
+        }).json(response);
+        return;
       }
       res.json(response);
     })

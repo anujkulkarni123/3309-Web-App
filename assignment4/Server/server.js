@@ -143,7 +143,7 @@ router.get('/companyTransactions', (req, res) => {
 // router to login user
 router.post('/login', (req, res) => {
   // check if user is logged in
-  if (res.cookies.user) {
+  if (req.cookies.user) {
     res.json({ loggedIn: true });
     return;
   }
@@ -259,7 +259,11 @@ router.get('/tools/:id', (req, res) => {
       ToolID
       ,ToolName
       ,ToolType
-      ,
+      ,Price
+      ,ForSale
+      ,ForRent
+      ,Username
+      ,Address
     FROM
       tools t
     JOIN users u
@@ -268,7 +272,13 @@ router.get('/tools/:id', (req, res) => {
       t.ToolID = ${id}
   `;
 
-  res.json({ message: '', success: false });
+  conn.query(query, (err, rows) => {
+    if (err) {
+      res.json({ row: [] });
+    }
+    res.json({ row: rows[0] });
+  });
+
 
   conn.end()
 });

@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import './Toolview.css';
-<<<<<<< HEAD
-import $ from "jquery";
-import axios from 'axios';
-=======
 import Expand from 'react-expand-animated';
->>>>>>> 163414c759f2ff8b9df758f23e88b49287c0d163
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}) => {
 

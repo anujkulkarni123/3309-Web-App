@@ -25,6 +25,7 @@ function Login() {
 
     let navigate = useNavigate();
     const [errMsg, setErrMsg] = useState('');
+    const [errMsgReg, setErrMsgReg] = useState('');
 
     const SubmitForm = (e) => {
         e.preventDefault();
@@ -62,10 +63,10 @@ function Login() {
             console.log(data);
             if (data.success) {
               console.log('redirecting...');
-              setErrMsg('');
+              setErrMsgReg('');
               navigate('/App');
             } else {
-              setErrMsg(data.message);
+              setErrMsgReg(data.message);
             }
           })
           .catch((err) => { throw err })
@@ -132,6 +133,7 @@ function Login() {
             </div>
 
           <button style={{marginTop:50}} onClick={registerUser}>Submit</button>
+          { errMsgReg ? <div className="err-msg">{errMsgReg}</div> : undefined }
           </div>
         </div>
     );

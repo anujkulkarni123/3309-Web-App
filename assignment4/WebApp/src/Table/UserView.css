@@ -1,0 +1,30 @@
+.user-container {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.user-div   {
+    height: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 30px;
+}
+
+.user-div:hover   {
+    background-color: var(--header);
+}
+
+.user-chevron  {
+    height: 20px;
+}
+
+.expandUser {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}

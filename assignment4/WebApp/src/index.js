@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Login from './Login';
 import User from './User';
-import InsertTools from './insertTools/insertTool';
+import InsertTools from './insertTools/InsertTool';
 import Profile from './Profile';
 import TableView from './Table/TableView';
 

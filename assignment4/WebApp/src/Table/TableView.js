@@ -23,7 +23,6 @@ class TableView extends Component {
 
     state = {
         tools: [],
-        users: [],
         results: [],
         displayResults: false
     }
@@ -43,24 +42,9 @@ class TableView extends Component {
             });
     }
 
-    getUsers = _ => {
-        axios.get('http://localhost:5000/users')
-            .then(({data}) => {
-                console.log(data.data);
-                this.setState({users: data.data});
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }
-
     renderTool = ({ ToolID, ToolName, Price, ToolType, UserID }) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType} UserID={UserID}></ToolView>
 
-    hangleToolSearch = (e) => {
-        this.filterTools(e.target.value);
-    }
-
-    handleUserSearch = (e) => {
+    handleToolSearch = (e) => {
         this.filterTools(e.target.value);
     }
 
@@ -83,18 +67,21 @@ class TableView extends Component {
         const { tools, results, displayResults } = this.state;
         return (        
             <div>
-                <div className="search-div">
-                    <label className="icon" class="icon">
-                        <FaSearch/>
-                    </label>
-                    <form>
-                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
-                    </form> 
-                </div>
+                <div className="filter-div">
+                    <div className="search-div">
+                        <label className="icon" class="icon">
+                            <FaSearch/>
+                        </label>
+                        <form>
+                            <input className="input" class="input" type="search" placeholder="search" onChange={this.handleToolSearch}></input>
+                        </form> 
+                    </div>
 
-                <div>
-                    <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
+                    <div>
+                        <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
+                    </div>
                 </div>
+                
                 
                 <div>
                     {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}

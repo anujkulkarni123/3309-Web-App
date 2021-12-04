@@ -5,18 +5,14 @@
     width: 30px;
     cursor: pointer;
     transition: all 0.5s ease;
-    color: black;
-}
-
-.table-container    {
-    width: calc(100%);
+    color: white;
 }
 
 .search-div   {
     margin: 20px;
     height: 50px;
+    background-color: var(--header);
     width: fit-content;
-    border: 1px solid black;
     display: flex;
     justify-content: start;
     border-radius: 13px;
@@ -32,7 +28,7 @@
     margin-right: 0px;
     color: black;
     outline: none;
-    transition: all 0.5s ease;
+    transition: all 1s ease;
 }
 
 .input:hover    {
@@ -54,11 +50,11 @@
     text-decoration: none;
     font-size: medium;
     color: white;
-    width: max-content;
-    border-radius: 5px;
+    width: fit-content;
+    border-radius: 10px;
     text-align: center;
-    margin: 10px;
-    padding: 5px;
+    margin: 30px;
+    padding: 20px;
     border: none;
     background-color: var(--header);
     transition-duration: 0.3s;
@@ -69,3 +65,11 @@
     color: white;
     padding: 5px;
   }
+
+  .filter-div   {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      min-width: 930px;
+  }
+

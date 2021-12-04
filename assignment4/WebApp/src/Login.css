@@ -26,3 +26,7 @@
   .inputs{
     padding-bottom: 0px;
   }
+
+  .err-msg {
+    color: red;
+  }

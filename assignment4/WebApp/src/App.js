@@ -3,6 +3,7 @@ import Header from './Header'
 import './App.css';
 import Table from './Table/Table';
 import TableView from './Table/TableView';
+import Login from './Login';
 
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
         
         <div className="body">
             <div>
-              <TableView/>
+              <Login/>
             </div>
         </div>
         

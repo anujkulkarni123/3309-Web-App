@@ -9,12 +9,21 @@
     padding: 40px;
     display: flex;
     justify-content: space-between;
-    width: 900px;
+    min-width: 1100px;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
 }
 
 .tool-div:hover   {
     background-color: var(--header);
+}
+
+.expandDiv{
+    border: 2px solid var(--secondary-text-color);
+}
+
+.downClick.active {
+    width: 200px;
+    height: 300px;
 }
 

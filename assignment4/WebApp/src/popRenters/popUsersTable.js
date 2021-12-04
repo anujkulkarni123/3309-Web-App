@@ -14,7 +14,7 @@ class PopUsersTable extends Component {
     }
 
     getUsers = _ => {
-        axios.get('http://localhost:5000/users')
+        axios.get('http://localhost:5000/popularUsers')
             .then(({data}) => {
                 console.log(data.data);
                 this.setState({users: data.data});
@@ -48,7 +48,7 @@ class PopUsersTable extends Component {
     render()    {
         const { users, results, displayResults } = this.state;
         return (
-        <div className="body">
+        <div className="pop-users-container">
             <div className="results-container">
                 <div>
                     {!displayResults ? users.map(this.renderUsers) : results.map(this.renderTool)}

@@ -1,0 +1,41 @@
+// import necessary modules
+const util = require('util');
+const createConnection = require('./connection');
+
+// async function to register user if it does not exist
+async function registerUser(username, password, cardNo, address) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    const users = await query(`SELECT * FROM users`);
+
+    for (let user of users) {
+      if (user.Username === username) {
+        return {message: 'Username Taken!', success: false};
+      }
+    }
+
+    // inserts user if the block of code above didn't return
+    await query(`
+      INSERT INTO users (Username, Password, CreditCardNo, Address) VALUES (
+        '${username}'
+        ,'${password}'
+        ,${ cardNo.length === 16 ? `'${cardNo}'` : null}
+        ,'${address}'
+      )
+    `);
+    return {message: 'Successfully added user!', success: true};
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
+// export the functions
+module.exports = {
+  registerUser: registerUser
+}

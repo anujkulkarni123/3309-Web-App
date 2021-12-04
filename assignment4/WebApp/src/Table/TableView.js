@@ -59,7 +59,7 @@ class TableView extends Component {
     render()    {
         const { tools, results, displayResults } = this.state;
         return (        
-            <div className="table-container">
+            <div>
                 <div className="search-div">
                     <label className="icon" class="icon">
                         <FaSearch/>

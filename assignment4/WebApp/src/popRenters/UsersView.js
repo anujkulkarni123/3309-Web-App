@@ -2,7 +2,7 @@ import React from 'react'
 import './UsersView.css'
 
 
-const UsersView = ({ UserId, UserName, Rating, TransDone}) =>{
+const UsersView = ({ UserId, UserName, Rating, TransDone, TransactionDate}) =>{
     
     return (
         <div className="user-container">
@@ -11,6 +11,7 @@ const UsersView = ({ UserId, UserName, Rating, TransDone}) =>{
                 <label>{UserName}</label>
                 <label>{Rating}</label>
                 <label>Trans: {TransDone}</label>
+                <label>{TransactionDate} </label>
             </div>
         </div>
     ); 

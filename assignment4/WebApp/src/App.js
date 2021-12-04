@@ -18,6 +18,8 @@ class App extends Component {
             </div>
 
             <div className="pop-users-view">
+              <h1>Popular Users</h1>
+              <h1>Near You</h1>
               <PopUsersTable/>
             </div>
 

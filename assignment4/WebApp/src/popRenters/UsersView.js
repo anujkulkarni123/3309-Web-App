@@ -1,4 +1,6 @@
 import React from 'react'
+import './UsersView.css'
+
 
 const UsersView = ({ UserId, UserName, Rating, TransDone}) =>{
     

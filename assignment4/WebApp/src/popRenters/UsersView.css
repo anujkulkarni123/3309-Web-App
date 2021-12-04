@@ -1,0 +1,19 @@
+.user-container {
+    height: fit-content;
+    width: fit-content;
+    padding: 20px;
+}
+
+.user-div   {
+    height: 100px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    min-width: 200px;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 30px;
+}
+
+.user-div:hover   {
+    background-color: var(--header);
+}

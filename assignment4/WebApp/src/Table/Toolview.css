@@ -1,7 +1,8 @@
 .tool-container {
     height: fit-content;
-    width: fit-content;
+    width: 100%;
     padding: 20px;
+
 }
 
 .tool-div   {
@@ -9,7 +10,7 @@
     padding: 40px;
     display: flex;
     justify-content: space-between;
-    width: 800px;
+    width: 100%;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
 }

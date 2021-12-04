@@ -12,8 +12,8 @@ ReactDOM.render(
     <Router>
       <Routes>
         <Route path="/App" element={<App />}></Route>
-        <Route path="/" element={<Login />}></Route>
-        <Route path='/InsertTool' element={<InsertTools />}></Route>
+        <Route path="/" element={<InsertTools />}></Route>
+        <Route path="/insertTool" element={<InsertTools />}></Route>
       </Routes>
     </Router>
   </React.StrictMode>,

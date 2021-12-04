@@ -35,7 +35,33 @@ async function registerUser(username, password, cardNo, address) {
   }
 }
 
+// async function to insert new tool
+async function insertTool(toolname, toolprice, tooltype) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // inserts user if the block of code above didn't return
+    await query(`
+      INSERT INTO tools (ToolName, UserID, Price, ToolType) VALUES (
+        '${toolname}'
+        ,'${3}'
+        ,'${toolprice}'
+        ,'${tooltype}'
+      )
+    `);
+    return {message: 'Successfully added tool!', success: true};
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
 // export the functions
 module.exports = {
-  registerUser: registerUser
+  registerUser: registerUser,
+  insertTool: insertTool
 }

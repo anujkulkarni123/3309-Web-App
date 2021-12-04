@@ -3,7 +3,7 @@ import Header from './Header'
 import './App.css';
 import TableView from './Table/TableView';
 import Login from './Login';
-import PopUsersTable from './popRenters/PopUsersTable';
+import PopUsersTable from './popRenters/popUsersTable';
 
 
 class App extends Component {

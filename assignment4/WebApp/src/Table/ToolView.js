@@ -6,12 +6,7 @@ import $ from "jquery";
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}) => {
 
-
-    $(function()    {
-        $(".iconChevron").click(function() {
-            $(".downClick").toggleClass("active");
-        });
-    });
+    const [clicked, setClicked] = useState(false);
     
     
     return (
@@ -21,9 +16,12 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
                 <label className="name">{Name}</label>
                 <label className="price">{Price}</label>
                 <label className="type">{Type}</label>
-                <FaChevronCircleDown className="iconChevron" class="downClick"/>
+                <FaChevronCircleDown className="icon" onClick={() => setClicked(!clicked)}/>
             </div>
 
+            <Expand className="expand" open={clicked}>
+                <div className="expandDiv" style={{height: '400px', color: 'red' }}></div>
+            </Expand>
            
         </div>
     );

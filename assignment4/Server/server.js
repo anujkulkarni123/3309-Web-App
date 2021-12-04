@@ -10,6 +10,7 @@ const router = express.Router();
 // import db connection and other functions
 const createConnection = require('./db/connection');
 const { registerUser } = require('./db/asyncFunctions');
+const { insertTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -209,6 +210,23 @@ router.post('/register', (req, res) => {
           sameSite: true,
         });
       }
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: err.message, success: false });
+    });
+});
+
+// router to insert a new tool (runs and insert query)
+router.post('/insertTool', (req, res) => {
+  const toolname = req.body.toolname;
+  const toolprice = req.body.toolprice;
+  const tooltype = req.body.tooltype;
+
+  // async method to insert tool imported
+  insertTool(toolname, toolprice, tooltype)
+    .then((response) => {
       res.json(response);
     })
     .catch((err) => {

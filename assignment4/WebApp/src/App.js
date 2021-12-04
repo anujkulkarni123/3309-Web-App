@@ -25,7 +25,7 @@ class App extends Component {
             </div>
 
             <div>
-              <button className="submitbtn"><Link className='submitbtn' to="/InsertTool">Add Tool</Link></button>
+              <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
             </div>
 
             <div className="pop-users-view">

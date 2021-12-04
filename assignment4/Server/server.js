@@ -303,7 +303,7 @@ router.get('/tools/:id', (req, res) => {
 });
 
 // route to get details of one user
-route.get('/user/:username', (req, res) => {
+router.get('/user/:username', (req, res) => {
   const username = req.params.username;
 
   const conn = createConnection();

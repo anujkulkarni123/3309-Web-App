@@ -6,8 +6,9 @@ const cors = require('cors');
 const app = express();
 const router = express.Router();
 
-// import db connection
+// import db connection and other functions
 const createConnection = require('./db/connection');
+const { registerUser } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -15,9 +16,16 @@ const port = 5000;
 // middlewares
 app.use(cors());
 
+// router middlewares
+router.use(express.urlencoded({
+  extended: true
+}));
+router.use(express.json());
+
 // route to get all the tools in the database
 router.get('/tools', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const Select_All_Tools_Query = 'SELECT * FROM tools;';
 
@@ -34,6 +42,7 @@ router.get('/tools', (req, res) => {
 // router route to get all the users
 router.get('/users', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   // query to get all the users
   const usersQuery = 'SELECT * FROM users;';
@@ -50,6 +59,7 @@ router.get('/users', (req, res) => {
 // router query to get all the companies
 router.get('/companies', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const companyQuery = 'SELECT * FROM companies;';
 
@@ -65,6 +75,7 @@ router.get('/companies', (req, res) => {
 // router query to get all the favourite tools
 router.get('/favTools', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const favQuery = 'SELECT * FROM favouritetools;';
 
@@ -80,6 +91,7 @@ router.get('/favTools', (req, res) => {
 // router query to get all the unavailable tools
 router.get('/unavTools', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const unavQuery = 'SELECT * FROM unavailabletools;';
 
@@ -95,6 +107,7 @@ router.get('/unavTools', (req, res) => {
 // router query to get all the user transactions
 router.get('/userTransactions', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const userTransQuery = 'SELECT * FROM usertransactions;';
 
@@ -110,6 +123,7 @@ router.get('/userTransactions', (req, res) => {
 // router query to get all the company transactions
 router.get('/companyTransactions', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const compTransQuery = 'SELECT * FROM companytransactions;';
 
@@ -123,11 +137,12 @@ router.get('/companyTransactions', (req, res) => {
 });
 
 // router to login user
-router.get('/login', (req, res) => {
-  const username = req.query.username;
-  const password = req.query.password;
+router.post('/login', (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
   const conn = createConnection();
+  conn.connect();
 
   const query = `
     SELECT
@@ -152,9 +167,33 @@ router.get('/login', (req, res) => {
   conn.end();
 });
 
+// router to register a user (runs and insert query)
+router.post('/register', (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const cardNo = req.body.cardNo;
+  const address = req.body.address;
+
+  if (!username || !password) {
+    res.json({message: 'Invalid Username and/or Password!', success: false});
+    return;
+  }
+
+  // async method to register user imported
+  registerUser(username, password, cardNo, address)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: err.message, success: false });
+    });
+});
+
 // router query to get all the popular users
 router.get('/popularUsers', (req, res) => {
   const conn = createConnection();
+  conn.connect();
 
   const query = `
     SELECT

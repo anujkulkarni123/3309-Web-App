@@ -10,7 +10,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
             <div className="tool-div">
                 <label className="id">{ID}</label>
                 <label className="name">{Name}</label>
-                <label className="price">{Price}</label>
+                <label className="price">${Price}</label>
                 <label className="type">{Type}</label>
                 <FaChevronCircleDown className="drop-icon" />
             </div>

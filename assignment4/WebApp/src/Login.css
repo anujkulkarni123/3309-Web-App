@@ -5,10 +5,10 @@
     justify-content: center;
     height: 1000px;;
     background-color: #1c3334;
-    
+
 
   }
-  
+
   .login {
     border: 1px solid black;
     display: flex;
@@ -29,4 +29,5 @@
 
   .err-msg {
     color: red;
+    text-align: center;
   }

@@ -1,6 +1,7 @@
 // import required modules
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 // create the app and router
 const app = express();
@@ -13,6 +14,8 @@ const { registerUser } = require('./db/asyncFunctions');
 // constant variables
 const port = 5000;
 
+// variable to store the user
+
 // middlewares
 app.use(cors());
 
@@ -21,6 +24,7 @@ router.use(express.urlencoded({
   extended: true
 }));
 router.use(express.json());
+router.use(cookieParser());
 
 // route to get all the tools in the database
 router.get('/tools', (req, res) => {
@@ -138,6 +142,12 @@ router.get('/companyTransactions', (req, res) => {
 
 // router to login user
 router.post('/login', (req, res) => {
+  // check if user is logged in
+  if (res.cookies.user) {
+    res.json({ loggedIn: true });
+    return;
+  }
+
   const username = req.body.username;
   const password = req.body.password;
 
@@ -158,6 +168,13 @@ router.post('/login', (req, res) => {
     if (err) throw err;
 
     if (rows.length === 1) {
+      // use cookies to store user
+      res.cookie('user', username, {
+        maxAge: 60 * 60 * 1000, // 1 hour
+        httpOnly: true,
+        secure: true,
+        sameSite: true,
+      });
       res.json({ message: 'Login Successful!', user: username, success: true });
     } else {
       res.send({ message: 'Login Unsuccessful!', success: false });
@@ -174,6 +191,7 @@ router.post('/register', (req, res) => {
   const cardNo = req.body.cardNo;
   const address = req.body.address;
 
+  // check if the password input is proper
   if (!username || !password) {
     res.json({message: 'Invalid Username and/or Password!', success: false});
     return;
@@ -182,6 +200,15 @@ router.post('/register', (req, res) => {
   // async method to register user imported
   registerUser(username, password, cardNo, address)
     .then((response) => {
+      if (response.success) {
+        // use cookies to store user
+        res.cookie('user', username, {
+          maxAge: 60 * 60 * 1000, // 1 hour
+          httpOnly: true,
+          secure: true,
+          sameSite: true,
+        });
+      }
       res.json(response);
     })
     .catch((err) => {
@@ -217,6 +244,43 @@ router.get('/popularUsers', (req, res) => {
   });
 
   conn.end();
+});
+
+// route to get info on a tool and its user
+router.get('/tools/:id', (req, res) => {
+  // get the params
+  const id = parseInt(req.params.id);
+
+  const conn = createConnection();
+  conn.connect();
+
+  const query = `
+    SELECT
+      ToolID
+      ,ToolName
+      ,ToolType
+      ,
+    FROM
+      tools t
+    JOIN users u
+      ON (t.UserID = u.UserID)
+    WHERE
+      t.ToolID = ${id}
+  `;
+
+  res.json({ message: '', success: false });
+
+  conn.end()
+});
+
+// route to logout user
+router.get('logout', (req, res) => {
+  // clear the cookie if it exists
+  if (res.cookies.user) {
+    res.clearCookie('user');
+  }
+
+  res.json({ message: 'Logged Out User!', success:  true });
 });
 
 // enable app to use the router

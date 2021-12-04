@@ -9,8 +9,7 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser } = require('./db/asyncFunctions');
-const { insertTool } = require('./db/asyncFunctions');
+const { registerUser, insertTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -295,13 +294,34 @@ router.get('/tools/:id', (req, res) => {
 
   conn.query(query, (err, rows) => {
     if (err) {
-      res.json({ row: [] });
+      res.json({ row: {} });
     }
     res.json({ row: rows[0] });
   });
 
-
   conn.end()
+});
+
+// route to get details of one user
+router.get('/user/:username', (req, res) => {
+  const username = req.params.username;
+
+  const conn = createConnection();
+  conn.connect();
+
+  const query = `
+    SELECT * FROM users WHERE Username = '${username}'
+  `;
+
+  conn.query(query, (err, rows) => {
+    if (err) {
+      res.json({ row: {} })
+    }
+
+    res.json({ row: rows[0] });
+  });
+
+  conn.end();
 });
 
 // route to logout user

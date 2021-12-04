@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Component } from 'react'
 import { FaSearch } from 'react-icons/fa';
 import $ from "jquery";
-import './tableview.css'
+//import './tableview.css'
 import axios from 'axios';
-import ToolView from './ToolView';
+import UserView from './UserView';
 
 
 $(function()    {
@@ -12,28 +12,16 @@ $(function()    {
         });
     });
 
-class TableView extends Component {
+class UserTableView extends Component {
 
     state = {
-        tools: [],
         users: [],
         results: [],
         displayResults: false
     }
 
     componentDidMount() {
-        this.getTools();
-    }
-
-    getTools = _ => {
-        axios.get('http://localhost:5000/tools')
-            .then(({data}) => {
-                console.log(data.data);
-                this.setState({tools: data.data});
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+        this.getUsers();
     }
 
     getUsers = _ => {
@@ -47,33 +35,30 @@ class TableView extends Component {
             });
     }
 
-    renderTool = ({ ToolID, ToolName, Price, ToolType}) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType}></ToolView>
+    renderUsers = ({ UserID, Username, Rating, Address}) => <UserView key={UserID} ID={UserID} Username={Username} Rating={Rating} Address={Address}></UserView>
 
-    hangleToolSearch = (e) => {
-        this.filterTools(e.target.value);
+    hangleUsersSearch = (e) => {
+        this.filterUsers(e.target.value);
     }
 
-    handleUserSearch = (e) => {
-        this.filterTools(e.target.value);
-    }
 
-    filterTools = (search) => {
+    filterUsers = (search) => {
         if (!search) {
             this.setState({ displayResults: false });
             return;
         }
 
-        const { tools } = this.state;
+        const { users } = this.state;
 
-        const results = tools.filter((tool) => {
-            return tool.ToolName.toLowerCase().includes(search.toLowerCase());
+        const results = users.filter((user) => {
+            return user.Username.toLowerCase().includes(search.toLowerCase());
         });
 
         this.setState({ results: results, displayResults: true });
     }
 
     render()    {
-        const { tools, results, displayResults } = this.state;
+        const { users, results, displayResults } = this.state;
         return (        
             <div>
                 <div className="search-div">
@@ -81,12 +66,12 @@ class TableView extends Component {
                         <FaSearch/>
                     </label>
                     <form>
-                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
+                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleUsersSearch}></input>
                     </form> 
                 </div>
 
                 <div>
-                    {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
+                    {!displayResults ? users.map(this.renderUsers) : results.map(this.renderUsers)}
                 </div>
             </div>
         );
@@ -94,4 +79,4 @@ class TableView extends Component {
 }
 
 
-export default TableView;
+export default UserTableView;

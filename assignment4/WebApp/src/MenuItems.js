@@ -4,13 +4,13 @@ export const MenuItems = [
     {
         icon: <FaTools/>,
         title: 'Tools',
-        url: '/',
+        url: '/App',
         cName: 'nav-links'
     },
     {
         icon: <FaUser/>,
         title: 'Profile',
-        url: '/',
+        url: '/User',
         cName: 'nav-links'
     },
     {   

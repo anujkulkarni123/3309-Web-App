@@ -18,3 +18,12 @@
     background-color: var(--header);
 }
 
+.expandDiv{
+    border: 2px solid var(--secondary-text-color);
+}
+
+.downClick.active {
+    width: 200px;
+    height: 300px;
+}
+

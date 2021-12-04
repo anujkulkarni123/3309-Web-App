@@ -4,6 +4,13 @@ import './App.css';
 import TableView from './Table/TableView';
 import Login from './Login';
 import PopUsersTable from './popRenters/popUsersTable';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate
+} from "react-router-dom";
 
 
 class App extends Component {
@@ -15,6 +22,10 @@ class App extends Component {
         <div className="app-body">
             <div className="table-View">
               <TableView/>
+            </div>
+
+            <div>
+              <button className="submitbtn"><Link className='submitbtn' to="/InsertTool">Add Tool</Link></button>
             </div>
 
             <div className="pop-users-view">

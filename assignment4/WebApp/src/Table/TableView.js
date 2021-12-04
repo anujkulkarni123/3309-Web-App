@@ -62,7 +62,7 @@ class TableView extends Component {
         return (
         <div className="body">
         
-            <div className="results-container">
+            <div className="table-container">
                 <div className="search-div">
                     <label className="icon" class="icon">
                         <FaSearch/>

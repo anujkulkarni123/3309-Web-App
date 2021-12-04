@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Component } from 'react'
-import { FaSearch } from 'react-icons/fa';
-import $ from "jquery";
 import axios from 'axios';
+import UsersView from './UsersView';
 
-class popUsersTable extends Component {
-
+class PopUsersTable extends Component {
     state = {
         users: [],
         results: [],
@@ -26,7 +24,7 @@ class popUsersTable extends Component {
             });
     }
 
-    renderUsers= ({ Username, Rating}) => <div key={UserID} name={Username} rating={Rating}>NAME: {Username} RATING: {Rating}</div>
+    renderUsers= ({ UserID, Username, Rating, TransDone}) => <UsersView key={UserID} UserId={UserID} UserName={Username} Rating={Rating} TransDone={TransDone}></UsersView>
 
     hangleUsersSearch = (e) => {
         this.filterUsers(e.target.value);
@@ -51,19 +49,9 @@ class popUsersTable extends Component {
         const { users, results, displayResults } = this.state;
         return (
         <div className="body">
-        
             <div className="results-container">
-                <div className="search-div">
-                    <label className="icon" class="icon">
-                        <FaSearch/>
-                    </label>
-                    <form>
-                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleUsersSearch}></input>
-                    </form> 
-                </div>
-
                 <div>
-                    {!displayResults ? users.map(this.renderTool) : results.map(this.renderTool)}
+                    {!displayResults ? users.map(this.renderUsers) : results.map(this.renderTool)}
                 </div>
             </div>
         </div>
@@ -71,4 +59,4 @@ class popUsersTable extends Component {
     }
 }
 
-export default popUsersTable;
+export default PopUsersTable;

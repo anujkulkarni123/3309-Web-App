@@ -58,10 +58,8 @@ class TableView extends Component {
 
     render()    {
         const { tools, results, displayResults } = this.state;
-        return (
-        <div className="body">
-        
-            <div className="table-container">
+        return (        
+            <div>
                 <div className="search-div">
                     <label className="icon" class="icon">
                         <FaSearch/>
@@ -75,7 +73,6 @@ class TableView extends Component {
                     {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
                 </div>
             </div>
-        </div>
         );
     }
 }

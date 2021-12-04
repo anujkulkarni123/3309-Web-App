@@ -12,7 +12,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
     const displayToolData = (id) => {
         setClicked(!clicked);
 
-        axios.get(`http://localhost:5000/tools/${id}`)
+        axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {
                 if (data) {
                     setToolSpecifics(data);
@@ -30,7 +30,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price, ForSale, ForRent}
                 <label className="name">{Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">{Type}</label>
-                <FaChevronCircleDown className="icon" onClick={() => displayToolData(ID)}/>
+                <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 
             <Expand className="expand" open={clicked}>

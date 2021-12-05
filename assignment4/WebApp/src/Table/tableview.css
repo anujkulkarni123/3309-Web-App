@@ -64,7 +64,7 @@
     transition-duration: 0.3s;
   }
   
-  .addtool-btn > * {
+  .addtool-btn{
     text-decoration: none;
     color: white;
     padding: 5px;

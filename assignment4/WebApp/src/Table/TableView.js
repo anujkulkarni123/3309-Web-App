@@ -83,6 +83,7 @@ class TableView extends Component {
         const { tools, results, displayResults } = this.state;
         return (        
             <div>
+                
                 <div className="search-div">
                     <label className="icon" class="icon">
                         <FaSearch/>
@@ -92,10 +93,6 @@ class TableView extends Component {
                     </form> 
                 </div>
 
-                <div>
-                    <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
-                </div>
-                
                 <div>
                     {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
                 </div>

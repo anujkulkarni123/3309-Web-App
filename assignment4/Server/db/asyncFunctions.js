@@ -36,18 +36,23 @@ async function registerUser(username, password, cardNo, address) {
 }
 
 // async function to insert new tool
-async function insertTool(toolname, toolprice, tooltype) {
+async function insertTool(toolname, toolprice, tooltype, username) {
   const conn = createConnection();
   conn.connect();
 
   const query = util.promisify(conn.query).bind(conn);
 
   try {
-    // inserts user if the block of code above didn't return
+    const user = await query(`SELECT UserID FROM users WHERE Username = '${username}'`);
+
+    if (user.length !== 1) {
+      return {message: 'Invalid Credentials', success: false};
+    }
+
     await query(`
       INSERT INTO tools (ToolName, UserID, Price, ToolType) VALUES (
         '${toolname}'
-        ,'${3}'
+        ,${user[0].UserID}
         ,'${toolprice}'
         ,'${tooltype}'
       )

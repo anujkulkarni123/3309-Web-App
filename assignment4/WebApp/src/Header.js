@@ -6,28 +6,28 @@ class Header extends Component{
 
 
     render()    {
-        return( 
+        return(
             <div className="container">
 
                 <div className="title">
                     <label style={{ fontSize: 30, }}>
                         RENTRABBIT
                     </label>
-                </div>  
+                </div>
 
                 <nav className="NavbarItems">
                     <div className="nav-menu">
                         {MenuItems.map((item, index) => {
                             return (
                                 <div key={index} className="nav-icon-div">
-                                    <a className="nav-icon" href={item.url}>
+                                    <a className="nav-icon" href={item.url} onClick={item.logout}>
                                         {item.icon}
                                     </a>
                                 </div>
                             )
                         })}
                     </div>
-                </nav>       
+                </nav>
             </div>
         );
     }

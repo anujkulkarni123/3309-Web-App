@@ -1,9 +1,10 @@
 import {FaTools, FaSignInAlt, FaUser} from "react-icons/fa";
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 export const MenuItems = [
     {
-        icon: <FaTools/>,
+        icon: <FaTools />,
         title: 'Tools',
         url: '/App',
         cName: 'nav-links'
@@ -17,7 +18,13 @@ export const MenuItems = [
     {
         icon: <FaSignInAlt />,
         title: 'Login/Signup',
-        url: '/',
+        logout: async () => {
+            let navigate = useNavigate();
+
+            await axios.get('http://localhost:5000/logout');
+
+            navigate('/');
+        },
         cName: 'nav-links'
     }
 ]

@@ -206,9 +206,8 @@ router.post('/register', (req, res) => {
         // use cookies to store user
         res.cookie('user', username, {
           maxAge: 60 * 60 * 1000, // 1 hour
-          httpOnly: true,
-          secure: true,
-          sameSite: true,
+          httpOnly: false,
+          secure: false
         }).json(response);
         return;
       }
@@ -225,9 +224,10 @@ router.post('/insertTool', (req, res) => {
   const toolname = req.body.toolname;
   const toolprice = req.body.toolprice;
   const tooltype = req.body.tooltype;
+  const username = req.body.username;
 
   // async method to insert tool imported
-  insertTool(toolname, toolprice, tooltype)
+  insertTool(toolname, toolprice, tooltype, username)
     .then((response) => {
       res.json(response);
     })
@@ -339,13 +339,15 @@ router.get('/tools/:column', (req, res) => {
 });
 
 // route to logout user
-router.get('logout', (req, res) => {
+router.get('/logout', (req, res) => {
   // clear the cookie if it exists
-  if (res.cookies.user) {
-    res.clearCookie('user');
-  }
+  res.cookie('user', '', { expires: new Date(1), path: '/' });
+  res.clearCookie('user');
 
-  res.json({ message: 'Logged Out User!', success:  true });
+  console.log(req.cookies.user);
+
+  // res.json({ message: 'Logged Out User!', success:  true });
+  next();
 });
 
 // enable app to use the router

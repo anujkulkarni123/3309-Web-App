@@ -6,8 +6,9 @@ import {
   Link,
   useNavigate
 } from "react-router-dom";
-import axios from 'axios';
 import Cookies from 'js-cookie';
+import Header from '../Header/Header';
+import Axios, { InsertTool } from '../Axios/Axios';
 
 
 
@@ -50,77 +51,70 @@ function InsertTools() {
         console.log(data);
 
         // Use axios to post the data into the table
-        axios.post(`http://localhost:5000/insertTool`, data)
-          .then(({ data }) => {
-            console.log(data);
-            if (data.success) {
-              console.log('redirecting...');
-              setErrMsg('');
-              navigate('/App');
-            } else {
-              setErrMsg(data.message);
-            }
-          })
-          .catch((err) => { throw err })
+        InsertTool(data, setErrMsg, navigate);
+
     }
 
     return (
-        <div className="login-container">
+      <div className="App">
+        <Header/>
+          <div className="login-container">
 
-          <div className="login">
+            <div className="login">
 
-            <label style={{ fontSize: 40, fontWeight: 700, }}>Insert a New Tool</label>
+              <label style={{ fontSize: 40, fontWeight: 700, }}>Insert a New Tool</label>
 
-            {/* Box to contain all the inputs needed to create a new tool */}
-            <div className="input-box">
-              <div className="inputs">
-                <label style={{ fontSize: 14, }}>
-                  Tool Name:
-                </label>
-                <input type="text" placeholder="toolname" ref={tn => (toolnameReg = tn)} style={{ marginLeft: 20}}></input>
+              {/* Box to contain all the inputs needed to create a new tool */}
+              <div className="input-box">
+                <div className="inputs">
+                  <label style={{ fontSize: 14, }}>
+                    Tool Name:
+                  </label>
+                  <input type="text" placeholder="toolname" ref={tn => (toolnameReg = tn)} style={{ marginLeft: 20}}></input>
+                </div>
+
+                <div className="inputs">
+                  <label style={{ fontSize: 14}}>
+                      Tool Price:
+                  </label>
+                  <input type="text" placeholder="toolprice" ref={tp => (toolpriceReg = tp)} style={{ marginLeft: 25}}></input>
+                </div>
+
+                <div className="inputs">
+                  <label style={{ fontSize: 14}}>
+                      Tool Type:
+                  </label>
+                  <input type="text" placeholder="tooltype" ref={tt => (tooltypeReg = tt)} style={{ marginLeft: 25}}></input>
+                </div>
+
+                <div className="forsale">
+                  <input
+                    type="checkbox"
+                    id="forsale"
+                    name="forsale"
+                    value="ForSale"
+                    checked={isSaleChecked}
+                    onChange={handleSaleOnChange}
+                  />
+                  For Sale
+                </div>
+
+                <div className="forrent">
+                  <input
+                    type="checkbox"
+                    id="forrent"
+                    name="forrent"
+                    value="ForRent"
+                    checked={isRentChecked}
+                    onChange={handleRentOnChange}
+                  />
+                  For Rent
+                </div>
+
               </div>
-
-              <div className="inputs">
-                <label style={{ fontSize: 14}}>
-                    Tool Price:
-                </label>
-                <input type="text" placeholder="toolprice" ref={tp => (toolpriceReg = tp)} style={{ marginLeft: 25}}></input>
-              </div>
-
-              <div className="inputs">
-                <label style={{ fontSize: 14}}>
-                    Tool Type:
-                </label>
-                <input type="text" placeholder="tooltype" ref={tt => (tooltypeReg = tt)} style={{ marginLeft: 25}}></input>
-              </div>
-
-              <div className="forsale">
-                <input
-                  type="checkbox"
-                  id="forsale"
-                  name="forsale"
-                  value="ForSale"
-                  checked={isSaleChecked}
-                  onChange={handleSaleOnChange}
-                />
-                For Sale
-              </div>
-
-              <div className="forrent">
-                <input
-                  type="checkbox"
-                  id="forrent"
-                  name="forrent"
-                  value="ForRent"
-                  checked={isRentChecked}
-                  onChange={handleRentOnChange}
-                />
-                For Rent
-              </div>
-
+              <button style={{marginTop:50}} onClick={insertTool}>Submit</button>
             </div>
-
-          <button style={{marginTop:50}} onClick={insertTool}>Submit</button>
+            {/* {errMsg ? alert(errMsg) : undefined} */}
           </div>
         </div>
     );

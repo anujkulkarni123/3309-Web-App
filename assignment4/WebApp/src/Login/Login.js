@@ -8,6 +8,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
+import Axios, { Register, LoginUser } from '../Axios/Axios';
 
 
 function Login() {
@@ -37,19 +38,7 @@ function Login() {
       }
 
         // Use axios to check the login data compared to the database
-        axios.post(`http://localhost:5000/login`, data)
-          .then(({ data }) => {
-            if (data.success) {
-              console.log('redirecting...');
-              setErrMsg('');
-              navigate('/App');
-            } else if (data.loggedIn) {
-              setErrMsg('Already LoggedIn');
-            } else {
-              setErrMsg(data.message);
-            }
-          })
-      .catch((err) => { throw err })
+        LoginUser(data, setErrMsgReg, navigate);
     }
 
     // Register user function
@@ -65,22 +54,21 @@ function Login() {
         console.log(data);
 
         // Use axios to post it to the database using express server
-        axios.post(`http://localhost:5000/register`, data)
-          .then(({ data }) => {
-            console.log(data);
-            if (data.success) {
-              console.log('redirecting...');
-              setErrMsgReg('');
-              navigate('/App');
-            } else {
-              setErrMsgReg(data.message);
-            }
-          })
-          .catch((err) => { throw err })
+        Register(data, setErrMsg, navigate);
     }
 
     // UI for the inputs needed to run the functions
     return (
+      <div className="App">
+
+        <div className="container">
+            <div className="title">
+                <label style={{ fontSize: 30, }}>
+                    RENTRABBIT
+                </label>
+            </div>
+        </div>
+
         <div className="login-container">
           <form className="login" action="auth" onSubmit={SubmitForm}>
             <label style={{ fontSize: 40, fontWeight: 700, }}>Login As Current User</label>
@@ -97,7 +85,7 @@ function Login() {
                 <label style={{ fontSize: 14, }}>
                     Enter Your Password:
                 </label>
-                <input type="text"  name="password" ref={passwrd => (password = passwrd)} placeholder="*********" style={{ marginLeft: 24}}></input>
+                <input type="password"  name="password" ref={passwrd => (password = passwrd)} placeholder="*********" style={{ marginLeft: 24}}></input>
               </div>
 
             </div>
@@ -144,6 +132,7 @@ function Login() {
           { errMsgReg ? <div className="err-msg">{errMsgReg}</div> : undefined }
           </div>
         </div>
+      </div>
     );
 }
 

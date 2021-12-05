@@ -1,11 +1,19 @@
 import React, { useState, useEffect, Component } from 'react'
-import { FaSearch } from 'react-icons/fa';
 import Cookie from 'js-cookie';
-import PersonalView from './PersonalView';
+import ToolView from '../../Tools/ToolView';
 import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+    useNavigate
+  } from "react-router-dom";
+import "./personalTools.css"
 
 class PersonalTableView extends Component {
 
+    // States needed for showing the users personal tools
     state = {
         pTools: [],
         results: [],
@@ -16,6 +24,7 @@ class PersonalTableView extends Component {
         this.getPersonalTools();
     }
 
+    //Gets the users tools from the route
     getPersonalTools = _ => {
         const user = Cookie.get('user');
         axios.get(`http://localhost:5000/user/${user}`)
@@ -28,20 +37,21 @@ class PersonalTableView extends Component {
             });
     }
 
-    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <PersonalView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></PersonalView>
+    // Renders each tool
+    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <ToolView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></ToolView>
 
-
+    // Loops through the pTools array which holds each users personal tools
     render()    {
         const { pTools, results, displayResults } = this.state;
         return (
-            <div>
+            <div className="listed-tools">
                 <div>
-                    {displayResults ? pTools.map(this.renderPTools) : results.map(this.renderPTools)}
+                    <button className="addtool-btn"><Link className='addtool-btn' to="/InsertTool">Add Tool</Link></button>
                 </div>
+                {displayResults ? pTools.map(this.renderPTools) : results.map(this.renderPTools)}
             </div>
         );
     }
 }
-
 
 export default PersonalTableView;

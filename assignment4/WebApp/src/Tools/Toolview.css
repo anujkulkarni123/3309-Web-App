@@ -1,23 +1,24 @@
-.user-container {
+.tool-container {
     height: fit-content;
     padding: 20px;
 }
 
-.user-div   {
+.tool-div   {
     height: 20px;
     padding: 40px;
     display: flex;
     justify-content: space-between;
-    width: 800px;
+    width: 89%;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
+
 }
 
-.user-div:hover   {
+.tool-div:hover   {
     background-color: var(--header);
 }
 
-.user-chevron  {
+.icon-chevron  {
     height: 20px;
 }
 
@@ -27,18 +28,19 @@
     border-bottom: 1px solid black;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    
+    display: flex;
+    justify-content: center;
 }
 
 .expandDiv  {
     height: fit-content;
     padding: 20px;
-    width: 800px;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.user-expanded  {
+.tool-expanded  {
     font-size: 20px;
     width: fit-content;
     display: flex;

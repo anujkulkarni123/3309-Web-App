@@ -15,17 +15,19 @@ import {
   } from "react-router-dom";
 import Paginate from 'react-paginate';
 
-
+// Used for the search bar at the top, makes it expand if a user clicks on it
 $(function()    {
         $(".icon").click(function() {
             $(".input").toggleClass("active");
         });
 });
 
+// Three titles in the sorting combo box
 const comboboxData = [ "ToolName", "Price", "ToolType" ];
 
 class TableView extends Component {
 
+    // Needed states
     state = {
         column: "ToolID",
         tools: [],
@@ -41,6 +43,7 @@ class TableView extends Component {
         this.getTools();
     }
 
+    // Gets all the available tools from the route
     getTools = () => {
         const { column, results } = this.state;
         if (results) {
@@ -78,19 +81,24 @@ class TableView extends Component {
         });
     }
 
+
+    // Changes how the filter is sorting the tools
     handleFilterChange(e)    {
         console.log(e);
         this.setState({column: e});
         this.getTools();
     }
 
+    // Render a tool
     renderTool = ({ ToolID, ToolName, Price, ToolType, UserID }) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType} UserID={UserID}></ToolView>
 
+    // Calls the filterTools function when the user clicks the search button
     handleToolSearch = () => {
         this.setState(this.state.search)
         this.filterTools(this.state.search);
     }
 
+    // Fills the results array with the avalible tools that match what the user entered into the search bar
     filterTools = (search) => {
         if (!search) {
             this.setState({ displayResults: false });
@@ -109,6 +117,7 @@ class TableView extends Component {
         this.setState({ results: results, displayResults: true });
     }
 
+    // Rendering all the avalible tools, search bar, and combo-box filter
     render()    {
         const { tools, results, displayResults } = this.state;
         return (

@@ -9,7 +9,7 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser, insertTool } = require('./db/asyncFunctions');
+const { registerUser, insertTool, getUserDetails } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -248,6 +248,7 @@ router.get('/popularUsers', (req, res) => {
       ,Address
       ,Rating
       ,TransDone
+      ,ut.TransactionDate
     FROM
       users u
       JOIN usertransactions ut
@@ -306,20 +307,33 @@ router.get('/tools/:id', (req, res) => {
 router.get('/user/:username', (req, res) => {
   const username = req.params.username;
 
+  getUserDetails(username)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ data: {} });
+    });
+});
+
+router.get('/tools/:column', (req, res) => {
+  const column = req.params.column;
+
   const conn = createConnection();
   conn.connect();
 
-  const query = `
-    SELECT * FROM users WHERE Username = '${username}'
-  `;
+  conn.query(`
+      SELECT
+        *
+      FROM
+        tools
+      ORDER BY
+        ${column}
+    `, (err, rows) => {
+      if (err) throw err;
 
-  conn.query(query, (err, rows) => {
-    if (err) {
-      res.json({ row: {} })
-    }
-
-    res.json({ row: rows[0] });
-  });
+      res.json({ data: rows });
+    });
 
   conn.end();
 });

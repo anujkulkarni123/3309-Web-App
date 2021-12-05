@@ -45,9 +45,9 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         <div className="tool-container">
             <div className="tool-div">
                 <label className="id">{ID}</label>
-                <label className="name">{Name}</label>
+                <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
-                <label className="type">{Type}</label>
+                <label className="type">Type: {Type}</label>
                 <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 

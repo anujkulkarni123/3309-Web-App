@@ -45,7 +45,7 @@ class TableView extends Component {
 
     // Gets all the available tools from the route
     getTools = () => {
-        const { column, results } = this.state;
+        const { column, results, search } = this.state;
         if (results) {
             const slice = results.slice(this.state.offset, this.state.offset + this.state.perPage);
             this.setState({
@@ -57,7 +57,12 @@ class TableView extends Component {
         axios.get(`http://localhost:5000/tools/order/${column}`)
             .then(({data}) => {
                 console.log(data.data);
-                const slice = data.data.slice(this.state.offset, this.state.offset + this.state.perPage);
+                let slice = data.data.slice(this.state.offset, this.state.offset + this.state.perPage);
+                if (search) {
+                    slice.filter((row) => {
+                        return row.ToolName.toLowerCase().includes(search.toLowerCase());
+                    });
+                }
                 this.setState({
                     tools: slice,
                     displayResults: false,
@@ -93,31 +98,36 @@ class TableView extends Component {
     renderTool = ({ ToolID, ToolName, Price, ToolType, UserID }) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType} UserID={UserID}></ToolView>
 
     // Calls the filterTools function when the user clicks the search button
-    handleToolSearch = () => {
-        this.setState(this.state.search)
-        this.filterTools(this.state.search);
+    handleToolSearch = (e) => {
+        const value = e.target.value;
+        this.setState({ search: value });
+        this.getTools();
+        // this.filterTools(this.state.search);
     }
 
-    // Fills the results array with the avalible tools that match what the user entered into the search bar
+    // Fills the results array with the available tools that match what the user entered into the search bar
     filterTools = (search) => {
         if (!search) {
             this.setState({ displayResults: false });
             return;
         }
 
+        this.setState({
+            currentPage: 0
+        });
+
+        this.getTools();
+
         const { tools } = this.state;
 
         const results = tools.filter((tool) => {
-            this.setState({
-                currentPage: 0
-            });
             return tool.ToolName.toLowerCase().includes(search.toLowerCase());
         });
 
         this.setState({ results: results, displayResults: true });
     }
 
-    // Rendering all the avalible tools, search bar, and combo-box filter
+    // Rendering all the available tools, search bar, and combo-box filter
     render()    {
         const { tools, results, displayResults } = this.state;
         return (

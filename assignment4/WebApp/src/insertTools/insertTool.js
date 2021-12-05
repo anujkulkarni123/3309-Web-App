@@ -7,7 +7,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 
 
 function InsertTools() {
@@ -21,13 +21,16 @@ function InsertTools() {
     const [errMsg, setErrMsg] = useState('');
 
     const insertTool = () => {
+      if (!Cookies.get('user')) {
+        navigate('/');
+      }
+
         const data = {
             toolname: toolnameReg.value,
             toolprice: toolpriceReg.value,
             tooltype: tooltypeReg.value,
+            username: Cookies.get('user')
         }
-
-        console.log(data);
 
         axios.post(`http://localhost:5000/insertTool`, data)
           .then(({ data }) => {

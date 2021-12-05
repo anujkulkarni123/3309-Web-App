@@ -41,6 +41,8 @@ function Login() {
               console.log('redirecting...');
               setErrMsg('');
               navigate('/App');
+            } else if (data.loggedIn) {
+              setErrMsg('Already LoggedIn');
             } else {
               setErrMsg(data.message);
             }

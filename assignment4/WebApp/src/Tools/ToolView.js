@@ -28,6 +28,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 console.error(err);
             });
     }
+
+    const buyTool = (id) => {
+        
+    }
     
     function handleHeartClick() {
         
@@ -53,6 +57,8 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         </div>
         );   
     }
+
+
 
     // Renders a tool
     return (

@@ -9,6 +9,7 @@ import InsertTools from './insertTools/InsertTool';
 import Profile from './Profile/Profile';
 import TableView from './Table/Tools/TableView';
 
+// Render all the routes for the pages
 ReactDOM.render(
   <React.StrictMode>
     <Router>

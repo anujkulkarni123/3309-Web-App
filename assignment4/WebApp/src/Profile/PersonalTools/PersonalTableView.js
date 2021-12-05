@@ -36,7 +36,7 @@ class PersonalTableView extends Component {
                 console.error(err);
             });
     }
-
+    
     // Renders each tool
     renderPTools = ({ UserID, ToolType, ToolName, Price}) => <ToolView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></ToolView>
 

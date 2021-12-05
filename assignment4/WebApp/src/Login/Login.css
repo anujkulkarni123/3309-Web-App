@@ -1,12 +1,8 @@
 .login-container  {
-    margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 1000px;;
-    background-color: #1c3334;
-
-
+    /* background-color: #1c3334; */
   }
 
   .login {
@@ -19,7 +15,7 @@
     height: 300px;
     width: max-content;
     background-color: var(--div-background);
-    border: 5px solid var(--border);
+    border: 3px solid;
     color:black;
   }
 

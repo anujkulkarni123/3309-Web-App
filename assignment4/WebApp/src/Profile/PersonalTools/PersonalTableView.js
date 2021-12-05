@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from 'react'
 import { FaSearch } from 'react-icons/fa';
 import Cookie from 'js-cookie';
-import ToolView from '../../Table/Tools/ToolView';
+import ToolView from '../../Tools/ToolView';
 import axios from 'axios';
 
 class PersonalTableView extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import './User.css';
 import Cookies from 'js-cookie';
-import UserTableView from '../Table/UserPage/UserTableView';
+import UserTableView from '../User/UserPage/UserTableView';
 
 // Display the list of all users
 class User extends Component {

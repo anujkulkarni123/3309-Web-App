@@ -8,6 +8,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
+import Header from '../Header/Header';
 
 
 function Login() {
@@ -81,6 +82,16 @@ function Login() {
 
     // UI for the inputs needed to run the functions
     return (
+      <div className="App">
+
+        <div className="container">
+            <div className="title">
+                <label style={{ fontSize: 30, }}>
+                    RENTRABBIT
+                </label>
+            </div>
+        </div>
+
         <div className="login-container">
           <form className="login" action="auth" onSubmit={SubmitForm}>
             <label style={{ fontSize: 40, fontWeight: 700, }}>Login As Current User</label>
@@ -144,6 +155,7 @@ function Login() {
           { errMsgReg ? <div className="err-msg">{errMsgReg}</div> : undefined }
           </div>
         </div>
+      </div>
     );
 }
 

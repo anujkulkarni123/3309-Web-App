@@ -34,7 +34,7 @@ router.get('/tools', (req, res) => {
   const conn = createConnection();
   conn.connect();
 
-  const Select_All_Tools_Query = 'SELECT * FROM tools;';
+  const Select_All_Tools_Query = 'SELECT t.ToolID, ToolName, ToolType, Price, ForSale, ForRent FROM tools t FULL OUTER JOIN unavailabletools ut ON (t.ToolID = ut.UserID);';
 
   conn.query(Select_All_Tools_Query, (err, rows) => {
     if (err) throw err
@@ -222,11 +222,11 @@ router.post('/register', (req, res) => {
 // router to insert a new tool (runs and insert query)
 router.post('/insertTool', (req, res) => {
   const toolname = req.body.toolname;
-    const toolprice = req.body.toolprice;
-    const tooltype = req.body.tooltype;
-    const sale = req.body.sale;
-    const rent = req.body.rent;
-    const username = req.body.username;
+  const toolprice = req.body.toolprice;
+  const tooltype = req.body.tooltype;
+  const sale = req.body.sale;
+  const rent = req.body.rent;
+  const username = req.body.username;
 
   // async method to insert tool imported
   insertTool(toolname, toolprice, tooltype, username, sale, rent)
@@ -397,11 +397,7 @@ router.get('/fav/:username', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
-<<<<<<< HEAD
-    t.UserID = (SELECT UserID FROM users WHERE Username = '${username}')
-=======
-    UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1')
->>>>>>> a3c45022c3f1cac46b73aad48d3a85a15b760f1f
+    UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1)
   `;
 
   conn.query(query, (err, rows) => {
@@ -424,7 +420,7 @@ router.post('/addFav', (req, res) => {
 
   const query = `
     INSERT INTO favouritetools (UserID, ToolID) VALUES (
-      (SELECT UserID FROM users WHERE username = '${username} LIMIT 1')
+      (SELECT UserID FROM users WHERE username = '${username}' LIMIT 1)
       ,${ToolID}
     )
   `;
@@ -451,7 +447,7 @@ router.get('/rmFav', (req, res) => {
 
   const query = `
     DELETE FROM favouritetools WHERE
-      UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1') AND
+      UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1) AND
       ToolID = ${ToolID}
   `;
 

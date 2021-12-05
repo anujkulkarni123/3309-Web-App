@@ -40,7 +40,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 console.error(err);
             });
     }
-    
+
     function setRed() {
         $(".icon-heart").click(function()   {
             $("#icon-heart").attr('class', 'icon-heart-active' );
@@ -81,7 +81,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             return;
         }
 
-        axios.get(`http://localhost:5000/buy?username='${Cookies.get('user')}'&toolID='${id}'`)
+        axios.get(`http://localhost:5000/buy?username=${Cookies.get('user')}&toolID=${id}`)
             .then(({ data }) => {
                 if (!data.success) {
                     console.log('redirecting...');
@@ -90,7 +90,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                     return;
                 }
                 else{
-                    alert('Success')
+                    alert(data.message)
                     return;
                 }
 

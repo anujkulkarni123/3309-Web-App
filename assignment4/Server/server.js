@@ -378,7 +378,7 @@ router.get('/tools/order/:column', (req, res) => {
   conn.end();
 });
 
-// route to get all the favourite tools
+// route to get all the favorite tools
 router.get('/fav', (req, res) => {
   const username = req.query.username;
 

@@ -103,9 +103,12 @@ async function buyTool(username, ToolID) {
   const query = util.promisify(conn.query).bind(conn);
 
   try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
     // add the transaction to the usertransactions table
     await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
-      (SELECT UserID from users WHERE Username = '${username}')
+      ${user[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
@@ -113,7 +116,7 @@ async function buyTool(username, ToolID) {
     // remove the tool from the tools table
     await query(`DELETE FROM tools
       WHERE
-        UserID = (SELECT UserID from users WHERE Username = '${username}') AND
+        UserID = ${user[0].UserID} AND
         ToolID = ${ToolID}
     `);
 
@@ -136,9 +139,12 @@ async function rentTool(username, ToolID, days) {
   const query = util.promisify(conn.query).bind(conn);
 
   try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
     // add the transaction to the usertransactions table
     await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
-      (SELECT UserID WHERE Username = '${username}')
+      ${user[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
@@ -146,7 +152,7 @@ async function rentTool(username, ToolID, days) {
     // remove the tool from the tools table
     await query(`DELETE FROM tools
       WHERE
-        UserID = (SELECT UserID from users WHERE Username = '${username}') AND
+        UserID = ${user[0].UserID} AND
         ToolID = ${ToolID}
     `);
 

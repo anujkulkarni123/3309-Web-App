@@ -85,7 +85,7 @@ function Login() {
                 <label style={{ fontSize: 14, }}>
                     Enter Your Password:
                 </label>
-                <input type="text"  name="password" ref={passwrd => (password = passwrd)} placeholder="*********" style={{ marginLeft: 24}}></input>
+                <input type="password"  name="password" ref={passwrd => (password = passwrd)} placeholder="*********" style={{ marginLeft: 24}}></input>
               </div>
 
             </div>

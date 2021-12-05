@@ -112,9 +112,9 @@ function InsertTools() {
                 </div>
 
               </div>
-
-            <button style={{marginTop:50}} onClick={insertTool}>Submit</button>
+              <button style={{marginTop:50}} onClick={insertTool}>Submit</button>
             </div>
+            {/* {errMsg ? alert(errMsg) : undefined} */}
           </div>
         </div>
     );

@@ -31,8 +31,6 @@ class TableView extends Component {
     state = {
         column: "ToolID",
         tools: [],
-        // results: [],
-        displayResults: false,
         perPage: 10,
         currentPage: 0,
         offset: 0,
@@ -64,7 +62,6 @@ class TableView extends Component {
                 slice = slice.slice(this.state.offset, this.state.offset + this.state.perPage);
                 this.setState({
                     tools: slice,
-                    displayResults: false,
                     pageCount: Math.ceil(pagesData.length / this.state.perPage)
                 });
             })
@@ -98,13 +95,13 @@ class TableView extends Component {
     // Calls the filterTools function when the user clicks the search button
     handleToolSearch = (e) => {
         const value = e.target.value;
-        this.setState({ search: value });
+        this.setState({ search: value, currentPage: 0 });
         this.getTools();
     }
 
     // Rendering all the available tools, search bar, and combo-box filter
     render()    {
-        const { tools, results, displayResults } = this.state;
+        const { tools } = this.state;
         return (
             <div>
                 <div className="filter-div">
@@ -130,7 +127,7 @@ class TableView extends Component {
                 </div>
 
                 <div>
-                    {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
+                    {tools.map(this.renderTool)}
                     <Paginate
                         previousLabel={<FaArrowLeft style={{ color: 'var(--header)' }}/>}
                         nextLabel={<FaArrowRight style={{ color: 'var(--header)' }} />}

@@ -7,6 +7,7 @@ import Cookie from 'js-cookie';
 
 const PersonalView =  ({ ID, Type, Name, Price}) => {
 
+    // Variables needed to show the users personal tools
     const [clicked, setClicked] = useState(false);
     const [userSpecifics, setUserSpecifics] = useState('');
 
@@ -15,6 +16,7 @@ const PersonalView =  ({ ID, Type, Name, Price}) => {
 
         const user = Cookie.get('user');
 
+        // Getting the tools from the route
         axios.get(`http://localhost:5000/user/${user}`)
             .then(({data}) => {
                 console.log(data);
@@ -27,6 +29,7 @@ const PersonalView =  ({ ID, Type, Name, Price}) => {
             });
     }
 
+    // Returning the html for each tool
     return (
         <div className="user-container">
             <div className="user-div">

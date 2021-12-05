@@ -6,9 +6,11 @@ import axios from 'axios';
 
 const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
+    // Necassary variables, clicked is for Expanding, userSpecifics is for the info in the expanded div
     const [clicked, setClicked] = useState(false);
     const [userSpecifics, setUserSpecifics] = useState('');
 
+    // Gets the users from the route
     const displayUserData = (id) => {
         setClicked(!clicked);
 
@@ -23,6 +25,7 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
             });
     }
 
+    // What is displayed in the drop down menu
     function renderInfo({ ToolName, Price, ToolType, ForSale, ForRent })  {
         console.log({ToolName});
         return(
@@ -40,6 +43,7 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
         );   
     }
 
+    // Renders a user
     return (
         <div className="user-container">
             <div className="user-div">

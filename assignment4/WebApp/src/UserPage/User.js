@@ -4,13 +4,15 @@ import './User.css';
 import Cookies from 'js-cookie';
 import UserTableView from '../Table/UserPage/UserTableView';
 
+// Display the list of all users
 class User extends Component {
-    state = {User: Cookies.get('user')};
+
     render() {
         console.log(this.state.User);
         return(
             <div className="users-page">
                 <Header />
+                {/* Display the users table the same way as the tools table */}
                 <div className="app-body">
                     <div className="table-View">
                         <UserTableView/>

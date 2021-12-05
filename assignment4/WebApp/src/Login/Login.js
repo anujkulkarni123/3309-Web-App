@@ -30,11 +30,13 @@ function Login() {
     const SubmitForm = (e) => {
         e.preventDefault();
 
+      // Record the data entered by the user
       const data = {
         username: username.value,
         password: password.value
       }
 
+        // Use axios to check the login data compared to the database
         axios.post(`http://localhost:5000/login`, data)
           .then(({ data }) => {
             if (data.success) {
@@ -50,7 +52,9 @@ function Login() {
       .catch((err) => { throw err })
     }
 
+    // Register user function
     const registerUser = () => {
+        // Record the data entered by the user
         const data = {
             username: usernameReg.value,
             password: passwordReg.value,
@@ -60,6 +64,7 @@ function Login() {
 
         console.log(data);
 
+        // Use axios to post it to the database using express server
         axios.post(`http://localhost:5000/register`, data)
           .then(({ data }) => {
             console.log(data);
@@ -74,6 +79,7 @@ function Login() {
           .catch((err) => { throw err })
     }
 
+    // UI for the inputs needed to run the functions
     return (
         <div className="login-container">
           <form className="login" action="auth" onSubmit={SubmitForm}>

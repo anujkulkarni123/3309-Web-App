@@ -1,13 +1,16 @@
 import React from 'react';
 import './header.css';
-import { MenuItems } from "../MenuItems";
+import { MenuItems } from "./MenuItems";
 import {FaSignInAlt} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 function Header() {
+    
+    // Navigation
     const navigate = useNavigate();
 
+    // Logout function
     const logout = async () => {
 
         Cookies.remove('user');
@@ -24,6 +27,7 @@ function Header() {
                 </label>
             </div>
 
+            {/* Use the navbar items to from MenuItems to route to different pages when clicked */}
             <nav className="NavbarItems">
                 <div className="nav-menu">
                     {MenuItems.map((item, index) => {

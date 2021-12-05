@@ -12,7 +12,8 @@ import {
   useNavigate
 } from "react-router-dom";
 
-
+// Main page displaying the tools and popular users
+// Including a header to navigate to different pages
 class App extends Component {
   render()  {
     return (
@@ -20,10 +21,12 @@ class App extends Component {
         <Header/>
 
         <div className="app-body">
+            {/* Call the table view for the tools */}
             <div className="table-View">
               <TableView/>
             </div>
 
+            {/* Call the table view for the popular users */}
             <div className="pop-users-view">
               <h1>Popular Users Near You</h1>
               <PopUsersTable/>

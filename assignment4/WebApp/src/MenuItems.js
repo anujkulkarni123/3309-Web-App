@@ -19,5 +19,11 @@ export const MenuItems = [
         title: 'Login/Signup',
         url: '/',
         cName: 'nav-links'
+    },
+    {
+        icon: <FaHeart />,
+        title: 'Favourites',
+        url: '/Profile',
+        cName: 'nav-links'
     }
 ]

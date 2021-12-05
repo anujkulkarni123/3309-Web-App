@@ -28,7 +28,7 @@ class PersonalTableView extends Component {
             });
     }
 
-    renderPTools = ({ UserID, Type, Name, Price}) => <PersonalView key={UserID} ID={UserID} Type={Type} Name={Name} Price={Price}></PersonalView>
+    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <PersonalView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></PersonalView>
 
 
     render()    {

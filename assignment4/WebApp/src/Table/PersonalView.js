@@ -32,8 +32,8 @@ const PersonalView =  ({ ID, Type, Name, Price}) => {
             <div className="user-div">
                 <label className="id">{ID}</label>
                 <label className="type">{Type}</label>
-                <label className="name">${Name}</label>
-                <label className="price">{Price}</label>
+                <label className="name">{Name}</label>
+                <label className="price">${Price}</label>
                 <FaChevronCircleDown className="user-chevron" onClick={() => displayPTools(ID)}/>
             </div>
 

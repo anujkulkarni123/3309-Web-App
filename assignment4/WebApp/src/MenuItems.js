@@ -1,4 +1,4 @@
-import {FaTools, FaSignInAlt, FaUser} from "react-icons/fa";
+import {FaTools, FaSignInAlt, FaUser, FaHeart} from "react-icons/fa";
 import axios from 'axios';
 
 export const MenuItems = [
@@ -18,6 +18,12 @@ export const MenuItems = [
         icon: <FaSignInAlt />,
         title: 'Login/Signup',
         url: '/',
+        cName: 'nav-links'
+    },
+    {
+        icon: <FaHeart />,
+        title: 'Favourites',
+        url: '/Profile',
         cName: 'nav-links'
     }
 ]

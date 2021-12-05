@@ -20,16 +20,25 @@ class Profile extends Component {
             <div className="profile-page">
                 <Header />
                 {/* Welcome message to the user */}
-                <h1>
-                    Welcome, {this.state.User}
-                </h1>
-                <div className="user-tools">
-                    <button className="addtool-btn"><Link className='addtool-btn' to="/InsertTool">Add Tool</Link></button>
-                    <PersonalTableView/>
-                </div>
-                <div className="pTable">
+
+                <div>
+                    <div>
+                        <h1>
+                            Welcome, {this.state.User}
+                        </h1>
+                    </div>
                     
+
+                    <div className="info-container">
+                        <div className="user-tools">
+                            <PersonalTableView/>
+                        </div>
+                        <div className="fav-tools">
+                            <label>Fav Tools</label>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         );
     }

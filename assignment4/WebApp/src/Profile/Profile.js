@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Header from './Header';
+import Header from '../Header/Header';
 import Cookies from 'js-cookie';
-import PersonalTableView from './Table/PersonalTableView';
+import PersonalTableView from '../Table/PersonalTools/PersonalTableView';
 import './Profile.css';
 import {
     BrowserRouter as Router,

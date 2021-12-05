@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css';
-import { MenuItems } from "./MenuItems";
+import { MenuItems } from "../MenuItems";
 import {FaSignInAlt} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';

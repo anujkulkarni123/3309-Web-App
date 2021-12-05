@@ -13,10 +13,12 @@ import Cookies from 'js-cookie';
 
 function InsertTools() {
 
+  // Constants/functions to determine if the checkbox is clicked
   const [isSaleChecked, setIsSaleChecked] = useState(false);
 
   const [isRentChecked, setIsRentChecked] = useState(false);
 
+  // Handle change of state of the checkboxes
   const handleSaleOnChange = () => {
     setIsSaleChecked(!isSaleChecked);
   };
@@ -33,7 +35,9 @@ function InsertTools() {
     let navigate = useNavigate();
     const [errMsg, setErrMsg] = useState('');
 
+    // Insert the tool with the given information into the table
     const insertTool = () => {
+        // JSON of all the values to be inserted
         const data = {
             toolname: toolnameReg.value,
             toolprice: toolpriceReg.value,
@@ -45,6 +49,7 @@ function InsertTools() {
 
         console.log(data);
 
+        // Use axios to post the data into the table
         axios.post(`http://localhost:5000/insertTool`, data)
           .then(({ data }) => {
             console.log(data);
@@ -66,6 +71,7 @@ function InsertTools() {
 
             <label style={{ fontSize: 40, fontWeight: 700, }}>Insert a New Tool</label>
 
+            {/* Box to contain all the inputs needed to create a new tool */}
             <div className="input-box">
               <div className="inputs">
                 <label style={{ fontSize: 14, }}>

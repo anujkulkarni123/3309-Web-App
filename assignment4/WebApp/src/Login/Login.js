@@ -8,7 +8,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
-import Header from '../Header/Header';
+import Axios, { Register, LoginUser } from '../Axios/Axios';
 
 
 function Login() {
@@ -38,19 +38,7 @@ function Login() {
       }
 
         // Use axios to check the login data compared to the database
-        axios.post(`http://localhost:5000/login`, data)
-          .then(({ data }) => {
-            if (data.success) {
-              console.log('redirecting...');
-              setErrMsg('');
-              navigate('/App');
-            } else if (data.loggedIn) {
-              setErrMsg('Already LoggedIn');
-            } else {
-              setErrMsg(data.message);
-            }
-          })
-      .catch((err) => { throw err })
+        LoginUser(data, setErrMsgReg, navigate);
     }
 
     // Register user function
@@ -66,18 +54,7 @@ function Login() {
         console.log(data);
 
         // Use axios to post it to the database using express server
-        axios.post(`http://localhost:5000/register`, data)
-          .then(({ data }) => {
-            console.log(data);
-            if (data.success) {
-              console.log('redirecting...');
-              setErrMsgReg('');
-              navigate('/App');
-            } else {
-              setErrMsgReg(data.message);
-            }
-          })
-          .catch((err) => { throw err })
+        Register(data, setErrMsg, navigate);
     }
 
     // UI for the inputs needed to run the functions

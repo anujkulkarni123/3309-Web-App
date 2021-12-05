@@ -8,7 +8,7 @@
     padding: 40px;
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 89%;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
 
@@ -28,13 +28,14 @@
     border-bottom: 1px solid black;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    
+    display: flex;
+    justify-content: center;
 }
 
 .expandDiv  {
     height: fit-content;
     padding: 20px;
-    width: 800px;
+    width: 100%;
     display: flex;
     justify-content: center;
 }

@@ -1,4 +1,4 @@
-import {FaTools, FaUser, FaHeart} from "react-icons/fa";
+import {FaTools, FaUsers, FaUserCircle} from "react-icons/fa";
 
 export const MenuItems = [
     {
@@ -8,13 +8,13 @@ export const MenuItems = [
         cName: 'nav-links'
     },
     {
-        icon: <FaUser />,
+        icon: <FaUsers />,
         title: 'Profile',
         url: '/User',
         cName: 'nav-links'
     },
     {
-        icon: <FaHeart />,
+        icon: <FaUserCircle />,
         title: 'Favourites',
         url: '/Profile',
         cName: 'nav-links'

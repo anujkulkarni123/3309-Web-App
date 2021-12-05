@@ -355,8 +355,9 @@ router.get('/user/:username', (req, res) => {
     });
 });
 
-router.get('/tools/order/:Column', (req, res) => {
-  const Column = req.params.Column;
+// router to get the tools ordered by column
+router.get('/tools/order/:column', (req, res) => {
+  const Column = req.params.column;
 
   const conn = createConnection();
   conn.connect();
@@ -367,12 +368,37 @@ router.get('/tools/order/:Column', (req, res) => {
       FROM
         tools
       ORDER BY
-        ${Column}
+        ${column}
     `, (err, data) => {
-      if (err) 
+      if (err)
         console.error(err);
       res.json({ data: data });
     });
+
+  conn.end();
+});
+
+// route to add favorite tools
+router.get('/fav', (re, res) => {
+  const ToolID = req.query.toolID;
+  const username = req.query.username;
+
+  const conn = createConnection();
+  conn.connect();
+
+  const query = `
+    INSERT INTO favouritetools (UserID, ToolID) VALUES (
+      (SELECT UserID FROM users WHERE username = '${username}')
+      ,${ToolID}
+    )
+  `;
+
+  conn.query(query, (err) => {
+    if (err)
+      res.json({ message: 'Unable to Insert Tool', success: false });
+
+    res.json({ message: 'Successfully Inserted Tool', success: true });
+  });
 
   conn.end();
 });

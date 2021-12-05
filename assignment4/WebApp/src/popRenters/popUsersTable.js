@@ -24,26 +24,8 @@ class PopUsersTable extends Component {
             });
     }
 
-    renderUsers= ({ UserID, Username, Rating, TransDone}) => <UsersView key={UserID} UserId={UserID} UserName={Username} Rating={Rating} TransDone={TransDone}></UsersView>
+    renderUsers= ({ UserID, Username, Rating, TransDone, TransactionDate}) => <UsersView key={UserID} UserId={UserID} UserName={Username} Rating={Rating} TransDone={TransDone} TransactionDate={TransactionDate}></UsersView>
 
-    hangleUsersSearch = (e) => {
-        this.filterUsers(e.target.value);
-    }
-
-    filterUsers = (search) => {
-        if (!search) {
-            this.setState({ displayResults: false });
-            return;
-        }
-
-        const { tools } = this.state;
-
-        const results = tools.filter((tool) => {
-            return tool.ToolName.toLowerCase().includes(search.toLowerCase());
-        });
-
-        this.setState({ results: results, displayResults: true });
-    }
 
     render()    {
         const { users, results, displayResults } = this.state;

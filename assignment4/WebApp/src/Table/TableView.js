@@ -90,11 +90,10 @@ class TableView extends Component {
                     <form>
                         <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
                     </form> 
-                    
-                    <div>
-                        <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
-                    </div>
+                </div>
 
+                <div>
+                    <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
                 </div>
                 
                 <div>

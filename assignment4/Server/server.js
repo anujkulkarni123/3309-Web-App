@@ -222,11 +222,11 @@ router.post('/register', (req, res) => {
 // router to insert a new tool (runs and insert query)
 router.post('/insertTool', (req, res) => {
   const toolname = req.body.toolname;
-    const toolprice = req.body.toolprice;
-    const tooltype = req.body.tooltype;
-    const sale = req.body.sale;
-    const rent = req.body.rent;
-    const username = req.body.username;
+  const toolprice = req.body.toolprice;
+  const tooltype = req.body.tooltype;
+  const sale = req.body.sale;
+  const rent = req.body.rent;
+  const username = req.body.username;
 
   // async method to insert tool imported
   insertTool(toolname, toolprice, tooltype, username, sale, rent)

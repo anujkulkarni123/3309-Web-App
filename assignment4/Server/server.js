@@ -224,11 +224,12 @@ router.post('/insertTool', (req, res) => {
   const toolname = req.body.toolname;
     const toolprice = req.body.toolprice;
     const tooltype = req.body.tooltype;
-    const rent = req.body.saleOrRent === 'Rent' ? 1 : 0;
-  const username = req.body.username;
+    const sale = req.body.sale;
+    const rent = req.body.rent;
+    const username = req.body.username;
 
   // async method to insert tool imported
-  insertTool(toolname, toolprice, tooltype, username, rent)
+  insertTool(toolname, toolprice, tooltype, username, sale, rent)
     .then((response) => {
       res.json(response);
     })
@@ -326,9 +327,9 @@ router.get('/users/:id', (req, res) => {
     FROM
       tools t
     JOIN users u
-      ON (t.UserID = u.UserID)
+      ON (u.UserID = t.UserID)
     WHERE
-      t.ToolID = ${UserID}
+      ${UserID} = t.ToolID
   `;
 
   conn.query(query, (err, rows) => {

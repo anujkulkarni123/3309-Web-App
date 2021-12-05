@@ -36,7 +36,7 @@ async function registerUser(username, password, cardNo, address) {
 }
 
 // async function to insert new tool
-async function insertTool(toolname, toolprice, tooltype, username, rent) {
+async function insertTool(toolname, toolprice, tooltype, username, sale, rent) {
   const conn = createConnection();
   conn.connect();
 
@@ -45,6 +45,7 @@ async function insertTool(toolname, toolprice, tooltype, username, rent) {
   try {
     const user = await query(`SELECT UserID FROM users WHERE Username = '${username}'`);
 
+    console.log(user);
     if (user.length !== 1) {
       return {message: 'Invalid Credentials', success: false};
     }
@@ -55,8 +56,8 @@ async function insertTool(toolname, toolprice, tooltype, username, rent) {
         ,${user[0].UserID}
         ,'${toolprice}'
         ,'${tooltype}'
+        ,${sale}
         ,${rent}
-        ,${!rent}
       )
     `);
     return {message: 'Successfully added tool!', success: true};

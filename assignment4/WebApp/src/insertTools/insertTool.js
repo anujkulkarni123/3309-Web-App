@@ -7,6 +7,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 
 
@@ -37,6 +38,9 @@ function InsertTools() {
             toolname: toolnameReg.value,
             toolprice: toolpriceReg.value,
             tooltype: tooltypeReg.value,
+            username: Cookies.get('user'),
+            sale: isSaleChecked,
+            rent: isRentChecked
         }
 
         console.log(data);

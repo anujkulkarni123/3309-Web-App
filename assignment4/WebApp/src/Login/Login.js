@@ -8,7 +8,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
-import Axios, { Register, LoginUser } from '../Axios/Axios';
+import { Register, LoginUser } from '../Axios/Axios';
 
 
 function Login() {

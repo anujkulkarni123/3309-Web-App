@@ -104,7 +104,7 @@ async function buyTool(username, ToolID) {
 
   try {
     // add the transaction to the usertransactions table
-    await query(`INSERT INTO usertransactions (UserID, ToolID, TransactionDate) VALUES (
+    await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
       (SELECT UserID from users WHERE Username = '${username}')
       ,${ToolID}
       ,CURDATE()
@@ -137,7 +137,7 @@ async function rentTool(username, ToolID, days) {
 
   try {
     // add the transaction to the usertransactions table
-    await query(`INSERT INTO usertransactions (UserID, ToolID, TransactionDate) VALUES (
+    await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
       (SELECT UserID WHERE Username = '${username}')
       ,${ToolID}
       ,CURDATE()

@@ -469,6 +469,7 @@ router.get('/buy', (req, res) => {
       res.json(response);
     })
     .catch((err) => {
+      console.log(err);
       res.json({ message: 'Unable to buy tool!', success: false });
     })
 });

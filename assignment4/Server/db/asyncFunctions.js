@@ -127,26 +127,19 @@ async function buyTool(username, ToolID) {
 
   const query = util.promisify(conn.query).bind(conn);
 
-  console.log({username});
-    console.log({ToolID});
-
   try {
     // getting user
     const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+    const tool = await query(`SELECT * FROM tools WHERE ToolID = ${ToolID}`);
 
     // add the transaction to the usertransactions table
 
-    await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
+    await query(`INSERT INTO usertransactions (BuyerID, SellerID, ToolID, TransactionDate) VALUES (
       ${user[0].UserID}
+      ,${tool[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
-
-    // remove the tool from the tools table
-    await query(`DELETE FROM tools
-      WHERE
-        ToolID = ${ToolID}
-    `);
 
     return { message: 'Transaction was successful', success: true };
   } catch (e) {
@@ -169,10 +162,12 @@ async function rentTool(username, ToolID, days) {
   try {
     // getting user
     const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+    const tool = await query(`SELECT * FROM tools WHERE ToolID = ${ToolID}`);
 
     // add the transaction to the usertransactions table
-    await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
+    await query(`INSERT INTO usertransactions (BuyerID, SellerID, ToolID, TransactionDate) VALUES (
       ${user[0].UserID}
+      ,${tool[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
@@ -186,7 +181,7 @@ async function rentTool(username, ToolID, days) {
 
     // add the tool to the unavailabletools table
     await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
-      (SELECT UserID WHERE Username = '${username}')
+      (SELECT UserID WHERE Username = '${username}' LIMIT 1)
       ,${ToolID}
       ,DATE_ADD(CURDATE(), INTERVAL ${days} DAY)
     )`);

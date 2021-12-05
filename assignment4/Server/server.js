@@ -34,7 +34,7 @@ router.get('/tools', (req, res) => {
   const conn = createConnection();
   conn.connect();
 
-  const Select_All_Tools_Query = 'SELECT * FROM tools;';
+  const Select_All_Tools_Query = 'SELECT t.ToolID, ToolName, ToolType, Price, ForSale, ForRent FROM tools t FULL OUTER JOIN unavailabletools ut ON (t.ToolID = ut.UserID);';
 
   conn.query(Select_All_Tools_Query, (err, rows) => {
     if (err) throw err
@@ -397,7 +397,7 @@ router.get('/fav/:username', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
-    UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1')
+    UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1)
   `;
 
   conn.query(query, (err, rows) => {
@@ -420,7 +420,7 @@ router.post('/addFav', (req, res) => {
 
   const query = `
     INSERT INTO favouritetools (UserID, ToolID) VALUES (
-      (SELECT UserID FROM users WHERE username = '${username} LIMIT 1')
+      (SELECT UserID FROM users WHERE username = '${username}' LIMIT 1)
       ,${ToolID}
     )
   `;
@@ -447,7 +447,7 @@ router.get('/rmFav', (req, res) => {
 
   const query = `
     DELETE FROM favouritetools WHERE
-      UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1') AND
+      UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1) AND
       ToolID = ${ToolID}
   `;
 

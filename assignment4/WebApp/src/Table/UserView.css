@@ -1,7 +1,5 @@
 .user-container {
     height: fit-content;
-    display: flex;
-    justify-content: center;
     padding: 20px;
 }
 
@@ -23,8 +21,41 @@
     height: 20px;
 }
 
-.expandUser {
+.expand {
     border-right: 1px solid black;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    
+}
+
+.expandDiv  {
+    height: fit-content;
+    padding: 20px;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-expanded  {
+    font-size: 20px;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.left-div   {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-div  {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

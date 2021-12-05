@@ -379,7 +379,7 @@ router.get('/tools/order/:column', (req, res) => {
 });
 
 // route to add favorite tools
-router.get('/fav', (re, res) => {
+router.get('/fav', (req, res) => {
   const ToolID = req.query.toolID;
   const username = req.query.username;
 
@@ -402,6 +402,9 @@ router.get('/fav', (re, res) => {
 
   conn.end();
 });
+
+// route to removed favorite tools
+router.get('/rmFav', (res))
 
 // enable app to use the router
 app.use('/', router);

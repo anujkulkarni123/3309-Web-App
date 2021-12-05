@@ -133,13 +133,20 @@ async function buyTool(username, ToolID) {
     const tool = await query(`SELECT * FROM tools WHERE ToolID = ${ToolID}`);
 
     // add the transaction to the usertransactions table
-
     await query(`INSERT INTO usertransactions (BuyerID, SellerID, ToolID, TransactionDate) VALUES (
       ${user[0].UserID}
       ,${tool[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
+
+    // add it unavailable tools
+    await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
+      ${user[0].UserID}
+      ,${tool[0].ToolID}
+      ,null
+    )`)
+
 
     return { message: 'Transaction was successful', success: true };
   } catch (e) {
@@ -171,13 +178,6 @@ async function rentTool(username, ToolID, days) {
       ,${ToolID}
       ,CURDATE()
     )`);
-
-    // remove the tool from the tools table
-    await query(`DELETE FROM tools
-      WHERE
-        UserID = ${user[0].UserID} AND
-        ToolID = ${ToolID}
-    `);
 
     // add the tool to the unavailabletools table
     await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (

@@ -397,11 +397,7 @@ router.get('/fav/:username', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
-<<<<<<< HEAD
-    t.UserID = (SELECT UserID FROM users WHERE Username = '${username}')
-=======
     UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1')
->>>>>>> a3c45022c3f1cac46b73aad48d3a85a15b760f1f
   `;
 
   conn.query(query, (err, rows) => {

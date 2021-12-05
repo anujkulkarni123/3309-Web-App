@@ -8,7 +8,7 @@ import UserTableView from '../Table/UserPage/UserTableView';
 class User extends Component {
 
     render() {
-        console.log(this.state.User);
+        //console.log(this.state.User);
         return(
             <div className="users-page">
                 <Header />

@@ -1,40 +1,47 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './header.css';
 import { MenuItems } from "./MenuItems";
 import {FaSignInAlt} from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-class Header extends Component{
+function Header() {
+    const navigate = useNavigate();
 
+    const logout = async () => {
 
-    render()    {
-        return(
-            <div className="container">
+        Cookies.remove('user');
 
-                <div className="title">
-                    <label style={{ fontSize: 30, }}>
-                        RENTRABBIT
-                    </label>
-                </div>
-
-                <nav className="NavbarItems">
-                    <div className="nav-menu">
-                        {MenuItems.map((item, index) => {
-                            return (
-                                <div key={index} className="nav-icon-div">
-                                    <a className="nav-icon" href={item.url} onClick={item.logout}>
-                                        {item.icon}
-                                    </a>
-                                </div>
-                            )
-                        })}
-                        <div>
-                            <FaSignInAlt className="nav-icon" onClick={} />
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        );
+        navigate('/');
     }
+
+    return(
+        <div className="container">
+
+            <div className="title">
+                <label style={{ fontSize: 30, }}>
+                    RENTRABBIT
+                </label>
+            </div>
+
+            <nav className="NavbarItems">
+                <div className="nav-menu">
+                    {MenuItems.map((item, index) => {
+                        return (
+                            <div key={index} className="nav-icon-div">
+                                <a className="nav-icon" href={item.url} onClick={item.logout}>
+                                    {item.icon}
+                                </a>
+                            </div>
+                        )
+                    })}
+                    <div>
+                        <FaSignInAlt className="nav-icon" onClick={logout} title="Login/Logout" />
+                    </div>
+                </div>
+            </nav>
+        </div>
+    );
 }
 
 export default Header;

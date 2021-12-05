@@ -338,18 +338,6 @@ router.get('/tools/:column', (req, res) => {
   conn.end();
 });
 
-// route to logout user
-router.get('/logout', (req, res) => {
-  // clear the cookie if it exists
-  res.cookie('user', '', { expires: new Date(1), path: '/' });
-  res.clearCookie('user');
-
-  console.log(req.cookies.user);
-
-  // res.json({ message: 'Logged Out User!', success:  true });
-  next();
-});
-
 // enable app to use the router
 app.use('/', router);
 

@@ -6,9 +6,9 @@ import {
   Link,
   useNavigate
 } from "react-router-dom";
-import axios from 'axios';
 import Cookies from 'js-cookie';
 import Header from '../Header/Header';
+import Axios, { InsertTool } from '../Axios/Axios';
 
 
 
@@ -51,18 +51,8 @@ function InsertTools() {
         console.log(data);
 
         // Use axios to post the data into the table
-        axios.post(`http://localhost:5000/insertTool`, data)
-          .then(({ data }) => {
-            console.log(data);
-            if (data.success) {
-              console.log('redirecting...');
-              setErrMsg('');
-              navigate('/App');
-            } else {
-              setErrMsg(data.message);
-            }
-          })
-          .catch((err) => { throw err })
+        InsertTool(data, setErrMsg, navigate);
+
     }
 
     return (

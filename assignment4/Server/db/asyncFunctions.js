@@ -45,6 +45,7 @@ async function insertTool(toolname, toolprice, tooltype, username, sale, rent) {
   try {
     const user = await query(`SELECT UserID FROM users WHERE Username = '${username}'`);
 
+    console.log(user);
     if (user.length !== 1) {
       return {message: 'Invalid Credentials', success: false};
     }

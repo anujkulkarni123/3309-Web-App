@@ -28,6 +28,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 console.error(err);
             });
     }
+
+    const buyTool = (id) => {
+        
+    }
     
     function handleHeartClick() {
         
@@ -54,6 +58,8 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         );   
     }
 
+
+
     // Renders a tool
     return (
         <div className="tool-container">
@@ -68,7 +74,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             <Expand className="expand" open={clicked}>
                 <div className="expandDiv">
                     {renderInfo(toolSpecifics)}
+                    <div>
                     <button className="buy-btn">Buy Tool</button>
+                    <button className="rent-btn">Rent Tool</button>
+                    </div>
                 </div>
             </Expand>
 

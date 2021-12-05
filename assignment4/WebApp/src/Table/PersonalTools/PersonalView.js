@@ -4,6 +4,7 @@ import { FaChevronCircleDown } from 'react-icons/fa';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 import Cookie from 'js-cookie';
+import './PersonalView.css'
 
 const PersonalView =  ({ ID, Type, Name, Price}) => {
 

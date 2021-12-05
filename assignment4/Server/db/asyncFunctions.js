@@ -36,20 +36,27 @@ async function registerUser(username, password, cardNo, address) {
 }
 
 // async function to insert new tool
-async function insertTool(toolname, toolprice, tooltype) {
+async function insertTool(toolname, toolprice, tooltype, username, rent) {
   const conn = createConnection();
   conn.connect();
 
   const query = util.promisify(conn.query).bind(conn);
 
   try {
-    // inserts user if the block of code above didn't return
+    const user = await query(`SELECT UserID FROM users WHERE Username = '${username}'`);
+
+    if (user.length !== 1) {
+      return {message: 'Invalid Credentials', success: false};
+    }
+
     await query(`
-      INSERT INTO tools (ToolName, UserID, Price, ToolType) VALUES (
+      INSERT INTO tools (ToolName, UserID, Price, ToolType, ForSale, ForRent) VALUES (
         '${toolname}'
-        ,'${3}'
+        ,${user[0].UserID}
         ,'${toolprice}'
         ,'${tooltype}'
+        ,${rent}
+        ,${!rent}
       )
     `);
     return {message: 'Successfully added tool!', success: true};
@@ -70,6 +77,9 @@ async function getUserDetails(username) {
   try {
     const user = await query(`SELECT * FROM users WHERE username = '${username}'`);
     const tools = await query(`SELECT * FROM tools WHERE UserID = ${user[0].UserID}`);
+
+    console.log(user[0]);
+    console.log(tools);
 
     const data = {
       user: user[0],

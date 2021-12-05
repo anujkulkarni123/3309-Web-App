@@ -103,8 +103,7 @@ class TableView extends Component {
                         <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
                     </div>
                 </div>
-                
-                
+
                 <div>
                     {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
                 </div>

@@ -3,17 +3,21 @@ import { FaChevronCircleDown } from 'react-icons/fa';
 //import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
+import Cookie from 'js-cookie';
 
-const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
+const PersonalView =  ({ ID, Type, Name, Price}) => {
 
     const [clicked, setClicked] = useState(false);
     const [userSpecifics, setUserSpecifics] = useState('');
 
-    const displayUserData = (id) => {
+    const displayPTools = (id) => {
         setClicked(!clicked);
 
-        axios.get(`http://localhost:5000/users`)
+        const user = Cookie.get('user');
+
+        axios.get(`http://localhost:5000/user/${user}`)
             .then(({data}) => {
+                console.log(data);
                 if (data) {
                     setUserSpecifics(data);
                 }
@@ -27,16 +31,14 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
         <div className="user-container">
             <div className="user-div">
                 <label className="id">{ID}</label>
-                <label className="username">{Username}</label>
-                <label className="rating">${Rating}</label>
-                <label className="address">{Address}</label>
-                <FaChevronCircleDown className="user-chevron" onClick={() => displayUserData(ID)}/>
+                <label className="type">{Type}</label>
+                <label className="name">${Name}</label>
+                <label className="price">{Price}</label>
+                <FaChevronCircleDown className="user-chevron" onClick={() => displayPTools(ID)}/>
             </div>
 
             <Expand className="expandUser" open={clicked}>
                 <div className="expandDiv" style={{height: '400px', color: 'red' }}>
-                    <div>{userSpecifics.Username}</div>
-                    <div>{userSpecifics.Address}</div>
                 </div>
             </Expand>
 
@@ -44,4 +46,4 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
     );
 }
 
-export default UserView;
+export default PersonalView;

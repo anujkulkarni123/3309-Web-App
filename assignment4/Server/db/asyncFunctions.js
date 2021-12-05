@@ -95,6 +95,31 @@ async function getUserDetails(username) {
   }
 }
 
+// async function to favorite a tool
+async function addFav(username, ToolID) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
+    // add the transaction to the usertransactions table
+    await query(`INSERT INTO favouritetools (UserID, ToolID) VALUES (
+      ${user[0].UserID}
+      ,${ToolID}
+    )`);
+
+    return { message: 'Successfully Inserted Tool', success: true };
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
 // async function to buy a tool
 async function buyTool(username, ToolID) {
   const conn = createConnection();
@@ -177,6 +202,7 @@ module.exports = {
   registerUser: registerUser,
   insertTool: insertTool,
   getUserDetails: getUserDetails,
+  addFav: addFav,
   buyTool: buyTool,
   rentTool: rentTool
 }

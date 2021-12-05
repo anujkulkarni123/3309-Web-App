@@ -3,6 +3,7 @@ import { FaChevronCircleDown, FaHeart } from 'react-icons/fa';
 import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import $ from 'jquery'
 
 
@@ -30,7 +31,8 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     }
 
     const buyTool = (id) => {
-
+        axios.get(`http://localhost:5000/buy?username=${}`)
+        
     }
     
     function handleHeartClick() {

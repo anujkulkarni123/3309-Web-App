@@ -15,7 +15,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     const displayToolData = (id) => {
         setClicked(!clicked);
 
-        //G Gets the tools from the route
+        // Gets the tools from the route
         axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {
                 if (data.row) {
@@ -30,7 +30,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     }
 
     const buyTool = (id) => {
-        
+
     }
     
     function handleHeartClick() {

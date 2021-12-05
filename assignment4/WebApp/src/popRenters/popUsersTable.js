@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios';
 import UsersView from './UsersView';
+import './UsersView.css'
+
 
 class PopUsersTable extends Component {
     state = {

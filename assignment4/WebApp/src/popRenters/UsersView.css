@@ -8,12 +8,20 @@
     height: 100px;
     padding: 40px;
     display: flex;
-    justify-content: space-between;
-    min-width: 200px;
+    justify-content: center;
+    max-width: 120px;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
+    /* background-color: red; */
+    flex-wrap: wrap;
 }
 
 .user-div:hover   {
     background-color: var(--header);
+}
+
+.pop-users-container{
+    /* background-color: blue; */
+    justify-content: center;
+    display: flex;
 }

@@ -292,7 +292,7 @@ router.get('/tools/:id', (req, res) => {
     JOIN users u
       ON (t.UserID = u.UserID)
     WHERE
-      t.ToolID = ${UserID}
+      t.UserID = ${UserID}
   `;
 
   conn.query(query, (err, rows) => {
@@ -329,7 +329,7 @@ router.get('/users/:id', (req, res) => {
     JOIN users u
       ON (u.UserID = t.UserID)
     WHERE
-      ${UserID} = t.ToolID
+      UserID = ${UserID}
   `;
 
   conn.query(query, (err, rows) => {
@@ -378,7 +378,7 @@ router.get('/tools/order/:column', (req, res) => {
   conn.end();
 });
 
-// route to get all the favourite tools
+// route to get all the favorite tools
 router.get('/fav', (req, res) => {
   const username = req.query.username;
 

@@ -62,3 +62,22 @@ flex-direction: column;
 .sort-label {
     padding: 5px;
 }
+
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pagination > * {
+  cursor: pointer;
+}
+
+.pg-active {
+  border-radius: 50%;
+  background-color: var(--header);
+  height: 25px;
+  width: 25px;
+  color: white;
+}

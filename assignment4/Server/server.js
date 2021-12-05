@@ -9,7 +9,7 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser, insertTool, getUserDetails, buyTool, rentTool } = require('./db/asyncFunctions');
+const { registerUser, insertTool, getUserDetails, addFav, buyTool, rentTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -397,7 +397,7 @@ router.get('/fav', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
-    UserID = (SELECT UserID FROM users WHERE Username = '${username}')
+    UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1')
   `;
 
   conn.query(query, (err, rows) => {
@@ -420,7 +420,7 @@ router.get('/addFav', (req, res) => {
 
   const query = `
     INSERT INTO favouritetools (UserID, ToolID) VALUES (
-      (SELECT UserID FROM users WHERE username = '${username}')
+      (SELECT UserID FROM users WHERE username = '${username} LIMIT 1')
       ,${ToolID}
     )
   `;
@@ -445,7 +445,7 @@ router.get('/rmFav', (req, res) => {
 
   const query = `
     DELETE FROM favouritetools WHERE
-      UserID = (SELECT UserID FROM users WHERE Username = '${username}') AND
+      UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1') AND
       ToolID = ${ToolID}
   `;
 

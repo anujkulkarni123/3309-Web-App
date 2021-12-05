@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from './Header';
+import Header from '../Header/Header';
 import './User.css';
 import Cookies from 'js-cookie';
-import UserTableView from './Table/UserTableView';
+import UserTableView from '../Table/UserPage/UserTableView';
 
 class User extends Component {
     state = {User: Cookies.get('user')};

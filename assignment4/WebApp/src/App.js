@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from './Header'
+import Header from './Header/Header'
 import './App.css';
-import TableView from './Table/TableView';
-import Login from './Login';
+import TableView from './Table/Tools/TableView';
+import Login from './Login/Login';
 import PopUsersTable from './popRenters/popUsersTable';
 import {
   BrowserRouter as Router,

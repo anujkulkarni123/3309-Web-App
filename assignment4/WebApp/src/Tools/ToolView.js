@@ -42,6 +42,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                     alert(data.message);
                     return;
                 }
+                else{
+                    alert('Success')
+                    return;
+                }
 
                 // display success message
             })

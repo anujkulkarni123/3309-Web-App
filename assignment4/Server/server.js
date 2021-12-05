@@ -378,8 +378,40 @@ router.get('/tools/order/:column', (req, res) => {
   conn.end();
 });
 
-// route to add favorite tools
+// route to get all the favourite tools
 router.get('/fav', (req, res) => {
+  const username = req.query.username;
+
+  const conn = createConnection();
+  conn.connect();
+
+  const query = `
+  SELECT
+    t.Price
+    ,t.ToolType
+    ,t.ToolName
+    ,t.ForSale
+    ,t.ForRent
+  FROM
+    favouritetools ft
+  JOIN tools t
+    ON (t.ToolID = ft.ToolID)
+  WHERE
+    UserID = (SELECT UserID FROM users WHERE Username = '${username}')
+  `;
+
+  conn.query(query, (err, rows) => {
+    if (err)
+      res.json({ message: 'Unable to get Tools', success: false });
+
+    res.json({ data: rows });
+  });
+
+  conn.end();
+});
+
+// route to add favorite tools
+router.get('/addFav', (req, res) => {
   const ToolID = req.query.toolID;
   const username = req.query.username;
 
@@ -404,7 +436,28 @@ router.get('/fav', (req, res) => {
 });
 
 // route to removed favorite tools
-router.get('/rmFav', (res))
+router.get('/rmFav', (req, res) => {
+  const ToolID = req.query.toolID;
+  const username = req.query.username;
+
+  const conn = createConnection();
+  conn.connect();
+
+  const query = `
+    DELETE FROM favouritetools WHERE
+      UserID = (SELECT UserID FROM users WHERE Username = '${username}') AND
+      ToolID = ${ToolID}
+  `;
+
+  conn.query(query, (err) => {
+    if (err)
+      res.json({ message: 'Unable to Delete Tool', success: false });
+
+    res.json({ message: 'Successfully Deleted Tool', success: true });
+  });
+
+  conn.end();
+});
 
 // enable app to use the router
 app.use('/', router);

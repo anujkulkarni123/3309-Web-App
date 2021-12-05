@@ -13,7 +13,7 @@ class PopUsersTable extends Component {
         this.getUsers();
     }
 
-    //Getting info from the users table and transactions table
+    // Getting info from the users table and transactions table
     getUsers = _ => {
         axios.get('http://localhost:5000/popularUsers')
             .then(({data}) => {
@@ -25,7 +25,7 @@ class PopUsersTable extends Component {
             });
     }
 
-    //Rendering the info
+    // Rendering the info
     renderUsers= ({ UserID, Username, Rating, TransDone, TransactionDate}) => <UsersView key={UserID} UserId={UserID} UserName={Username} Rating={Rating} TransDone={TransDone} TransactionDate={TransactionDate}></UsersView>
 
 

@@ -462,7 +462,7 @@ router.get('/rmFav', (req, res) => {
 // route to buy a tool
 router.get('/buy', (req, res) => {
   const username = req.query.username;
-  const ToolID = req.query.toolID;
+  const ToolID = parseInt(req.query.toolID);
 
   buyTool(username, ToolID)
     .then((response) => {
@@ -476,9 +476,10 @@ router.get('/buy', (req, res) => {
 // route to rent a tool
 router.get('/rent', (req, res) => {
   const username = req.query.username;
-  const ToolID = req.query.toolID;
+  const ToolID = parseInt(req.query.toolID);
+  const days = parseInt(req.query.days);
 
-  rentTool(username, ToolID)
+  rentTool(username, ToolID, days)
     .then((response) => {
       res.json(response);
     })

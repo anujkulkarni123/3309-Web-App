@@ -228,7 +228,7 @@ router.post('/insertTool', (req, res) => {
   const username = req.body.username;
 
   // async method to insert tool imported
-  insertTool(toolname, toolprice, tooltype, username)
+  insertTool(toolname, toolprice, tooltype, username, rent)
     .then((response) => {
       res.json(response);
     })

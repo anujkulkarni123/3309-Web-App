@@ -116,13 +116,10 @@ class TableView extends Component {
 
                     <div className="sort-div">
                         <div classname="sort-label">
-                            <label >Sort By:</label>
+                            <label>Sort By:</label> 
                         </div>
-                        <ComboBox id="combo-box" class="combo-box" options={comboboxData} onOptionsChange={this.handleFilterChange.bind(this)} enableAutocomplete/>
-                    </div>
 
-                    <div>
-                        <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
+                        <ComboBox id="combo-box" class="combo-box" options={comboboxData} onOptionsChange={this.handleFilterChange.bind(this)} enableAutocomplete/>
                     </div>
                 </div>
 

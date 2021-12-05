@@ -1,5 +1,7 @@
 import {FaTools, FaUsers, FaUserCircle} from "react-icons/fa";
 
+// File containing all menu items in the header including their:
+// Icon, title, url (for the route) and the name of the class
 export const MenuItems = [
     {
         icon: <FaTools />,

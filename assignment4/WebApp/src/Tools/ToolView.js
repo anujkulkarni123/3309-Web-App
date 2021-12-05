@@ -4,13 +4,15 @@ import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 import $ from 'jquery'
+import { InsertFavourite } from '../Axios/Axios';
+import Cookies from 'js-cookie';
 
 
-
-const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+const ToolView =  ({ ID, Type, Name, UserID, CompanyID, isForSale, isForRent, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
+    const [ fav, setFav ] = useState("")
 
     const displayToolData = (id) => {
         setClicked(!clicked);
@@ -29,8 +31,37 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             });
     }
     
-    function handleHeartClick() {
-        
+
+    function setRed() {
+        $(".icon-heart").click(function()   {
+            $("#icon-heart").attr('class', 'icon-heart-active' );
+        })
+    }
+
+    function setBlack() {
+        $(".icon-heart-active").click(function()   {
+            $("#icon-heart").attr('class', 'icon-heart' );
+        })
+    }
+
+    //handling insertion and deletion intop fav sql tabl;e
+
+    function handleFav()    {
+
+        const info = {
+            username: Cookies.get('user'),
+            toolID: ID
+        }
+
+        setFav(!fav)
+        if (fav === true)   {
+            setRed();
+            //insert into fav tool table
+            InsertFavourite(info);
+        } else  {
+            setBlack();
+            //delete from sql table
+        }
     }
 
     // Renders the info in the drop down 
@@ -61,7 +92,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>
-                <FaHeart className="icon-heart"/>
+                <FaHeart id="icon-heart" className="icon-heart" class="icon-heart" onClick={() => {handleFav()}}/>
                 <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 

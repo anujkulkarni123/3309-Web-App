@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 import Cookies from 'js-cookie'
-import ToolView from '../../Tools/ToolView'
+import PersonalTable from '../PersonalTools/PersonalTable';
 
 class FavTable extends Component {
 
@@ -19,7 +19,7 @@ class FavTable extends Component {
         axios.get(`http://localhost:5000/fav/${username}`)
             .then(({data}) =>   {
                 console.log(data.data);
-                this.setState({favTools: data.data});
+                this.setState({favTools: data.data.tools});
             })
             .catch((err) => {
                 console.error(err);
@@ -27,12 +27,13 @@ class FavTable extends Component {
     }
 
     renderFavTool = ({ToolID, ToolName, Price, ToolType, UserID, ForSale, ForRent }) => 
-                    <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} 
+                    <PersonalTable key={ToolID} ID={ToolID} Name={ToolName} Price={Price} 
                     Type={ToolType} UserID={UserID} isForRent={ForRent} isForSale={ForSale}/>
     render()    {
+        const { favTools } = this.state;
         return (
             <div>
-                {/*/favTools.map(this.renderFavTool)*/}
+                {favTools.map(this.renderFavTool)}
             </div>
         );
     }

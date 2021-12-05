@@ -37,6 +37,8 @@ function InsertTools() {
             toolname: toolnameReg.value,
             toolprice: toolpriceReg.value,
             tooltype: tooltypeReg.value,
+            sale: isSaleChecked,
+            rent: isRentChecked
         }
 
         console.log(data);

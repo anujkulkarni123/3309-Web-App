@@ -4,6 +4,13 @@ import $ from "jquery";
 import './tableview.css'
 import axios from 'axios';
 import ToolView from './ToolView';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+    useNavigate
+  } from "react-router-dom";
 
 
 $(function()    {
@@ -83,8 +90,13 @@ class TableView extends Component {
                     <form>
                         <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
                     </form> 
-                </div>
+                    
+                    <div>
+                        <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
+                    </div>
 
+                </div>
+                
                 <div>
                     {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
                 </div>

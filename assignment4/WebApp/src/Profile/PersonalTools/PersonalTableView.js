@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from 'react'
 import Cookie from 'js-cookie';
-import ToolView from '../../Tools/ToolView';
+import PersonalTable from './PersonalTable';
 import axios from 'axios';
 import {
     BrowserRouter as Router,
@@ -36,9 +36,9 @@ class PersonalTableView extends Component {
                 console.error(err);
             });
     }
-
+    
     // Renders each tool
-    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <ToolView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></ToolView>
+    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <PersonalTable key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></PersonalTable>
 
     // Loops through the pTools array which holds each users personal tools
     render()    {

@@ -31,8 +31,6 @@ class TableView extends Component {
     state = {
         column: "ToolID",
         tools: [],
-        results: [],
-        displayResults: false,
         perPage: 10,
         currentPage: 0,
         offset: 0,
@@ -45,23 +43,26 @@ class TableView extends Component {
 
     // Gets all the available tools from the route
     getTools = () => {
-        const { column, results } = this.state;
-        if (results) {
-            const slice = results.slice(this.state.offset, this.state.offset + this.state.perPage);
-            this.setState({
-                results: slice,
-                pageCount: Math.ceil(results.length / this.state.perPage)
-            })
-        }
+        const { column, search } = this.state;
 
         axios.get(`http://localhost:5000/tools/order/${column}`)
             .then(({data}) => {
-                console.log(data.data);
-                const slice = data.data.slice(this.state.offset, this.state.offset + this.state.perPage);
+                let slice;
+                let pagesData;
+                if (search.length > 0) {
+                    const rows = data.data;
+                    slice = rows.filter((row) => {
+                        return row.ToolName.toLowerCase().includes(search.toLowerCase());
+                    });
+                    pagesData = [...slice];
+                } else {
+                    slice = data.data;
+                    pagesData = data.data;
+                }
+                slice = slice.slice(this.state.offset, this.state.offset + this.state.perPage);
                 this.setState({
                     tools: slice,
-                    displayResults: false,
-                    pageCount: Math.ceil(data.data.length / this.state.perPage)
+                    pageCount: Math.ceil(pagesData.length / this.state.perPage)
                 });
             })
             .catch((err) => {
@@ -83,9 +84,8 @@ class TableView extends Component {
 
 
     // Changes how the filter is sorting the tools
-    handleFilterChange(e)    {
-        console.log(e);
-        this.setState({column: e});
+    handleFilterChange(e) {
+        this.setState({ column: e, currentPage: 0 });
         this.getTools();
     }
 
@@ -93,33 +93,15 @@ class TableView extends Component {
     renderTool = ({ ToolID, ToolName, Price, ToolType, UserID }) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType} UserID={UserID}></ToolView>
 
     // Calls the filterTools function when the user clicks the search button
-    handleToolSearch = () => {
-        this.setState(this.state.search)
-        this.filterTools(this.state.search);
+    handleToolSearch = (e) => {
+        const value = e.target.value;
+        this.setState({ search: value, currentPage: 0 });
+        this.getTools();
     }
 
-    // Fills the results array with the avalible tools that match what the user entered into the search bar
-    filterTools = (search) => {
-        if (!search) {
-            this.setState({ displayResults: false });
-            return;
-        }
-
-        const { tools } = this.state;
-
-        const results = tools.filter((tool) => {
-            this.setState({
-                currentPage: 0
-            });
-            return tool.ToolName.toLowerCase().includes(search.toLowerCase());
-        });
-
-        this.setState({ results: results, displayResults: true });
-    }
-
-    // Rendering all the avalible tools, search bar, and combo-box filter
+    // Rendering all the available tools, search bar, and combo-box filter
     render()    {
-        const { tools, results, displayResults } = this.state;
+        const { tools } = this.state;
         return (
             <div>
                 <div className="filter-div">
@@ -134,18 +116,15 @@ class TableView extends Component {
 
                     <div className="sort-div">
                         <div classname="sort-label">
-                            <label >Sort By:</label>
+                            <label>Sort By:</label> 
                         </div>
-                        <ComboBox id="combo-box" class="combo-box" options={comboboxData} onOptionsChange={this.handleFilterChange.bind(this)} enableAutocomplete/>
-                    </div>
 
-                    <div>
-                        <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
+                        <ComboBox id="combo-box" class="combo-box" options={comboboxData} onOptionsChange={this.handleFilterChange.bind(this)} enableAutocomplete/>
                     </div>
                 </div>
 
                 <div>
-                    {!displayResults ? tools.map(this.renderTool) : results.map(this.renderTool)}
+                    {tools.map(this.renderTool)}
                     <Paginate
                         previousLabel={<FaArrowLeft style={{ color: 'var(--header)' }}/>}
                         nextLabel={<FaArrowRight style={{ color: 'var(--header)' }} />}

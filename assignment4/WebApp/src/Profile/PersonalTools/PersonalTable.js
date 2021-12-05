@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { FaChevronCircleDown, FaHeart } from 'react-icons/fa';
-import './Toolview.css';
+import { FaChevronCircleDown } from 'react-icons/fa';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
-import $ from 'jquery'
 
 
-
-const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+const PersonalTable =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
@@ -15,7 +12,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     const displayToolData = (id) => {
         setClicked(!clicked);
 
-        //G Gets the tools from the route
+        // Gets the tools from the route
         axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {
                 if (data.row) {
@@ -27,10 +24,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 // setToolSpecifics(err.message);
                 console.error(err);
             });
-    }
-    
-    function handleHeartClick() {
-        
     }
 
     // Renders the info in the drop down 
@@ -61,7 +54,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>
-                <FaHeart className="icon-heart"/>
                 <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 
@@ -75,4 +67,4 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     );
 }
 
-export default ToolView;
+export default PersonalTable;

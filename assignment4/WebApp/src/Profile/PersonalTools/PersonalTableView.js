@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from 'react'
 import { FaSearch } from 'react-icons/fa';
 import Cookie from 'js-cookie';
-import PersonalView from './PersonalView';
+import ToolView from '../../Table/Tools/ToolView';
 import axios from 'axios';
 
 class PersonalTableView extends Component {
@@ -31,7 +31,7 @@ class PersonalTableView extends Component {
     }
 
     // Renders each tool
-    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <PersonalView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></PersonalView>
+    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <ToolView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></ToolView>
 
 
     // Loops through the pTools array which holds each users personal tools

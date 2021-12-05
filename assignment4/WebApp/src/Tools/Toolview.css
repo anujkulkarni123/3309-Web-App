@@ -8,9 +8,10 @@
     padding: 40px;
     display: flex;
     justify-content: space-between;
-    width: 800px;
+    width: 50%;
     border: 1px solid var(--secondary-text-color);
     border-radius: 30px;
+
 }
 
 .tool-div:hover   {

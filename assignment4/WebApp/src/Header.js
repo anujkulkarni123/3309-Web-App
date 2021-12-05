@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './header.css';
 import { MenuItems } from "./MenuItems";
+import {FaSignInAlt} from "react-icons/fa";
 
 class Header extends Component{
 
@@ -26,6 +27,9 @@ class Header extends Component{
                                 </div>
                             )
                         })}
+                        <div>
+                            <FaSignInAlt className="nav-icon" onClick={} />
+                        </div>
                     </div>
                 </nav>
             </div>

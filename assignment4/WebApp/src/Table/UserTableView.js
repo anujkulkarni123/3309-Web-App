@@ -6,12 +6,6 @@ import axios from 'axios';
 import UserView from './UserView';
 
 
-$(function()    {
-        $(".icon").click(function() {
-            $(".input").toggleClass("active");
-        });
-    });
-
 class UserTableView extends Component {
 
     state = {

@@ -222,12 +222,18 @@ router.post('/register', (req, res) => {
 // router to insert a new tool (runs and insert query)
 router.post('/insertTool', (req, res) => {
   const toolname = req.body.toolname;
-  const toolprice = req.body.toolprice;
-  const tooltype = req.body.tooltype;
-  const username = req.body.username;
+    const toolprice = req.body.toolprice;
+    const tooltype = req.body.tooltype;
+    const sale = req.body.sale;
+    const rent = req.body.rent;
+    const username = req.body.username;
 
   // async method to insert tool imported
-  insertTool(toolname, toolprice, tooltype, username)
+<<<<<<< Updated upstream
+  insertTool(toolname, toolprice, tooltype, username, rent)
+=======
+  insertTool(toolname, toolprice, tooltype, username, sale, rent)
+>>>>>>> Stashed changes
     .then((response) => {
       res.json(response);
     })
@@ -296,6 +302,7 @@ router.get('/tools/:id', (req, res) => {
   conn.query(query, (err, rows) => {
     if (err) {
       res.json({ row: {} });
+      return;
     }
     res.json({ row: rows[0] });
   });
@@ -352,8 +359,8 @@ router.get('/user/:username', (req, res) => {
     });
 });
 
-router.get('/tools/:column', (req, res) => {
-  const column = req.params.column;
+router.get('/tools/order/:Column', (req, res) => {
+  const Column = req.params.Column;
 
   const conn = createConnection();
   conn.connect();
@@ -364,11 +371,11 @@ router.get('/tools/:column', (req, res) => {
       FROM
         tools
       ORDER BY
-        ${column}
-    `, (err, rows) => {
-      if (err) throw err;
-
-      res.json({ data: rows });
+        ${Column}
+    `, (err, data) => {
+      if (err) 
+        console.error(err);
+      res.json({ data: data });
     });
 
   conn.end();

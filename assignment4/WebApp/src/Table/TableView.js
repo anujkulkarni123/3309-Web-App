@@ -4,6 +4,8 @@ import $ from "jquery";
 import './tableview.css'
 import axios from 'axios';
 import ToolView from './ToolView';
+import ComboBox from 'react-responsive-combo-box'
+import 'react-responsive-combo-box/dist/index.css'
 import {
     BrowserRouter as Router,
     Routes,
@@ -17,13 +19,15 @@ $(function()    {
         $(".icon").click(function() {
             $(".input").toggleClass("active");
         });
-    });
+});
+
+const comboboxData = [ "ToolName", "Price", "ToolType" ];
 
 class TableView extends Component {
-
+    
     state = {
+        column: "ToolID",
         tools: [],
-        users: [],
         results: [],
         displayResults: false
     }
@@ -32,35 +36,30 @@ class TableView extends Component {
         this.getTools();
     }
 
-    getTools = _ => {
-        axios.get('http://localhost:5000/tools')
+
+    
+
+    getTools = () => {
+        const { column } = this.state;
+        axios.get(`http://localhost:5000/tools/order/${column}`)
             .then(({data}) => {
                 console.log(data.data);
-                this.setState({tools: data.data});
+                this.setState({tools: data.data, displayResults: false});
             })
             .catch((err) => {
                 console.error(err);
             });
     }
-
-    getUsers = _ => {
-        axios.get('http://localhost:5000/users')
-            .then(({data}) => {
-                console.log(data.data);
-                this.setState({users: data.data});
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+    
+    handleFilterChange(e)    {
+        console.log(e);
+        this.setState({column: e});
+        this.getTools();
     }
 
     renderTool = ({ ToolID, ToolName, Price, ToolType, UserID }) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType} UserID={UserID}></ToolView>
 
-    hangleToolSearch = (e) => {
-        this.filterTools(e.target.value);
-    }
-
-    handleUserSearch = (e) => {
+    handleToolSearch = (e) => {
         this.filterTools(e.target.value);
     }
 
@@ -83,14 +82,26 @@ class TableView extends Component {
         const { tools, results, displayResults } = this.state;
         return (        
             <div>
-                
-                <div className="search-div">
-                    <label className="icon" class="icon">
-                        <FaSearch/>
-                    </label>
-                    <form>
-                        <input className="input" class="input" type="search" placeholder="search" onChange={this.hangleToolSearch}></input>
-                    </form> 
+                <div className="filter-div">
+                    <div className="search-div">
+                        <label className="icon" class="icon">
+                            <FaSearch/>
+                        </label>
+                        <form>
+                            <input className="input" class="input" type="search" placeholder="search" onChange={this.handleToolSearch}></input>
+                        </form> 
+                    </div>
+
+                    <div className="sort-div">
+                        <div classname="sort-label">
+                            <label >Sort By:</label> 
+                        </div>
+                        <ComboBox id="combo-box" class="combo-box" options={comboboxData} onOptionsChange={this.handleFilterChange.bind(this)} enableAutocomplete/>
+                    </div>
+
+                    <div>
+                        <button className='addtool-btn'><Link to="/InsertTool">Add Tool</Link></button>
+                    </div>
                 </div>
 
                 <div>

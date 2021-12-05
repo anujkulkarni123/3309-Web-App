@@ -1,71 +1,84 @@
 .icon {
-    color: var(--text-color);
-    padding: 15px;
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-    color: black;
-}
-
-.table-container    {
-    width: calc(100%);
+color: var(--text-color);
+padding: 15px;
+height: 30px;
+width: 30px;
+cursor: pointer;
+transition: all 0.5s ease;
+color: white;
 }
 
 .search-div   {
-    margin: 20px;
-    height: 50px;
-    width: fit-content;
-    border: 1px solid black;
-    display: flex;
-    justify-content: start;
-    border-radius: 13px;
-    flex-direction: row;
+margin: 20px;
+height: 50px;
+background-color: var(--header);
+width: fit-content;
+display: flex;
+justify-content: start;
+border-radius: 13px;
+flex-direction: row;
 }
 
 .input  {
-    width: 0px;
-    height: 25px;
-    background-color: transparent;
-    border: 0px;
-    margin-top: 12px;
-    margin-right: 0px;
-    color: black;
-    outline: none;
-    transition: all 0.5s ease;
+width: 0px;
+height: 25px;
+background-color: transparent;
+border: 0px;
+margin-top: 12px;
+margin-right: 0px;
+color: black;
+outline: none;
+transition: all 1s ease;
 }
 
 .input:hover    {
-    background-color: var(--background);
-    color:var(--secondary-text-color);
+background-color: var(--background);
+color:var(--secondary-text-color);
 }
 
 .input.active   {
-    width: 200px;
-    margin-right: 20px;
+width: 200px;
+margin-right: 20px;
 }
 
 .results-container {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .addtool-btn{
-    text-decoration: none;
-    font-size: medium;
-    color: white;
-    width: max-content;
-    border-radius: 5px;
-    text-align: center;
-    margin: 10px;
-    padding: 5px;
-    border: none;
-    background-color: var(--header);
-    transition-duration: 0.3s;
-  }
-  
-  .addtool-btn{
-    text-decoration: none;
-    color: white;
-    padding: 5px;
-  }
+text-decoration: none;
+font-size: medium;
+color: white;
+width: fit-content;
+border-radius: 10px;
+text-align: center;
+margin: 30px;
+padding: 20px;
+border: none;
+background-color: var(--header);
+transition-duration: 0.3s;
+}
+
+.addtool-btn > * {
+text-decoration: none;
+color: white;
+padding: 5px;
+}
+
+.filter-div   {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 930px;
+}
+
+.sort-div   {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.sort-label {
+    padding: 10px;
+}

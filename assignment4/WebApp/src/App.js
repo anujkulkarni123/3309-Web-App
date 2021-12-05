@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header/Header'
 import './App.css';
-import TableView from './Table/Tools/TableView';
+import TableView from './Tools/TableView';
 import Login from './Login/Login';
 import PopUsersTable from './popRenters/popUsersTable';
 import {

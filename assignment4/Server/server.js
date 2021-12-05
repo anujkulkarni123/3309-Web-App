@@ -357,7 +357,7 @@ router.get('/user/:username', (req, res) => {
 
 // router to get the tools ordered by column
 router.get('/tools/order/:column', (req, res) => {
-  const Column = req.params.column;
+  const column = req.params.column;
 
   const conn = createConnection();
   conn.connect();

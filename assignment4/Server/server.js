@@ -303,6 +303,42 @@ router.get('/tools/:id', (req, res) => {
   conn.end()
 });
 
+// route to get info on a tool and its user
+router.get('/users/:id', (req, res) => {
+  // get the params
+  const UserID = parseInt(req.params.id);
+
+  const conn = createConnection();
+  conn.connect();
+
+  const query = `
+    SELECT
+      ToolID
+      ,ToolName
+      ,ToolType
+      ,Price
+      ,ForSale
+      ,ForRent
+      ,Username
+      ,Address
+    FROM
+      tools t
+    JOIN users u
+      ON (t.UserID = u.UserID)
+    WHERE
+      t.ToolID = ${UserID}
+  `;
+
+  conn.query(query, (err, rows) => {
+    if (err) {
+      res.json({ row: {} });
+    }
+    res.json({ row: rows[0] });
+  });
+
+  conn.end()
+});
+
 // route to get details of one user
 router.get('/user/:username', (req, res) => {
   const username = req.params.username;

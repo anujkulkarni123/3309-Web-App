@@ -18,7 +18,14 @@ class PopUsersTable extends Component {
 
     // Getting info from the users table and transactions table
     getUsers = _ => {
-        GetUser();
+        axios.get('http://localhost:5000/popularUsers')
+        .then(({data}) => {
+            console.log(data.data);
+            this.setState({users: data.data});
+        })
+        .catch((err) => {
+            console.error(err);
+        });
     }
 
     // Rendering the info

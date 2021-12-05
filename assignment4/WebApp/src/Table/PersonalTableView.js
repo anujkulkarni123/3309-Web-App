@@ -21,7 +21,7 @@ class PersonalTableView extends Component {
         axios.get(`http://localhost:5000/user/${user}`)
             .then(({data}) => {
                 console.log(data.data);
-                this.setState({pTools: data.data.tools});
+                this.setState({pTools: data.data.tools, displayResults: true});
             })
             .catch((err) => {
                 console.error(err);
@@ -33,7 +33,7 @@ class PersonalTableView extends Component {
 
     render()    {
         const { pTools, results, displayResults } = this.state;
-        return (        
+        return (
             <div>
                 <div>
                     {displayResults ? pTools.map(this.renderPTools) : results.map(this.renderPTools)}

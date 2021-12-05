@@ -9,7 +9,7 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser, insertTool } = require('./db/asyncFunctions');
+const { registerUser, insertTool, getUserDetails } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -248,6 +248,7 @@ router.get('/popularUsers', (req, res) => {
       ,Address
       ,Rating
       ,TransDone
+      ,ut.TransactionDate
     FROM
       users u
       JOIN usertransactions ut
@@ -295,6 +296,7 @@ router.get('/tools/:id', (req, res) => {
   conn.query(query, (err, rows) => {
     if (err) {
       res.json({ row: {} });
+      return;
     }
     res.json({ row: rows[0] });
   });
@@ -306,26 +308,17 @@ router.get('/tools/:id', (req, res) => {
 router.get('/user/:username', (req, res) => {
   const username = req.params.username;
 
-  const conn = createConnection();
-  conn.connect();
-
-  const query = `
-    SELECT * FROM users WHERE Username = '${username}'
-  `;
-
-  conn.query(query, (err, rows) => {
-    if (err) {
-      res.json({ row: {} })
-    }
-
-    res.json({ row: rows[0] });
-  });
-
-  conn.end();
+  getUserDetails(username)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ data: {} });
+    });
 });
 
-router.get('/tools/:column', (req, res) => {
-  const column = req.params.column;
+router.get('/tools/order/:Column', (req, res) => {
+  const Column = req.params.Column;
 
   const conn = createConnection();
   conn.connect();
@@ -336,15 +329,15 @@ router.get('/tools/:column', (req, res) => {
       FROM
         tools
       ORDER BY
-        ${column}
-    `, (err, rows) => {
-      if (err) throw err;
-
-      res.json({ data: rows });
+        ${Column}
+    `, (err, data) => {
+      if (err) 
+        console.error(err);
+      res.json({ data: data });
     });
 
   conn.end();
-})
+});
 
 // route to logout user
 router.get('logout', (req, res) => {

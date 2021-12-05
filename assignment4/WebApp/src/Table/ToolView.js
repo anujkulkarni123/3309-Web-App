@@ -36,6 +36,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label>Address: {Address}</label>
                 <label>For Sale: {ForSale}</label>
             </div>
+
+            <div>
+                <label>ID: {ID}</label>
+            </div>
             
         </div>
         );   
@@ -44,7 +48,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     return (
         <div className="tool-container">
             <div className="tool-div">
-                <label className="id">{ID}</label>
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>

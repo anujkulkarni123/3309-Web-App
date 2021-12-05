@@ -7,10 +7,22 @@ import {
   useNavigate
 } from "react-router-dom";
 import axios from 'axios';
-import Cookies from 'js-cookie';
+
 
 
 function InsertTools() {
+
+  const [isSaleChecked, setIsSaleChecked] = useState(false);
+
+  const [isRentChecked, setIsRentChecked] = useState(false);
+
+  const handleSaleOnChange = () => {
+    setIsSaleChecked(!isSaleChecked);
+  };
+
+  const handleRentOnChange = () => {
+    setIsRentChecked(!isRentChecked);
+  };
 
     // inserting new tool refs
     let toolnameReg = React.createRef();
@@ -21,16 +33,13 @@ function InsertTools() {
     const [errMsg, setErrMsg] = useState('');
 
     const insertTool = () => {
-      if (!Cookies.get('user')) {
-        navigate('/');
-      }
-
         const data = {
             toolname: toolnameReg.value,
             toolprice: toolpriceReg.value,
             tooltype: tooltypeReg.value,
-            username: Cookies.get('user')
         }
+
+        console.log(data);
 
         axios.post(`http://localhost:5000/insertTool`, data)
           .then(({ data }) => {
@@ -58,21 +67,45 @@ function InsertTools() {
                 <label style={{ fontSize: 14, }}>
                   Tool Name:
                 </label>
-        <input type="text" placeholder="toolname" ref={tn => (toolnameReg = tn)} style={{ marginLeft: 20}}></input>
+                <input type="text" placeholder="toolname" ref={tn => (toolnameReg = tn)} style={{ marginLeft: 20}}></input>
               </div>
 
               <div className="inputs">
                 <label style={{ fontSize: 14}}>
                     Tool Price:
                 </label>
-        <input type="text" placeholder="toolprice" ref={tp => (toolpriceReg = tp)} style={{ marginLeft: 25}}></input>
+                <input type="text" placeholder="toolprice" ref={tp => (toolpriceReg = tp)} style={{ marginLeft: 25}}></input>
               </div>
 
               <div className="inputs">
                 <label style={{ fontSize: 14}}>
                     Tool Type:
                 </label>
-        <input type="text" placeholder="tooltype" ref={tt => (tooltypeReg = tt)} style={{ marginLeft: 25}}></input>
+                <input type="text" placeholder="tooltype" ref={tt => (tooltypeReg = tt)} style={{ marginLeft: 25}}></input>
+              </div>
+
+              <div className="forsale">
+                <input
+                  type="checkbox"
+                  id="forsale"
+                  name="forsale"
+                  value="ForSale"
+                  checked={isSaleChecked}
+                  onChange={handleSaleOnChange}
+                />
+                For Sale
+              </div>
+
+              <div className="forrent">
+                <input
+                  type="checkbox"
+                  id="forrent"
+                  name="forrent"
+                  value="ForRent"
+                  checked={isRentChecked}
+                  onChange={handleRentOnChange}
+                />
+                For Rent
               </div>
 
             </div>

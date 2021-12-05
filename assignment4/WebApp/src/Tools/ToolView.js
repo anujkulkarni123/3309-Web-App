@@ -10,7 +10,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
-    const [msg, setMsg] = useState('');
 
     const displayToolData = (id) => {
         setClicked(!clicked);
@@ -32,14 +31,14 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     const buyTool = (id) => {
         // tell user to log in if they are not
         if (!Cookies.get('user')) {
-            setMsg('Need to be Logged in to do that!');
+            alert('Need to be Logged in to do that!');
             return;
         }
 
         axios.get(`http://localhost:5000/buy?username=${Cookies.get('user')}&toolID=${id}`)
-            .then(({ message, success }) => {
-                if (!success) {
-                    setMsg(message);
+            .then(({ data }) => {
+                if (!data.success) {
+                    alert(data.message);
                 }
 
                 // display success message
@@ -90,7 +89,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <div className="expandDiv">
                     {renderInfo(toolSpecifics)}
                     <div>
-                    <button className="buy-btn">Buy Tool</button>
+                    <button className="buy-btn" onClick={() => buyTool(ID)}>Buy Tool</button>
                     <button className="rent-btn">Rent Tool</button>
                     </div>
                 </div>

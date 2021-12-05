@@ -130,6 +130,9 @@ async function rentTool(username, ToolID, days) {
   const conn = createConnection();
   conn.connect();
 
+  // make days a valid int
+  days = Math.ceil(days);
+
   const query = util.promisify(conn.query).bind(conn);
 
   try {
@@ -146,6 +149,15 @@ async function rentTool(username, ToolID, days) {
         UserID = (SELECT UserID from users WHERE Username = '${username}') AND
         ToolID = ${ToolID}
     `);
+
+    // add the tool to the unavailabletools table
+    await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
+      (SELECT UserID WHERE Username = '${username}')
+      ,${ToolID}
+      ,DATE_ADD(CURDATE(), INTERVAL ${days} DAY)
+    )`);
+
+    return { message: `Successfully rented the tool for ${days} days!`, success: true };
 
   } catch (e) {
     throw e;

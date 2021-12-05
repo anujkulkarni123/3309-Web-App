@@ -6,6 +6,7 @@ import axios from 'axios';
 
 class PersonalTableView extends Component {
 
+    // States needed for showing the users personal tools
     state = {
         pTools: [],
         results: [],
@@ -16,6 +17,7 @@ class PersonalTableView extends Component {
         this.getPersonalTools();
     }
 
+    //Gets the users tools from the route
     getPersonalTools = _ => {
         const user = Cookie.get('user');
         axios.get(`http://localhost:5000/user/${user}`)
@@ -28,9 +30,11 @@ class PersonalTableView extends Component {
             });
     }
 
+    // Renders each tool
     renderPTools = ({ UserID, ToolType, ToolName, Price}) => <PersonalView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></PersonalView>
 
 
+    // Loops through the pTools array which holds each users personal tools
     render()    {
         const { pTools, results, displayResults } = this.state;
         return (

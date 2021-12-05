@@ -8,6 +8,7 @@ import UserView from './UserView';
 
 class UserTableView extends Component {
 
+    // States for displaying users
     state = {
         users: [],
         results: [],
@@ -18,6 +19,7 @@ class UserTableView extends Component {
         this.getUsers();
     }
 
+    // Getting users from the below route
     getUsers = _ => {
         axios.get('http://localhost:5000/users')
             .then(({data}) => {
@@ -29,13 +31,15 @@ class UserTableView extends Component {
             });
     }
 
+    // Renders a User
     renderUsers = ({ UserID, Username, Rating, Address}) => <UserView key={UserID} ID={UserID} Username={Username} Rating={Rating} Address={Address}></UserView>
 
+    // Calls the filterUsers function when the user clicks on the search bar
     hangleUsersSearch = (e) => {
         this.filterUsers(e.target.value);
     }
 
-
+    // Fills the results array with the users that match the whats in the search bar
     filterUsers = (search) => {
         if (!search) {
             this.setState({ displayResults: false });
@@ -51,6 +55,7 @@ class UserTableView extends Component {
         this.setState({ results: results, displayResults: true });
     }
 
+    // Renders the list of users
     render()    {
         const { users, results, displayResults } = this.state;
         return (        

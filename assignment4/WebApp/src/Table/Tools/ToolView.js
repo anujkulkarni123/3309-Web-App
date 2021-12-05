@@ -6,12 +6,14 @@ import axios from 'axios';
 
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+    // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
 
     const displayToolData = (id) => {
         setClicked(!clicked);
 
+        //G Gets the tools from the route
         axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {
                 if (data.row) {
@@ -25,6 +27,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             });
     }
 
+    // Renders the info in the drop down 
     function renderInfo({ Username, ForSale, ForRent, Address })  {
         return(
         <div key={ID} className="tool-expanded">
@@ -45,6 +48,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         );   
     }
 
+    // Renders a tool
     return (
         <div className="tool-container">
             <div className="tool-div">

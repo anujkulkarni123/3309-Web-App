@@ -90,7 +90,9 @@ class TableView extends Component {
     }
 
     // Render a tool
-    renderTool = ({ ToolID, ToolName, Price, ToolType, UserID }) => <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} Type={ToolType} UserID={UserID}></ToolView>
+    renderTool = ({ ToolID, ToolName, Price, ToolType, UserID, ForSale, ForRent }) => 
+                    <ToolView key={ToolID} ID={ToolID} Name={ToolName} Price={Price} 
+                    Type={ToolType} UserID={UserID} isForRent={ForRent} isForSale={ForSale}/>
 
     // Calls the filterTools function when the user clicks the search button
     handleToolSearch = (e) => {

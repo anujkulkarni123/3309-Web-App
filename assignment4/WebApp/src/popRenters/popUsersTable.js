@@ -2,7 +2,6 @@ import React, { useState, useEffect, Component } from 'react'
 import axios from 'axios';
 import UsersView from './UsersView';
 import './UsersView.css'
-import { GetUser } from '../Axios/Axios';
 
 
 class PopUsersTable extends Component {
@@ -19,13 +18,13 @@ class PopUsersTable extends Component {
     // Getting info from the users table and transactions table
     getUsers = _ => {
         axios.get('http://localhost:5000/popularUsers')
-        .then(({data}) => {
-            console.log(data.data);
-            this.setState({users: data.data});
-        })
-        .catch((err) => {
-            console.error(err);
-        });
+            .then(({data}) => {
+                console.log(data.data);
+                this.setState({users: data.data});
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     // Rendering the info

@@ -4,12 +4,25 @@ import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import $ from 'jquery'
+import $ from 'jquery';
+import { InsertFavourite } from '../Axios/Axios';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+    useNavigate
+  } from "react-router-dom";
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
+    const [ fav, setFav ] = useState("")
+
+    let navigate = useNavigate();
+    const [errMsg, setErrMsg] = useState('');
 
     const displayToolData = (id) => {
         setClicked(!clicked);
@@ -27,6 +40,38 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 console.error(err);
             });
     }
+    
+    function setRed() {
+        $(".icon-heart").click(function()   {
+            $("#icon-heart").attr('class', 'icon-heart-active' );
+        })
+    }
+
+    function setBlack() {
+        $(".icon-heart-active").click(function()   {
+            $("#icon-heart").attr('class', 'icon-heart' );
+        })
+    }
+
+    //handling insertion and deletion intop fav sql tabl;e
+
+    function handleFav()    {
+
+        const info = {
+            username: Cookies.get('user'),
+            toolID: ID
+        }
+
+        setFav(!fav)
+        if (fav === true)   {
+            setRed();
+            //insert into fav tool table
+            InsertFavourite(info);
+        } else  {
+            setBlack();
+            //delete from sql table
+        }
+    }
 
     // Called when the buy tool button is clicked
     const buyTool = (id) => {
@@ -36,10 +81,12 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             return;
         }
 
-        axios.get(`http://localhost:5000/buy?username=${Cookies.get('user')}&toolID=${id}`)
+        axios.get(`http://localhost:5000/buy?username='${Cookies.get('user')}'&toolID='${id}'`)
             .then(({ data }) => {
                 if (!data.success) {
+                    console.log('redirecting...');
                     alert(data.message);
+                    navigate('/App');
                     return;
                 }
                 else{
@@ -53,9 +100,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 throw err;
             });
 
-    }
-
-    function handleHeartClick() {
+            // buyTool(data, setErrMsg, navigate);
 
     }
 
@@ -87,7 +132,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>
-                <FaHeart className="icon-heart"/>
+                <FaHeart id="icon-heart" className="icon-heart" class="icon-heart" onClick={() => {handleFav()}}/>
                 <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 
@@ -103,6 +148,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
 
         </div>
     );
-}
+    }
 
 export default ToolView;

@@ -31,7 +31,7 @@ class TableView extends Component {
     state = {
         column: "ToolID",
         tools: [],
-        results: [],
+        // results: [],
         displayResults: false,
         perPage: 10,
         currentPage: 0,
@@ -45,28 +45,27 @@ class TableView extends Component {
 
     // Gets all the available tools from the route
     getTools = () => {
-        const { column, results, search } = this.state;
-        if (results) {
-            const slice = results.slice(this.state.offset, this.state.offset + this.state.perPage);
-            this.setState({
-                results: slice,
-                pageCount: Math.ceil(results.length / this.state.perPage)
-            })
-        }
+        const { column, search } = this.state;
 
         axios.get(`http://localhost:5000/tools/order/${column}`)
             .then(({data}) => {
-                console.log(data.data);
-                let slice = data.data.slice(this.state.offset, this.state.offset + this.state.perPage);
-                if (search) {
-                    slice.filter((row) => {
+                let slice;
+                let pagesData;
+                if (search.length > 0) {
+                    const rows = data.data;
+                    slice = rows.filter((row) => {
                         return row.ToolName.toLowerCase().includes(search.toLowerCase());
                     });
+                    pagesData = [...slice];
+                } else {
+                    slice = data.data;
+                    pagesData = data.data;
                 }
+                slice = slice.slice(this.state.offset, this.state.offset + this.state.perPage);
                 this.setState({
                     tools: slice,
                     displayResults: false,
-                    pageCount: Math.ceil(data.data.length / this.state.perPage)
+                    pageCount: Math.ceil(pagesData.length / this.state.perPage)
                 });
             })
             .catch((err) => {
@@ -88,9 +87,8 @@ class TableView extends Component {
 
 
     // Changes how the filter is sorting the tools
-    handleFilterChange(e)    {
-        console.log(e);
-        this.setState({column: e});
+    handleFilterChange(e) {
+        this.setState({ column: e, currentPage: 0 });
         this.getTools();
     }
 
@@ -102,7 +100,6 @@ class TableView extends Component {
         const value = e.target.value;
         this.setState({ search: value });
         this.getTools();
-        // this.filterTools(this.state.search);
     }
 
     // Fills the results array with the available tools that match what the user entered into the search bar

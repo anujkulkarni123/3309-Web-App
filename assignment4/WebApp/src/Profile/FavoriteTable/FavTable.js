@@ -32,7 +32,7 @@ class FavTable extends Component {
     render()    {
         return (
             <div>
-                {favTools.map(this.renderFavTool)}
+                {/*/favTools.map(this.renderFavTool)*/}
             </div>
         );
     }

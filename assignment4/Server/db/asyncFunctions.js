@@ -95,9 +95,118 @@ async function getUserDetails(username) {
   }
 }
 
+// async function to favorite a tool
+async function addFav(username, ToolID) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
+    // add the transaction to the usertransactions table
+    await query(`INSERT INTO favouritetools (UserID, ToolID) VALUES (
+      ${user[0].UserID}
+      ,${ToolID}
+    )`);
+
+    return { message: 'Successfully Inserted Tool', success: true };
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
+// async function to buy a tool
+async function buyTool(username, ToolID) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  console.log({username});
+    console.log({ToolID});
+
+  try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
+    // add the transaction to the usertransactions table
+
+    await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
+      ${user[0].UserID}
+      ,${ToolID}
+      ,CURDATE()
+    )`);
+
+    // remove the tool from the tools table
+    await query(`DELETE FROM tools
+      WHERE
+        UserID = ${user[0].UserID} AND
+        ToolID = ${ToolID}
+    `);
+
+    return { message: 'Transaction was successful', success: true };
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
+// async function to rent a tool
+async function rentTool(username, ToolID, days) {
+  const conn = createConnection();
+  conn.connect();
+
+  // make days a valid int
+  days = Math.ceil(days);
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
+    // add the transaction to the usertransactions table
+    await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
+      ${user[0].UserID}
+      ,${ToolID}
+      ,CURDATE()
+    )`);
+
+    // remove the tool from the tools table
+    await query(`DELETE FROM tools
+      WHERE
+        UserID = ${user[0].UserID} AND
+        ToolID = ${ToolID}
+    `);
+
+    // add the tool to the unavailabletools table
+    await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
+      (SELECT UserID WHERE Username = '${username}')
+      ,${ToolID}
+      ,DATE_ADD(CURDATE(), INTERVAL ${days} DAY)
+    )`);
+
+    return { message: `Successfully rented the tool for ${days} days!`, success: true };
+
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
 // export the functions
 module.exports = {
   registerUser: registerUser,
   insertTool: insertTool,
-  getUserDetails: getUserDetails
+  getUserDetails: getUserDetails,
+  addFav: addFav,
+  buyTool: buyTool,
+  rentTool: rentTool
 }

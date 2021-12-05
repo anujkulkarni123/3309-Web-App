@@ -49,7 +49,38 @@
     padding: 20px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.buy-btn{
+    background-color:var(--header);
+    color: white;
     justify-content: center;
+    display: flex;
+    height: max-content;
+    margin-top: 30px;
+    width: 100px;
+}
+
+.buy-btn:hover{
+    background-color: tomato;
+}
+
+
+.rent-btn{
+    background-color:var(--header);
+    color: white;
+    justify-content: center;
+    display: flex;
+    height: max-content;
+    margin-top: 3px;
+    width: 100px;
+}
+
+.rent-btn:hover{
+    background-color: tomato;
 }
 
 .tool-expanded  {
@@ -68,8 +99,7 @@
 }
 
 .right-div  {
-    width: 50%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
 }

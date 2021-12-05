@@ -9,7 +9,7 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser, insertTool, getUserDetails } = require('./db/asyncFunctions');
+const { registerUser, insertTool, getUserDetails, addFav, buyTool, rentTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -397,7 +397,11 @@ router.get('/fav/:username', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
+<<<<<<< HEAD
     t.UserID = (SELECT UserID FROM users WHERE Username = '${username}')
+=======
+    UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1')
+>>>>>>> a3c45022c3f1cac46b73aad48d3a85a15b760f1f
   `;
 
   conn.query(query, (err, rows) => {
@@ -420,7 +424,7 @@ router.post('/addFav', (req, res) => {
 
   const query = `
     INSERT INTO favouritetools (UserID, ToolID) VALUES (
-      (SELECT UserID FROM users WHERE username = '${username}')
+      (SELECT UserID FROM users WHERE username = '${username} LIMIT 1')
       ,${ToolID}
     )
   `;
@@ -447,7 +451,7 @@ router.get('/rmFav', (req, res) => {
 
   const query = `
     DELETE FROM favouritetools WHERE
-      UserID = (SELECT UserID FROM users WHERE Username = '${username}') AND
+      UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1') AND
       ToolID = ${ToolID}
   `;
 
@@ -459,6 +463,36 @@ router.get('/rmFav', (req, res) => {
   });
 
   conn.end();
+});
+
+// route to buy a tool
+router.get('/buy', (req, res) => {
+  const username = req.query.username;
+  const ToolID = (req.query.toolID);
+
+  buyTool(username, ToolID)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: 'Unable to buy tool!', success: false });
+    })
+});
+
+// route to rent a tool
+router.get('/rent', (req, res) => {
+  const username = req.query.username;
+  const ToolID = parseInt(req.query.toolID);
+  const days = parseInt(req.query.days);
+
+  rentTool(username, ToolID, days)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ message: 'Unable to rent tool!', success: false });
+    })
 });
 
 // enable app to use the router

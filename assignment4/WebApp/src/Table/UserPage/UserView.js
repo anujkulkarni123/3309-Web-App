@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaChevronCircleDown } from 'react-icons/fa';
-//import './Toolview.css';
+import './UserView.css'
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 
@@ -45,17 +45,17 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
     // Renders a user
     return (
-        <div className="user-container">
-            <div className="user-div">
+        <div className="users-container">
+            <div className="users-div">
                 <label className="id">{ID}</label>
-                <label className="username">{Username}</label>
-                <label className="rating">stars: {Rating}</label>
-                <label className="address">{Address}</label>
-                <FaChevronCircleDown className="user-chevron" onClick={() => displayUserData(ID)}/>
+                <label className="usernames">{Username}</label>
+                <label className="ratings">stars: {Rating}</label>
+                <label className="userAddress">{Address}</label>
+                <FaChevronCircleDown className="users-chevron" onClick={() => displayUserData(ID)}/>
             </div>
 
-            <Expand className="expand" open={clicked}>
-                <div className="expandDiv">
+            <Expand className="userExpand" open={clicked}>
+                <div className="expandedDiv">
                     {renderInfo(userSpecifics)}
                 </div>
             </Expand>

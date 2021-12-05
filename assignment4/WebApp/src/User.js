@@ -9,7 +9,7 @@ class User extends Component {
     render() {
         console.log(this.state.User);
         return(
-            <div className="profile-page">
+            <div className="users-page">
                 <Header />
                 <div className="app-body">
                     <div className="table-View">

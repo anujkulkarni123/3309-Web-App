@@ -379,8 +379,8 @@ router.get('/tools/order/:column', (req, res) => {
 });
 
 // route to get all the favorite tools
-router.get('/fav', (req, res) => {
-  const username = req.query.username;
+router.get('/fav/:username', (req, res) => {
+  const username = req.params.username;
 
   const conn = createConnection();
   conn.connect();
@@ -397,7 +397,11 @@ router.get('/fav', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
+<<<<<<< HEAD
+    t.UserID = (SELECT UserID FROM users WHERE Username = '${username}')
+=======
     UserID = (SELECT UserID FROM users WHERE Username = '${username} LIMIT 1')
+>>>>>>> a3c45022c3f1cac46b73aad48d3a85a15b760f1f
   `;
 
   conn.query(query, (err, rows) => {
@@ -411,9 +415,9 @@ router.get('/fav', (req, res) => {
 });
 
 // route to add favorite tools
-router.get('/addFav', (req, res) => {
-  const ToolID = req.query.toolID;
-  const username = req.query.username;
+router.post('/addFav', (req, res) => {
+  const ToolID = req.body.toolID;
+  const username = req.body.username;
 
   const conn = createConnection();
   conn.connect();
@@ -424,6 +428,8 @@ router.get('/addFav', (req, res) => {
       ,${ToolID}
     )
   `;
+
+  console.log(query);
 
   conn.query(query, (err) => {
     if (err)
@@ -462,7 +468,7 @@ router.get('/rmFav', (req, res) => {
 // route to buy a tool
 router.get('/buy', (req, res) => {
   const username = req.query.username;
-  const ToolID = parseInt(req.query.toolID);
+  const ToolID = (req.query.toolID);
 
   buyTool(username, ToolID)
     .then((response) => {

@@ -22,6 +22,13 @@
     height: 20px;
 }
 
+.icon-heart {
+    color: black;
+}
+
+.icon-heart-active  {
+    color: red;
+}
 
 .hide{
     display: none;

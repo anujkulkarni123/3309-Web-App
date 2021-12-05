@@ -102,28 +102,6 @@ class TableView extends Component {
         this.getTools();
     }
 
-    // Fills the results array with the available tools that match what the user entered into the search bar
-    filterTools = (search) => {
-        if (!search) {
-            this.setState({ displayResults: false });
-            return;
-        }
-
-        this.setState({
-            currentPage: 0
-        });
-
-        this.getTools();
-
-        const { tools } = this.state;
-
-        const results = tools.filter((tool) => {
-            return tool.ToolName.toLowerCase().includes(search.toLowerCase());
-        });
-
-        this.setState({ results: results, displayResults: true });
-    }
-
     // Rendering all the available tools, search bar, and combo-box filter
     render()    {
         const { tools, results, displayResults } = this.state;

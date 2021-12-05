@@ -141,7 +141,6 @@ async function buyTool(username, ToolID) {
     // remove the tool from the tools table
     await query(`DELETE FROM tools
       WHERE
-        UserID = ${user[0].UserID} AND
         ToolID = ${ToolID}
     `);
 

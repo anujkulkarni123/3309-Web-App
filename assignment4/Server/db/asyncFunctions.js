@@ -95,9 +95,70 @@ async function getUserDetails(username) {
   }
 }
 
+// async function to buy a tool
+async function buyTool(username, ToolID) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // add the transaction to the usertransactions table
+    await query(`INSERT INTO usertransactions (UserID, ToolID, TransactionDate) VALUES (
+      (SELECT UserID from users WHERE Username = '${username}')
+      ,${ToolID}
+      ,CURDATE()
+    )`);
+
+    // remove the tool from the tools table
+    await query(`DELETE FROM tools
+      WHERE
+        UserID = (SELECT UserID from users WHERE Username = '${username}') AND
+        ToolID = ${ToolID}
+    `);
+
+    return { message: 'Transaction was successful', success: true };
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
+// async function to rent a tool
+async function rentTool(username, ToolID, days) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // add the transaction to the usertransactions table
+    await query(`INSERT INTO usertransactions (UserID, ToolID, TransactionDate) VALUES (
+      (SELECT UserID WHERE Username = '${username}')
+      ,${ToolID}
+      ,CURDATE()
+    )`);
+
+    // remove the tool from the tools table
+    await query(`DELETE FROM tools
+      WHERE
+        UserID = (SELECT UserID from users WHERE Username = '${username}') AND
+        ToolID = ${ToolID}
+    `);
+
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
 // export the functions
 module.exports = {
   registerUser: registerUser,
   insertTool: insertTool,
-  getUserDetails: getUserDetails
+  getUserDetails: getUserDetails,
+  buyTool: buyTool,
+  rentTool: rentTool
 }

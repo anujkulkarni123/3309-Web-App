@@ -9,7 +9,7 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser, insertTool, getUserDetails } = require('./db/asyncFunctions');
+const { registerUser, insertTool, getUserDetails, buyTool, rentTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
@@ -457,6 +457,34 @@ router.get('/rmFav', (req, res) => {
   });
 
   conn.end();
+});
+
+// route to buy a tool
+router.get('/buy', (req, res) => {
+  const username = req.query.username;
+  const ToolID = req.query.toolID;
+
+  buyTool(username, ToolID)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ message: 'Unable to buy tool!', success: false });
+    })
+});
+
+// route to rent a tool
+router.get('/rent', (req, res) => {
+  const username = req.query.username;
+  const ToolID = req.query.toolID;
+
+  rentTool(username, ToolID)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) => {
+      res.json({ message: 'Unable to rent tool!', success: false });
+    })
 });
 
 // enable app to use the router

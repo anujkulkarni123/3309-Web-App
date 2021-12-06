@@ -28,9 +28,9 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
     // What is displayed in the drop down menu
     const renderInfo = ({ ToolName, Price, ToolType, ForSale, ForRent }) => {
-            <div key={ID} className="user-expanded">
+            return (<div key={ID} className="user-expanded">
                 <div className="left-div">
-                    <label>ToolName: {ToolName}</label>   
+                    <label>ToolName: {ToolName}</label>
                     <label>Price: {Price}</label>
                     <label>ToolType: {ToolType}</label>
                 </div>
@@ -38,7 +38,7 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
                     <label>For Sale: {ForSale}</label>
                     <label>For Rent: {ForRent}</label>
                 </div>
-            </div>
+            </div>);
         }
 
     // Renders a user

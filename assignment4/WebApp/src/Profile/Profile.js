@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import Cookies from 'js-cookie';
 import PersonalTableView from './PersonalTools/PersonalTableView';
+import FavTable from './FavoriteTable/FavTable';
 import './Profile.css';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-    useNavigate
-  } from "react-router-dom";
 
 class Profile extends Component {
 
@@ -34,7 +28,7 @@ class Profile extends Component {
                             <PersonalTableView/>
                         </div>
                         <div className="fav-tools">
-                            <label>Fav Tools</label>
+                            <FavTable/>
                         </div>
                     </div>
                 </div>

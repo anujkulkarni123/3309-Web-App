@@ -34,7 +34,7 @@ router.get('/tools', (req, res) => {
   const conn = createConnection();
   conn.connect();
 
-  const Select_All_Tools_Query = 'SELECT t.ToolID, ToolName, ToolType, Price, ForSale, ForRent FROM tools t FULL OUTER JOIN unavailabletools ut ON (t.ToolID = ut.UserID);';
+  const Select_All_Tools_Query = 'SELECT t.ToolID, ToolName, ToolType, Price, ForSale, ForRent FROM tools t, unavailabletools ut WHERE t.ToolID != ut.ToolID;';
 
   conn.query(Select_All_Tools_Query, (err, rows) => {
     if (err) throw err
@@ -397,14 +397,14 @@ router.get('/fav/:username', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
-    UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1)
+    ft.UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1)
   `;
 
-  conn.query(query, (err, rows) => {
+  conn.query(query, (err, data) => {
     if (err)
-      res.json({ message: 'Unable to get Tools', success: false });
+      return res.json({ message: `Unable to get Tools for ${username}`, success: false });
 
-    res.json({ data: rows });
+    return res.json({ data: data });
   });
 
   conn.end();
@@ -429,9 +429,9 @@ router.post('/addFav', (req, res) => {
 
   conn.query(query, (err) => {
     if (err)
-      res.json({ message: 'Unable to Insert Tool', success: false });
+      return res.json({ message: 'Unable to Insert Tool', success: false });
 
-    res.json({ message: 'Successfully Inserted Tool', success: true });
+    return res.json({ message: 'Successfully Inserted Tool', success: true });
   });
 
   conn.end();

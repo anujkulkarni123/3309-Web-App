@@ -33,15 +33,16 @@ const PersonalTable =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             <div className="left-div">
                 <label>Owner: {Username}</label>   
                 <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
-            </div>
-            <div className="right-div">
-                <label>Address: {Address}</label>
                 <label>For Sale: {ForSale? 'Yes' : 'No'}</label>
             </div>
 
+            <div className="right-div">
+                <label>Address: {Address}</label>
+            </div>
+{/* 
             <div>
                 <label>ID: {ID}</label>
-            </div>
+            </div> */}
             
         </div>
         );   

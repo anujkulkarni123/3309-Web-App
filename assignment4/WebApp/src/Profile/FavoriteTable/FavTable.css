@@ -7,3 +7,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.fav-title{
+    background-color:black;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-weight: bold;
+    color: white;
+}

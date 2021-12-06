@@ -267,8 +267,8 @@ router.get('/popularUsers', (req, res) => {
       JOIN usertransactions ut
         ON (u.UserID = ut.SellerID)
     ORDER BY
-      TransactionDate
-      ,TransDone
+      TransactionDate desc
+      ,TransDone desc
     LIMIT 20`;
 
   conn.query(query, (err, rows) => {

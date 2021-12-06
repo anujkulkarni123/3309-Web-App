@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import './Toolview.css';
 import Expand from 'react-expand-animated';
@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import Fav from './Fav';
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+
+    // refs for days
+    let days = React.createRef();
 
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
@@ -78,7 +81,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         const data = {
             username: Cookies.get('user'),
             toolID: id,
-            days: 10
+            days: days.value || 10
         }
 
         console.log(data);
@@ -136,8 +139,12 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <div className="expandDiv">
                     {renderInfo(toolSpecifics)}
                     <div>
-                    <button className="buy-btn" onClick={() => buyTool(ID)}>Buy Tool</button>
-                    <button className="rent-btn" onClick={() => rentTool(ID)}>Rent Tool</button>
+                        <button className="buy-btn" onClick={() => buyTool(ID)}>Buy Tool</button>
+                        <div>
+                            Days for rent: <span></span>
+                            <input type="number" ref={d => (days = d)} placeholder="10"/>
+                            <button className="rent-btn" onClick={() => rentTool(ID)}>Rent Tool</button>
+                        </div>
                     </div>
                 </div>
             </Expand>

@@ -497,10 +497,10 @@ router.post('/buy', (req, res) => {
 });
 
 // route to rent a tool
-router.get('/rent', (req, res) => {
-  const username = req.query.username;
-  const ToolID = parseInt(req.query.toolID);
-  const days = parseInt(req.query.days);
+router.post('/rent', (req, res) => {
+  const username = req.body.username;
+  const ToolID = parseInt(req.body.toolID);
+  const days = parseInt(req.body.days);
 
   rentTool(username, ToolID, days)
     .then((response) => {

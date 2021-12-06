@@ -95,31 +95,6 @@ async function getUserDetails(username) {
   }
 }
 
-// async function to favorite a tool
-async function addFav(username, ToolID) {
-  const conn = createConnection();
-  conn.connect();
-
-  const query = util.promisify(conn.query).bind(conn);
-
-  try {
-    // getting user
-    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
-
-    // add the transaction to the usertransactions table
-    await query(`INSERT INTO favouritetools (UserID, ToolID) VALUES (
-      ${user[0].UserID}
-      ,${ToolID}
-    )`);
-
-    return { message: 'Successfully Inserted Tool', success: true };
-  } catch (e) {
-    throw e;
-  } finally {
-    conn.end();
-  }
-}
-
 // async function to buy a tool
 async function buyTool(username, ToolID) {
   const conn = createConnection();
@@ -181,7 +156,7 @@ async function rentTool(username, ToolID, days) {
 
     // add the tool to the unavailabletools table
     await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
-      (SELECT UserID WHERE Username = '${username}' LIMIT 1)
+      ,${user[0].UserID}
       ,${ToolID}
       ,DATE_ADD(CURDATE(), INTERVAL ${days} DAY)
     )`);
@@ -189,6 +164,7 @@ async function rentTool(username, ToolID, days) {
     return { message: `Successfully rented the tool for ${days} days!`, success: true };
 
   } catch (e) {
+    console.log(e);
     throw e;
   } finally {
     conn.end();
@@ -200,7 +176,6 @@ module.exports = {
   registerUser: registerUser,
   insertTool: insertTool,
   getUserDetails: getUserDetails,
-  addFav: addFav,
   buyTool: buyTool,
   rentTool: rentTool
 }

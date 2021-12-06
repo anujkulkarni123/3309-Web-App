@@ -48,7 +48,7 @@ CREATE TABLE Tools (
 CREATE TABLE UnavailableTools (
     ToolID INT NOT NULL
     ,UserID INT NOT NULL
-    ,ReturnDate DATE NOT NULL
+    ,ReturnDate DATE
     ,FOREIGN KEY (ToolID)
         REFERENCES Tools(ToolID)
         ON DELETE CASCADE

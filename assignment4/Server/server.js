@@ -9,12 +9,10 @@ const router = express.Router();
 
 // import db connection and other functions
 const createConnection = require('./db/connection');
-const { registerUser, insertTool, getUserDetails, addFav, buyTool, rentTool } = require('./db/asyncFunctions');
+const { registerUser, insertTool, getUserDetails, buyTool, rentTool } = require('./db/asyncFunctions');
 
 // constant variables
 const port = 5000;
-
-// variable to store the user
 
 // middlewares
 app.use(cors({
@@ -34,13 +32,26 @@ router.get('/tools', (req, res) => {
   const conn = createConnection();
   conn.connect();
 
-  const Select_All_Tools_Query = 'SELECT t.ToolID, ToolName, ToolType, Price, ForSale, ForRent FROM tools t, unavailabletools ut WHERE t.ToolID != ut.ToolID;';
+  const Select_All_Tools_Query = `
+    SELECT
+      t.ToolID
+      ,ToolName
+      ,ToolType
+      ,Price
+      ,ForSale
+      ,ForRent
+    FROM
+      tools t
+    LEFT OUTER JOIN unavailabletools ut
+      ON (t.ToolID = ut.ToolID)
+    WHERE ut.ToolID IS NULL;
+  `;
 
   conn.query(Select_All_Tools_Query, (err, rows) => {
     if (err) throw err
 
     //could be tools: rows
-    res.json({ data: rows });
+    return res.json({ data: rows });
   });
 
   conn.end();
@@ -364,11 +375,20 @@ router.get('/tools/order/:column', (req, res) => {
 
   conn.query(`
       SELECT
-        *
+        t.ToolID
+        ,t.ToolName
+        ,t.ToolType
+        ,t.Price
+        ,t.ForRent
+        ,t.ForSale
       FROM
-        tools
+        tools t
+        LEFT OUTER JOIN unavailabletools ut
+          ON (t.ToolID = ut.ToolID)
+      WHERE
+        ut.ToolID IS NULL
       ORDER BY
-        ${column}
+        t.${column}
     `, (err, data) => {
       if (err)
         console.error(err);

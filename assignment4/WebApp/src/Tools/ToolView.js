@@ -54,6 +54,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                     navigate('/App');
                     return;
                 }
+                else{
+                    alert('Success')
+                    return;
+                }
 
                 // display success message
             })

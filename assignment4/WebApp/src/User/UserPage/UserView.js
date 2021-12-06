@@ -16,8 +16,9 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
         axios.get(`http://localhost:5000/users/${ID}`)
             .then(({data}) => {
-                if (data) {
-                    setUserSpecifics(data);
+                console.log(data)
+                if (data.row) {
+                    setUserSpecifics(data.row);
                 }
             })
             .catch((err) => {

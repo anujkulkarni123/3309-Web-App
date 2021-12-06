@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './header.css';
 import { MenuItems } from "./MenuItems";
 import {FaSignInAlt} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
+
 function Header() {
-    
+
     // Navigation
     const navigate = useNavigate();
 
@@ -17,6 +19,7 @@ function Header() {
 
         navigate('/');
     }
+
 
     return(
         <div className="container">
@@ -33,7 +36,7 @@ function Header() {
                     {MenuItems.map((item, index) => {
                         return (
                             <div key={index} className="nav-icon-div">
-                                <a className="nav-icon" href={item.url} onClick={item.logout}>
+                                <a className='nav-icon' href={item.url} >
                                     {item.icon}
                                 </a>
                             </div>

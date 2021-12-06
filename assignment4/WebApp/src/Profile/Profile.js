@@ -21,8 +21,7 @@ class Profile extends Component {
                             Welcome, {this.state.User}
                         </h1>
                     </div>
-                    
-
+    
                     <div className="info-container">
                         <div className="user-tools">
                             <PersonalTableView/>

@@ -68,6 +68,40 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
 
     }
 
+    const rentTool = (id) => {
+        // tell user to log in if they are not
+        if (!Cookies.get('user')) {
+            alert('Need to be Logged in to do that!');
+            return;
+        }
+
+        const data = {
+            username: Cookies.get('user'),
+            toolID: id,
+            days: 10
+        }
+
+        axios.post(`http://localhost:5000/rent`, data)
+            .then(({ data }) => {
+                if (!data.success) {
+                    console.log('redirecting...');
+                    alert(data.message);
+                    navigate('/App');
+                    return;
+                }
+                else{
+                    alert(data.message)
+                    return;
+                }
+
+                // display success message
+            })
+            .catch((err) => {
+                throw err;
+            });
+
+    }
+
     // Renders the info in the drop down
     function renderInfo({ Username, ForSale, ForRent, Address })  {
         return(
@@ -101,7 +135,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                     {renderInfo(toolSpecifics)}
                     <div>
                     <button className="buy-btn" onClick={() => buyTool(ID)}>Buy Tool</button>
-                    <button className="rent-btn">Rent Tool</button>
+                    <button className="rent-btn" onClick={() => rentTool(ID)}>Rent Tool</button>
                     </div>
                 </div>
             </Expand>

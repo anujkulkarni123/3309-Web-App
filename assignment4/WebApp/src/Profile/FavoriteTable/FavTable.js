@@ -18,17 +18,24 @@ class FavTable extends Component {
         const{ username } = this.state;
         axios.get(`http://localhost:5000/fav/${username}`)
             .then(({data}) =>   {
-                console.log(data.data);
-                this.setState({favTools: data.data.tools});
+                console.log(data);
+                this.setState({favTools: data.data});
             })
             .catch((err) => {
                 console.error(err);
             });
     }
 
-    renderFavTool = ({ToolID, ToolName, Price, ToolType, UserID, ForSale, ForRent }) => 
-                    <PersonalTable key={ToolID} ID={ToolID} Name={ToolName} Price={Price} 
-                    Type={ToolType} UserID={UserID} isForRent={ForRent} isForSale={ForSale}/>
+    //renders tool
+    renderFavTool = ({ ToolName, Price, ToolType, ForSale, ForRent }) => 
+        <div>
+            <label>{ToolName}</label>
+            <label>${Price}</label>
+            <label>{ToolType}</label>
+            <label>{ForSale}</label>
+            <label>{ForRent}</label>
+        </div>
+
     render()    {
         const { favTools } = this.state;
         return (

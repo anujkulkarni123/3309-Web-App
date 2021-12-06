@@ -42,10 +42,10 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
                 <label>ToolType: {ToolType}</label>
                 </div>
                 <div>
-                <label>For Sale: {ForSale}</label>
+                <label>For Sale: {ForSale? 'Yes' : 'No'}</label>
                 </div>
                 <div>
-                <label>For Rent: {ForRent}</label>
+                <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
                 </div>
             </div>
         </div>

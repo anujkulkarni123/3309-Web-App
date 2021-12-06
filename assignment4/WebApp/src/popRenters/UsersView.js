@@ -11,7 +11,7 @@ const UsersView = ({ UserId, UserName, Rating, TransDone, TransactionDate}) =>{
                 <label>{UserId}</label>
                 <label>{UserName}</label>
                 <label>{Rating}</label>
-                <label>Trans: {TransDone}</label>
+                <label>Transactions Done: {TransDone}</label>
                 <label>{TransactionDate} </label>
             </div>
         </div>

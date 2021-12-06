@@ -1,0 +1,9 @@
+.favTools{
+    border: 1px;
+    justify-content: space-between;
+}
+
+.favTool{
+    display: flex;
+    justify-content: space-between;
+}

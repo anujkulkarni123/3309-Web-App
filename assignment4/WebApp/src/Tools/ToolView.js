@@ -3,19 +3,19 @@ import { FaChevronCircleDown, FaHeart } from 'react-icons/fa';
 import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import $ from 'jquery'
-
-
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
+    const [msg, setMsg] = useState('');
 
     const displayToolData = (id) => {
         setClicked(!clicked);
 
-        //G Gets the tools from the route
+        // Gets the tools from the route
         axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {
                 if (data.row) {
@@ -30,19 +30,36 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     }
 
     const buyTool = (id) => {
-        
-    }
-    
-    function handleHeartClick() {
-        
+        // tell user to log in if they are not
+        if (!Cookies.get('user')) {
+            setMsg('Need to be Logged in to do that!');
+            return;
+        }
+
+        axios.get(`http://localhost:5000/buy?username=${Cookies.get('user')}&toolID=${id}`)
+            .then(({ message, success }) => {
+                if (!success) {
+                    setMsg(message);
+                }
+
+                // display success message
+            })
+            .catch((err) => {
+                throw err;
+            });
+
     }
 
-    // Renders the info in the drop down 
+    function handleHeartClick() {
+
+    }
+
+    // Renders the info in the drop down
     function renderInfo({ Username, ForSale, ForRent, Address })  {
         return(
         <div key={ID} className="tool-expanded">
             <div className="left-div">
-                <label>Owner: {Username}</label>   
+                <label>Owner: {Username}</label>
                 <label>For Rent: {ForRent}</label>
             </div>
             <div className="right-div">
@@ -53,12 +70,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             <div>
                 <label>ID: {ID}</label>
             </div>
-            
+
         </div>
-        );   
+        );
     }
-
-
 
     // Renders a tool
     return (

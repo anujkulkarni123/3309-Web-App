@@ -31,12 +31,10 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
         console.log({ToolName});
         return(
         <div key={ID} className="user-expanded">
-            <div className="left-div">
+            <div className="tools-div">
                 <label>ToolName: {ToolName}</label>   
                 <label>Price: {Price}</label>
                 <label>ToolType: {ToolType}</label>
-            </div>
-            <div className="right-div">
                 <label>For Sale: {ForSale}</label>
                 <label>For Rent: {ForRent}</label>
             </div>

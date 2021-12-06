@@ -27,6 +27,8 @@
     border-bottom: 1px solid black;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
+    display: flex;
+    flex-direction: row;
     
 }
 
@@ -36,4 +38,14 @@
     width: 800px;
     display: flex;
     justify-content: center;
+}
+
+.tools-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+label{
+    padding-right: 50px;
 }

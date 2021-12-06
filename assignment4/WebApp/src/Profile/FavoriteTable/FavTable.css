@@ -9,11 +9,11 @@
 }
 
 .fav-title{
-    background-color:black;
+    background-color: var(--header);
     height: 120px;
     display: flex;
     justify-content: center;
-    align-content: center;
-    font-weight: bold;
     color: white;
+    font-size: 30px;
+    border-radius: 50px;   
 }

@@ -8,17 +8,17 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
     // Necassary variables, clicked is for Expanding, userSpecifics is for the info in the expanded div
     const [clicked, setClicked] = useState(false);
-    const [userSpecifics, setUserSpecifics] = useState('');
+    const [userSpecifics, setUserSpecifics] = useState([]);
 
     // Gets the users from the route
     const displayUserData = (id) => {
         setClicked(!clicked);
 
-        axios.get(`http://localhost:5000/users/${ID}`)
+        axios.get(`http://localhost:5000/user/${Username}`)
             .then(({data}) => {
-                console.log(data)
-                if (data.row) {
-                    setUserSpecifics(data.row);
+                console.log(data.data.tools)
+                if (data.data.tools) {
+                    setUserSpecifics(data.data.tools);
                 }
             })
             .catch((err) => {
@@ -27,22 +27,19 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
     }
 
     // What is displayed in the drop down menu
-    function renderInfo({ ToolName, Price, ToolType, ForSale, ForRent })  {
-        console.log({ToolName});
-        return(
-        <div key={ID} className="user-expanded">
-            <div className="left-div">
-                <label>ToolName: {ToolName}</label>   
-                <label>Price: {Price}</label>
-                <label>ToolType: {ToolType}</label>
+    const renderInfo = ({ ToolName, Price, ToolType, ForSale, ForRent }) => {
+            <div key={ID} className="user-expanded">
+                <div className="left-div">
+                    <label>ToolName: {ToolName}</label>   
+                    <label>Price: {Price}</label>
+                    <label>ToolType: {ToolType}</label>
+                </div>
+                <div className="right-div">
+                    <label>For Sale: {ForSale}</label>
+                    <label>For Rent: {ForRent}</label>
+                </div>
             </div>
-            <div className="right-div">
-                <label>For Sale: {ForSale}</label>
-                <label>For Rent: {ForRent}</label>
-            </div>
-        </div>
-        );   
-    }
+        }
 
     // Renders a user
     return (
@@ -57,7 +54,7 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
             <Expand className="userExpand" open={clicked}>
                 <div className="expandedDiv">
-                    {renderInfo(userSpecifics)}
+                    {userSpecifics.map(renderInfo)}
                 </div>
             </Expand>
 

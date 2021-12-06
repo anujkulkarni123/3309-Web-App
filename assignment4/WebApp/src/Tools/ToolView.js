@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { FaChevronCircleDown, FaHeart } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaChevronCircleDown } from 'react-icons/fa';
 import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import $ from 'jquery';
-import { InsertFavourite } from '../Axios/Axios';
 import { useNavigate } from "react-router-dom";
 import Fav from './Fav';
 
@@ -14,8 +12,29 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
+    const [fav, setFav] = useState(false);
 
     let navigate = useNavigate();
+
+    const getFavTools = () => {
+        axios.get(`http://localhost:5000/fav/${Cookies.get('user')}`)
+            .then(({data}) => {
+                for (let tool of data.data) {
+                    if (tool.ToolID === ID) {
+                        console.log('favourite');
+                        setFav(true);
+                        return;
+                    }
+                }
+            })
+            .catch((err) => {
+                throw err;
+            });
+    }
+
+    useEffect(() => {
+        getFavTools();
+    });
 
     const displayToolData = (id) => {
         setClicked(!clicked);
@@ -72,7 +91,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
 
     // Renders the info in the drop down
     function renderInfo({ Username, ForSale, ForRent, Address })  {
-        console.log(ID);
         return(
         <div key={ID} className="tool-expanded">
             <div className="left-div">
@@ -95,7 +113,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>
-                <Fav fav={false} ID={ID} />
+                <Fav fav={fav} ID={ID} />
                 <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 

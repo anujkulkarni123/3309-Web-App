@@ -387,7 +387,8 @@ router.get('/fav/:username', (req, res) => {
 
   const query = `
   SELECT
-    t.Price
+    t.ToolID
+    ,t.Price
     ,t.ToolType
     ,t.ToolName
     ,t.ForSale
@@ -425,8 +426,6 @@ router.post('/addFav', (req, res) => {
     )
   `;
 
-  console.log(query);
-
   conn.query(query, (err) => {
     if (err)
       return res.json({ message: 'Unable to Insert Tool', success: false });
@@ -438,9 +437,9 @@ router.post('/addFav', (req, res) => {
 });
 
 // route to removed favorite tools
-router.get('/rmFav', (req, res) => {
-  const ToolID = req.query.toolID;
-  const username = req.query.username;
+router.post('/rmFav', (req, res) => {
+  const ToolID = req.body.toolID;
+  const username = req.body.username;
 
   const conn = createConnection();
   conn.connect();
@@ -453,7 +452,7 @@ router.get('/rmFav', (req, res) => {
 
   conn.query(query, (err) => {
     if (err)
-      res.json({ message: 'Unable to Delete Tool', success: false });
+      res.json({ message: 'Unable to Delete Tool', success: false, errors: err });
 
     res.json({ message: 'Successfully Deleted Tool', success: true });
   });

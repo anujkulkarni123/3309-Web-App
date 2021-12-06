@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FaHeart } from 'react-icons/fa';
-import { InsertFavourite } from '../Axios/Axios';
+import { InsertFavourite, DeleteFavourite } from '../Axios/Axios';
 import Cookies from 'js-cookie';
 
 // component to like/unlike tools
@@ -23,15 +23,16 @@ export default class Fav extends Component {
         }
 
         this.setState(({ fav }) => ({ fav: !fav }));
-        if (fav)   {
+        if (!fav)   {
             InsertFavourite(info);
         } else  {
+            DeleteFavourite(info);
         }
     }
 
     render() {
         return (
-            <FaHeart id="icon-heart" className="icon-heart" class={this.state.fav ? 'icon-heart-active' : 'icon-heart'} onClick={() => {this.handleFav()}}/>
+            <FaHeart id="icon-heart" className="icon-heart" class={this.props.fav ? 'icon-heart-active' : 'icon-heart'} onClick={() => {this.handleFav()}}/>
         );
     }
 }

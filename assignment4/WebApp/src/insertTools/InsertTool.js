@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import Cookies from 'js-cookie';
 import Header from '../Header/Header';
-import Axios, { InsertTool } from '../Axios/Axios';
+import { InsertTool } from '../Axios/Axios';
 
 
 

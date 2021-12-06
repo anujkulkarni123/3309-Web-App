@@ -46,4 +46,15 @@ export function LoginUser(data, setErrMsg, navigate) {
     .catch((err) => { throw err })
 }
 
+export function GetUser() {
+    axios.get('http://localhost:5000/popularUsers')
+        .then(({data}) => {
+            console.log(data.data);
+            this.setState({users: data.data});
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+
 export default Axios;

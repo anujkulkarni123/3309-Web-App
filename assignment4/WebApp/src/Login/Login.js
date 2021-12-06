@@ -115,9 +115,9 @@ function Login() {
 
               <div className="inputs">
                 <label style={{ fontSize: 14, marginLeft: 35}}>
-                    CreditCardNo.:
+                    CreditCardNo:
                 </label>
-        <input type="text" placeholder="creditcardNo." ref={no => cardNoReg = no} style={{ marginLeft: 27}}></input>
+        <input type="text" placeholder="xxxxxxxxxxxxxxxx" ref={no => cardNoReg = no} style={{ marginLeft: 27}}></input>
               </div>
 
               <div className="inputs">

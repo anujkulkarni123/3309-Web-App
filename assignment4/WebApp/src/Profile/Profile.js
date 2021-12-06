@@ -14,7 +14,7 @@ class Profile extends Component {
             <div className="profile-page">
                 <Header />
                 {/* Welcome message to the user */}
-
+                
                 <div>
                     <div>
                         <h1>

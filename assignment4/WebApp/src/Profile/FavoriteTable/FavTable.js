@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react'
 import Cookies from 'js-cookie'
-import PersonalTable from '../PersonalTools/PersonalTable';
 import './FavTable.css'
 import FavTableView from './FavTableView';
 
@@ -13,7 +12,7 @@ class FavTable extends Component {
     }
 
     componentDidMount() {
-        this.getFavTools();
+        this.getFavTools();  
     }
 
     getFavTools = () =>    {
@@ -44,5 +43,6 @@ class FavTable extends Component {
     }
     
 }
+
 
 export default FavTable;

@@ -57,4 +57,15 @@ export function InsertFavourite(data) {
     })
 }
 
+
+export function DeleteFavourite(data) {
+  axios.post(`http://localhost:5000/rmFav`)
+    .then(({data}) => {
+      if (data.success) {
+        console.log(data);
+      } else {
+        console.error();
+      }
+    })
+}
 export default Axios;

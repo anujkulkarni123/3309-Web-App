@@ -156,7 +156,7 @@ async function rentTool(username, ToolID, days) {
 
     // add the tool to the unavailabletools table
     await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
-      (SELECT UserID WHERE Username = '${username}' LIMIT 1)
+      ${user[0].UserID}
       ,${ToolID}
       ,DATE_ADD(CURDATE(), INTERVAL ${days} DAY)
     )`);
@@ -164,6 +164,7 @@ async function rentTool(username, ToolID, days) {
     return { message: `Successfully rented the tool for ${days} days!`, success: true };
 
   } catch (e) {
+    console.log(e);
     throw e;
   } finally {
     conn.end();

@@ -81,6 +81,8 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             days: 10
         }
 
+        console.log(data);
+
         axios.post(`http://localhost:5000/rent`, data)
             .then(({ data }) => {
                 if (!data.success) {

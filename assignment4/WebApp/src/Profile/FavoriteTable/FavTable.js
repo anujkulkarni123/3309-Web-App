@@ -29,15 +29,15 @@ class FavTable extends Component {
     }
 
     //renders tool
-    renderFavTool = ({ UserID, ToolType, ToolName, Price}) => <FavTableView key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></FavTableView>
+    renderFavTool = ({ UserID, ToolID, ToolType, ToolName, Price}) => <FavTableView key={UserID} ID={UserID} ToolID={ToolID} Type={ToolType} Name={ToolName} Price={Price}></FavTableView>
 
     render()    {
         const { favTools } = this.state;
         return (
             <div className="favTools">
-                <div class="fav-title">
+                <label class="fav-title">
                     Favorited Tools
-                </div>
+                </label>
                 {favTools.map(this.renderFavTool)}
             </div>
         );

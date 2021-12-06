@@ -4,7 +4,7 @@ import Expand from 'react-expand-animated';
 import axios from 'axios';
 
 
-const FavTableView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+const FavTableView =  ({ ID, ToolID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
@@ -14,7 +14,7 @@ const FavTableView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
 
         console.log(ID);
         // Gets the tools from the route
-        axios.get(`http://localhost:5000/tools/${ID}`)
+        axios.get(`http://localhost:5000/tools/${ToolID}`)
             .then(({data}) => {
                 if (data.row) {
                     setToolSpecifics(data.row);
@@ -33,11 +33,11 @@ const FavTableView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         <div key={ID} className="tool-expanded">
             <div className="left-div">
                 <label>Owner: {Username}</label>   
-                <label>For Rent: {ForRent}</label>
+                <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
             </div>
             <div className="right-div">
                 <label>Address: {Address}</label>
-                <label>For Sale: {ForSale}</label>
+                <label>For Sale: {ForSale? 'Yes' : 'No'}</label>
             </div>
 
             <div>

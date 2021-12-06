@@ -8,17 +8,17 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
     // Necassary variables, clicked is for Expanding, userSpecifics is for the info in the expanded div
     const [clicked, setClicked] = useState(false);
-    const [userSpecifics, setUserSpecifics] = useState('');
+    const [userSpecifics, setUserSpecifics] = useState([]);
 
     // Gets the users from the route
     const displayUserData = (id) => {
         setClicked(!clicked);
 
-        axios.get(`http://localhost:5000/users/${ID}`)
+        axios.get(`http://localhost:5000/user/${Username}`)
             .then(({data}) => {
-                console.log(data)
-                if (data.row) {
-                    setUserSpecifics(data.row);
+                console.log(data.data.tools)
+                if (data.data.tools) {
+                    setUserSpecifics(data.data.tools);
                 }
             })
             .catch((err) => {
@@ -55,7 +55,7 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
 
             <Expand className="userExpand" open={clicked}>
                 <div className="expandedDiv">
-                    {renderInfo(userSpecifics)}
+                    {userSpecifics.map(renderInfo)}
                 </div>
             </Expand>
 

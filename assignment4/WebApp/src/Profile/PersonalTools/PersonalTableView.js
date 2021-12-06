@@ -45,8 +45,9 @@ class PersonalTableView extends Component {
         const { pTools, results, displayResults } = this.state;
         return (
             <div className="listed-tools">
-                <div>
-                    <button className="addtool-btn"><Link className='addtool-btn' to="/InsertTool">Add Tool</Link></button>
+                <div className="listed-tool-div">
+                    <button className="addtool"><Link className='addtool-btn' to="/InsertTool">Add Tool</Link></button>
+                    <label className="label">Listed Tools</label>
                 </div>
                 {displayResults ? pTools.map(this.renderPTools) : results.map(this.renderPTools)}
             </div>

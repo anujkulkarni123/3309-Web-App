@@ -12,6 +12,7 @@ const FavTableView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     const displayFavTool= (id) => {
         setClicked(!clicked);
 
+        console.log(ID);
         // Gets the tools from the route
         axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {

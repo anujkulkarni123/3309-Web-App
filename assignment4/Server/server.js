@@ -393,6 +393,7 @@ router.get('/fav/:username', (req, res) => {
     ,t.ToolName
     ,t.ForSale
     ,t.ForRent
+    ,t.UserID
   FROM
     favouritetools ft
   JOIN tools t

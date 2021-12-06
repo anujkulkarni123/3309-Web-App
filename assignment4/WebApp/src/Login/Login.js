@@ -78,14 +78,14 @@ function Login() {
                 <label style={{ fontSize: 14, }}>
                   Enter Your Username:
                 </label>
-                <input type="text" name="username" ref={usr => (username = usr)} placeholder="username" style={{ marginLeft: 20}}></input>
+                <input type="text" name="username" ref={usr => (username = usr)} placeholder="Username" style={{ marginLeft: 20}}></input>
               </div>
 
               <div className="inputs">
                 <label style={{ fontSize: 14, }}>
                     Enter Your Password:
                 </label>
-                <input type="password"  name="password" ref={passwrd => (password = passwrd)} placeholder="*********" style={{ marginLeft: 24}}></input>
+                <input type="password"  name="password" ref={passwrd => (password = passwrd)} placeholder="Password" style={{ marginLeft: 24}}></input>
               </div>
 
             </div>
@@ -103,14 +103,14 @@ function Login() {
                 <label style={{ fontSize: 14, }}>
                   Enter Your Username:
                 </label>
-        <input type="text" placeholder="username" ref={usr => (usernameReg = usr)} style={{ marginLeft: 20}}></input>
+        <input type="text" placeholder="Username" ref={usr => (usernameReg = usr)} style={{ marginLeft: 20}}></input>
               </div>
 
               <div className="inputs">
                 <label style={{ fontSize: 14}}>
                     Enter Your Password:
                 </label>
-        <input type="text" placeholder="*********" ref={pwd => (passwordReg = pwd)} style={{ marginLeft: 25}}></input>
+        <input type="text" placeholder="Password" ref={pwd => (passwordReg = pwd)} style={{ marginLeft: 25}}></input>
               </div>
 
               <div className="inputs">

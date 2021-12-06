@@ -5,11 +5,21 @@ import Expand from 'react-expand-animated';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import $ from 'jquery'
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+    useNavigate
+  } from "react-router-dom";
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
+
+    let navigate = useNavigate();
+    const [errMsg, setErrMsg] = useState('');
 
     const displayToolData = (id) => {
         setClicked(!clicked);
@@ -35,10 +45,12 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             return;
         }
 
-        axios.get(`http://localhost:5000/buy?username=${Cookies.get('user')}&toolID=${id}`)
+        axios.get(`http://localhost:5000/buy?username='${Cookies.get('user')}'&toolID='${id}'`)
             .then(({ data }) => {
                 if (!data.success) {
+                    console.log('redirecting...');
                     alert(data.message);
+                    navigate('/App');
                     return;
                 }
 
@@ -47,6 +59,8 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             .catch((err) => {
                 throw err;
             });
+
+            // buyTool(data, setErrMsg, navigate);
 
     }
 

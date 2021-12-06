@@ -102,8 +102,12 @@ async function buyTool(username, ToolID) {
 
   const query = util.promisify(conn.query).bind(conn);
 
+  console.log({username});
+    console.log({ToolID});
+
   try {
     // add the transaction to the usertransactions table
+
     await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
       (SELECT UserID from users WHERE Username = '${username}')
       ,${ToolID}

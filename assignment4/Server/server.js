@@ -462,7 +462,7 @@ router.get('/rmFav', (req, res) => {
 // route to buy a tool
 router.get('/buy', (req, res) => {
   const username = req.query.username;
-  const ToolID = parseInt(req.query.toolID);
+  const ToolID = (req.query.toolID);
 
   buyTool(username, ToolID)
     .then((response) => {

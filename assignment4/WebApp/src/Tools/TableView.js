@@ -96,6 +96,7 @@ class TableView extends Component {
     handleToolSearch = (e) => {
         const value = e.target.value;
         this.setState({ search: value, currentPage: 0 });
+        this.handlePageClick({ selected: 0 });
         this.getTools();
     }
 
@@ -116,7 +117,7 @@ class TableView extends Component {
 
                     <div className="sort-div">
                         <div classname="sort-label">
-                            <label>Sort By:</label> 
+                            <label>Sort By:</label>
                         </div>
 
                         <ComboBox id="combo-box" class="combo-box" options={comboboxData} onOptionsChange={this.handleFilterChange.bind(this)} enableAutocomplete/>

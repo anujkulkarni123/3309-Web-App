@@ -1,13 +1,13 @@
 import axios, { Axios } from 'axios';
 
-export function InsertTool(data, setErrMsg) {
+export function InsertTool(data, setErrMsg, navigate) {
     axios.post(`http://localhost:5000/insertTool`, data)
     .then(({ data }) => {
       console.log(data);
       if (data.success) {
         console.log('redirecting...');
         setErrMsg('');
-        
+        navigate('/Profile');
       } else {
         setErrMsg(data.message);
       }
@@ -57,4 +57,15 @@ export function InsertFavourite(data) {
     })
 }
 
+
+export function DeleteFavourite(data) {
+  axios.post(`http://localhost:5000/rmFav`)
+    .then(({data}) => {
+      if (data.success) {
+        console.log(data);
+      } else {
+        console.error();
+      }
+    })
+}
 export default Axios;

@@ -164,6 +164,7 @@ async function rentTool(username, ToolID, days) {
     return { message: `Successfully rented the tool for ${days} days!`, success: true };
 
   } catch (e) {
+    console.log(e);
     throw e;
   } finally {
     conn.end();

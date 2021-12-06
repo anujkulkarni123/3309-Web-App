@@ -36,6 +36,15 @@
     font-size: 20px;
 }
 
+.nav-icon  {
+    color: white;
+    font-size: 20px;
+}
+
+.nav-icon:hover   {
+    color: gray;
+}
+
 
 .logout-btn{
     padding: 10px;

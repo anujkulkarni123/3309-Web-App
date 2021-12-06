@@ -4,7 +4,7 @@ import {FaTools, FaUsers, FaUserCircle} from "react-icons/fa";
 // Icon, title, url (for the route) and the name of the class
 export const MenuItems = [
     {
-        icon: <FaTools />,
+        icon: <FaTools/>,
         title: 'Tools',
         url: '/App',
         cName: 'nav-links'

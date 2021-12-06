@@ -32,11 +32,21 @@ const UserView =  ({ ID, Username, Rating, TransDone, Address}) => {
         return(
         <div key={ID} className="user-expanded">
             <div className="tools-div">
-                <label>ToolName: {ToolName}</label>   
+                <div>
+                <label>ToolName: {ToolName}</label> 
+                </div> 
+                <div>
                 <label>Price: {Price}</label>
+                </div>
+                <div>
                 <label>ToolType: {ToolType}</label>
+                </div>
+                <div>
                 <label>For Sale: {ForSale}</label>
+                </div>
+                <div>
                 <label>For Rent: {ForRent}</label>
+                </div>
             </div>
         </div>
         );   

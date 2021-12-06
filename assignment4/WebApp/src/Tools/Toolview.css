@@ -85,14 +85,14 @@
 
 .tool-expanded  {
     font-size: 20px;
-    width: fit-content;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
 .left-div   {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,6 +100,7 @@
 
 .right-div  {
     display: flex;
-    flex-direction: row;
+    width: 100%;
+    flex-direction: column;
     justify-content: center;
 }

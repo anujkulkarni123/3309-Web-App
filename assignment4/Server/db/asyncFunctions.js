@@ -95,6 +95,31 @@ async function getUserDetails(username) {
   }
 }
 
+// async function to favorite a tool
+async function addFav(username, ToolID) {
+  const conn = createConnection();
+  conn.connect();
+
+  const query = util.promisify(conn.query).bind(conn);
+
+  try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
+    // add the transaction to the usertransactions table
+    await query(`INSERT INTO favouritetools (UserID, ToolID) VALUES (
+      ${user[0].UserID}
+      ,${ToolID}
+    )`);
+
+    return { message: 'Successfully Inserted Tool', success: true };
+  } catch (e) {
+    throw e;
+  } finally {
+    conn.end();
+  }
+}
+
 // async function to buy a tool
 async function buyTool(username, ToolID) {
   const conn = createConnection();
@@ -106,10 +131,13 @@ async function buyTool(username, ToolID) {
     console.log({ToolID});
 
   try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
     // add the transaction to the usertransactions table
 
     await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
-      (SELECT UserID from users WHERE Username = '${username}')
+      ${user[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
@@ -117,7 +145,7 @@ async function buyTool(username, ToolID) {
     // remove the tool from the tools table
     await query(`DELETE FROM tools
       WHERE
-        UserID = (SELECT UserID from users WHERE Username = '${username}') AND
+        UserID = ${user[0].UserID} AND
         ToolID = ${ToolID}
     `);
 
@@ -140,9 +168,12 @@ async function rentTool(username, ToolID, days) {
   const query = util.promisify(conn.query).bind(conn);
 
   try {
+    // getting user
+    const user = await query(`SELECT UserID FROM users WHERE Username='${username}'`);
+
     // add the transaction to the usertransactions table
     await query(`INSERT INTO usertransactions (BuyerID, ToolID, TransactionDate) VALUES (
-      (SELECT UserID WHERE Username = '${username}')
+      ${user[0].UserID}
       ,${ToolID}
       ,CURDATE()
     )`);
@@ -150,7 +181,7 @@ async function rentTool(username, ToolID, days) {
     // remove the tool from the tools table
     await query(`DELETE FROM tools
       WHERE
-        UserID = (SELECT UserID from users WHERE Username = '${username}') AND
+        UserID = ${user[0].UserID} AND
         ToolID = ${ToolID}
     `);
 
@@ -175,6 +206,7 @@ module.exports = {
   registerUser: registerUser,
   insertTool: insertTool,
   getUserDetails: getUserDetails,
+  addFav: addFav,
   buyTool: buyTool,
   rentTool: rentTool
 }

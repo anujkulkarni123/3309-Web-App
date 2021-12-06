@@ -38,6 +38,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             });
     }
 
+    // Called when the buy tool button is clicked
     const buyTool = (id) => {
         // tell user to log in if they are not
         if (!Cookies.get('user')) {

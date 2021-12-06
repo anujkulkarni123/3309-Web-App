@@ -142,7 +142,6 @@ async function buyTool(username, ToolID) {
       ,null
     )`)
 
-
     return { message: 'Transaction was successful', success: true };
   } catch (e) {
     throw e;

@@ -32,11 +32,11 @@ const PersonalTable =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         <div key={ID} className="tool-expanded">
             <div className="left-div">
                 <label>Owner: {Username}</label>   
-                <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
+                <label>For Rent: {ForRent}</label>
             </div>
             <div className="right-div">
                 <label>Address: {Address}</label>
-                <label>For Sale: {ForSale? 'Yes' : 'No'}</label>
+                <label>For Sale: {ForSale}</label>
             </div>
 
             <div>

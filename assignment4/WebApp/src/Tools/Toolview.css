@@ -49,11 +49,31 @@
 
 .buy-btn{
     background-color:var(--header);
+    color: white;
     justify-content: center;
     display: flex;
-    width: max-content;
     height: max-content;
     margin-top: 30px;
+    width: 100px;
+}
+
+.buy-btn:hover{
+    background-color: tomato;
+}
+
+
+.rent-btn{
+    background-color:var(--header);
+    color: white;
+    justify-content: center;
+    display: flex;
+    height: max-content;
+    margin-top: 3px;
+    width: 100px;
+}
+
+.rent-btn:hover{
+    background-color: tomato;
 }
 
 .tool-expanded  {

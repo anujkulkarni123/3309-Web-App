@@ -68,7 +68,10 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             <Expand className="expand" open={clicked}>
                 <div className="expandDiv">
                     {renderInfo(toolSpecifics)}
+                    <div>
                     <button className="buy-btn">Buy Tool</button>
+                    <button className="rent-btn">Rent Tool</button>
+                    </div>
                 </div>
             </Expand>
 

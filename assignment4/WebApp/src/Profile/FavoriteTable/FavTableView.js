@@ -4,16 +4,17 @@ import Expand from 'react-expand-animated';
 import axios from 'axios';
 
 
-const PersonalTable =  ({ ID, ToolID, Type, Name, UserID, CompanyID, Price}) => {
+const FavTableView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
 
-    const displayToolData = (id) => {
+    const displayFavTool= (id) => {
         setClicked(!clicked);
 
+        console.log(ID);
         // Gets the tools from the route
-        axios.get(`http://localhost:5000/tools/${ToolID}`)
+        axios.get(`http://localhost:5000/tools/${ID}`)
             .then(({data}) => {
                 if (data.row) {
                     setToolSpecifics(data.row);
@@ -32,17 +33,16 @@ const PersonalTable =  ({ ID, ToolID, Type, Name, UserID, CompanyID, Price}) => 
         <div key={ID} className="tool-expanded">
             <div className="left-div">
                 <label>Owner: {Username}</label>   
-                <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
-                <label>For Sale: {ForSale? 'Yes' : 'No'}</label>
+                <label>For Rent: {ForRent}</label>
             </div>
-
             <div className="right-div">
                 <label>Address: {Address}</label>
+                <label>For Sale: {ForSale}</label>
             </div>
-{/* 
+
             <div>
                 <label>ID: {ID}</label>
-            </div> */}
+            </div>
             
         </div>
         );   
@@ -55,7 +55,7 @@ const PersonalTable =  ({ ID, ToolID, Type, Name, UserID, CompanyID, Price}) => 
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>
-                <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
+                <FaChevronCircleDown className="icon-chevron" onClick={() => displayFavTool(ID)}/>
             </div>
 
             <Expand className="expand" open={clicked}>
@@ -68,4 +68,4 @@ const PersonalTable =  ({ ID, ToolID, Type, Name, UserID, CompanyID, Price}) => 
     );
 }
 
-export default PersonalTable;
+export default FavTableView;

@@ -60,6 +60,7 @@
     height: max-content;
     margin-top: 30px;
     width: 100px;
+    margin-left: 90px;
 }
 
 .buy-btn:hover{
@@ -75,6 +76,7 @@
     height: max-content;
     margin-top: 3px;
     width: 100px;
+    margin-left: 90px;
 }
 
 .rent-btn:hover{
@@ -83,10 +85,10 @@
 
 .tool-expanded  {
     font-size: 20px;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .left-div   {
@@ -96,9 +98,16 @@
     justify-content: center;
 }
 
-.right-div  {
+.mid-div  {
     display: flex;
     width: 100%;
     flex-direction: column;
     justify-content: center;
+}
+
+.right-div{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: right;
 }

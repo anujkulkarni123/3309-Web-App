@@ -116,9 +116,15 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label>Address: {Address}</label>
 
             </div>
-            <div className="right-div">
+            <div className="mid-div">
                 <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
                 <label>For Sale: {ForSale? 'Yes' : 'No'}</label>
+            </div>
+            <div className="right-div">
+                    <button className="buy-btn" onClick={() => buyTool(ID)}>Buy Tool</button>
+                    <button className="rent-btn" onClick={() => rentTool(ID)}>Rent Tool</button>
+                    Days for rent:
+                    <input type="number" ref={d => (days = d)} placeholder="10"/>
             </div>
         </div>
         );
@@ -138,14 +144,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             <Expand className="expand" open={clicked}>
                 <div className="expandDiv">
                     {renderInfo(toolSpecifics)}
-                    <div>
-                        <button className="buy-btn" onClick={() => buyTool(ID)}>Buy Tool</button>
-                        <div>
-                            Days for rent: <span></span>
-                            <input type="number" ref={d => (days = d)} placeholder="10"/>
-                            <button className="rent-btn" onClick={() => rentTool(ID)}>Rent Tool</button>
-                        </div>
-                    </div>
                 </div>
             </Expand>
 

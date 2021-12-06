@@ -23,7 +23,7 @@ $(function()    {
 });
 
 // Three titles in the sorting combo box
-const comboboxData = [ "ToolName", "Price", "ToolType" ];
+const comboboxData = [ "ToolName", "Price", "ToolType", "ToolID" ];
 
 class TableView extends Component {
 

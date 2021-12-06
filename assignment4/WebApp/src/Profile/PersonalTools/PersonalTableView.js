@@ -38,7 +38,7 @@ class PersonalTableView extends Component {
     }
     
     // Renders each tool
-    renderPTools = ({ UserID, ToolType, ToolName, Price}) => <PersonalTable key={UserID} ID={UserID} Type={ToolType} Name={ToolName} Price={Price}></PersonalTable>
+    renderPTools = ({ UserID, ToolID, ToolType, ToolName, Price}) => <PersonalTable key={UserID} ID={UserID} ToolID={ToolID} Type={ToolType} Name={ToolName} Price={Price}></PersonalTable>
 
     // Loops through the pTools array which holds each users personal tools
     render()    {

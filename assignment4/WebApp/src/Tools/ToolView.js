@@ -1,28 +1,19 @@
-import React, { useState } from 'react';
-import { FaChevronCircleDown, FaHeart } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaChevronCircleDown } from 'react-icons/fa';
 import './Toolview.css';
 import Expand from 'react-expand-animated';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import $ from 'jquery';
-import { InsertFavourite } from '../Axios/Axios';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-    useNavigate
-  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Fav from './Fav';
 
 const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
 
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
-    const [ fav, setFav ] = useState("")
 
     let navigate = useNavigate();
-    const [errMsg, setErrMsg] = useState('');
 
     const displayToolData = (id) => {
         setClicked(!clicked);
@@ -41,38 +32,6 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             });
     }
 
-    function setRed() {
-        $(".icon-heart").click(function()   {
-            $("#icon-heart").attr('class', 'icon-heart-active' );
-        })
-    }
-
-    function setBlack() {
-        $(".icon-heart-active").click(function()   {
-            $("#icon-heart").attr('class', 'icon-heart' );
-        })
-    }
-
-    //handling insertion and deletion intop fav sql tabl;e
-
-    function handleFav()    {
-
-        const info = {
-            username: Cookies.get('user'),
-            toolID: ID
-        }
-
-        setFav(!fav)
-        if (fav === true)   {
-            setRed();
-            //insert into fav tool table
-            InsertFavourite(info);
-        } else  {
-            setBlack();
-            //delete from sql table
-        }
-    }
-
     // Called when the buy tool button is clicked
     const buyTool = (id) => {
         // tell user to log in if they are not
@@ -81,7 +40,12 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
             return;
         }
 
-        axios.get(`http://localhost:5000/buy?username=${Cookies.get('user')}&toolID=${id}`)
+        const data = {
+            username: Cookies.get('user'),
+            toolID: id
+        }
+
+        axios.post(`http://localhost:5000/buy`, data)
             .then(({ data }) => {
                 if (!data.success) {
                     console.log('redirecting...');
@@ -106,13 +70,12 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
 
     // Renders the info in the drop down
     function renderInfo({ Username, ForSale, ForRent, Address })  {
-        console.log(ID);
         return(
         <div key={ID} className="tool-expanded">
             <div className="left-div">
                 <label>Owner: {Username}</label>
                 <label>Address: {Address}</label>
-            
+
             </div>
             <div className="right-div">
                 <label>For Rent: {ForRent? 'Yes' : 'No'}</label>
@@ -129,7 +92,7 @@ const ToolView =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
                 <label className="name">Name: {Name}</label>
                 <label className="price">${Price}</label>
                 <label className="type">Type: {Type}</label>
-                <FaHeart id="icon-heart" className="icon-heart" class="icon-heart" onClick={() => {handleFav()}}/>
+                <Fav ID={ID} />
                 <FaChevronCircleDown className="icon-chevron" onClick={() => displayToolData(ID)}/>
             </div>
 

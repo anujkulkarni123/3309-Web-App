@@ -7,3 +7,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+.fav-title{
+    background-color: var(--header);
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    border-radius: 50px;   
+}

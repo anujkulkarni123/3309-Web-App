@@ -59,12 +59,12 @@ export function InsertFavourite(data) {
 
 
 export function DeleteFavourite(data) {
-  axios.post(`http://localhost:5000/rmFav`)
-    .then(({data}) => {
-      if (data.success) {
-        console.log(data);
+  axios.post(`http://localhost:5000/rmFav`, data)
+    .then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
       } else {
-        console.error();
+        console.error(response.data.message);
       }
     })
 }

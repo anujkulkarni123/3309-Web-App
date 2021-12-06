@@ -35,6 +35,9 @@ class FavTable extends Component {
         const { favTools } = this.state;
         return (
             <div className="favTools">
+                <div class="fav-title">
+                    Favorited Tools
+                </div>
                 {favTools.map(this.renderFavTool)}
             </div>
         );

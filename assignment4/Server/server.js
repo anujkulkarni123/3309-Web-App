@@ -397,7 +397,7 @@ router.get('/fav/:username', (req, res) => {
   JOIN tools t
     ON (t.ToolID = ft.ToolID)
   WHERE
-    UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1)
+    ft.UserID = (SELECT UserID FROM users WHERE Username = '${username}' LIMIT 1)
   `;
 
   conn.query(query, (err, data) => {

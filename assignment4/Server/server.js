@@ -272,7 +272,7 @@ router.get('/popularUsers', (req, res) => {
 // route to get info on a tool and its user
 router.get('/tools/:id', (req, res) => {
   // get the params
-  const UserID = parseInt(req.params.id);
+  const ToolsID = parseInt(req.params.id);
 
   const conn = createConnection();
   conn.connect();
@@ -292,7 +292,7 @@ router.get('/tools/:id', (req, res) => {
     JOIN users u
       ON (t.UserID = u.UserID)
     WHERE
-      t.UserID = ${UserID}
+      t.ToolID = ${ToolsID}
   `;
 
   conn.query(query, (err, rows) => {

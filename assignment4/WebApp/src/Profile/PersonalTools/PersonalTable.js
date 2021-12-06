@@ -4,7 +4,7 @@ import Expand from 'react-expand-animated';
 import axios from 'axios';
 
 
-const PersonalTable =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
+const PersonalTable =  ({ ID, ToolID, Type, Name, UserID, CompanyID, Price}) => {
     // Needed Variables, clicked is used for the drop down, toolSpecifics is used for the info in the drop down
     const [clicked, setClicked] = useState(false);
     const [toolSpecifics, setToolSpecifics] = useState('');
@@ -13,7 +13,7 @@ const PersonalTable =  ({ ID, Type, Name, UserID, CompanyID, Price}) => {
         setClicked(!clicked);
 
         // Gets the tools from the route
-        axios.get(`http://localhost:5000/tools/${ID}`)
+        axios.get(`http://localhost:5000/tools/${ToolID}`)
             .then(({data}) => {
                 if (data.row) {
                     setToolSpecifics(data.row);

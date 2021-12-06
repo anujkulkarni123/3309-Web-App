@@ -500,7 +500,7 @@ router.post('/buy', (req, res) => {
 router.post('/rent', (req, res) => {
   const username = req.body.username;
   const ToolID = parseInt(req.body.toolID);
-  const days = parseInt(req.body.days);
+  const days = req.body.days;
 
   rentTool(username, ToolID, days)
     .then((response) => {

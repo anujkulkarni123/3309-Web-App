@@ -115,6 +115,16 @@ async function buyTool(username, ToolID) {
       ,CURDATE()
     )`);
 
+    // update transactions done for the user
+    await query(`
+      UPDATE
+        users
+      SET
+        TransDone = TransDone + 1
+      WHERE
+        UserID = ${user[0].UserID}
+    `);
+
     // add it unavailable tools
     await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (
       ${user[0].UserID}
@@ -153,6 +163,16 @@ async function rentTool(username, ToolID, days) {
       ,${ToolID}
       ,CURDATE()
     )`);
+
+    // update transactions done for the user
+    await query(`
+      UPDATE
+        users
+      SET
+        TransDone = TransDone + 1
+      WHERE
+        UserID = ${user[0].UserID}
+    `);
 
     // add the tool to the unavailabletools table
     await query(`INSERT INTO unavailabletools (UserID, ToolID, ReturnDate) VALUES (

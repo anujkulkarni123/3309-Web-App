@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { InsertFavourite, DeleteFavourite } from '../Axios/Axios';
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 // component to like/unlike tools
 export default class Fav extends Component {
@@ -9,8 +10,23 @@ export default class Fav extends Component {
         super(props);
 
         this.state = {
-            fav: this.props.fav
+            fav: false
         }
+    }
+
+    checkFavTools = () => {
+        axios.get(`http://localhost:5000/fav/${Cookies.get('user')}`)
+            .then(({data}) => {
+                for (let tool of data.data) {
+                    if (tool.ToolID === this.props.ID) {
+                        this.setState({ fav: true });
+                        return;
+                    }
+                }
+            })
+            .catch((err) => {
+                throw err;
+            });
     }
 
     handleFav = () => {
@@ -22,7 +38,8 @@ export default class Fav extends Component {
             toolID: this.props.ID
         }
 
-        this.setState(({ fav }) => ({ fav: !fav }));
+        this.setState({ fav: !fav });
+
         if (!fav)   {
             InsertFavourite(info);
         } else  {
@@ -30,9 +47,13 @@ export default class Fav extends Component {
         }
     }
 
+    componentDidMount() {
+        this.checkFavTools();
+    }
+
     render() {
         return (
-            <FaHeart id="icon-heart" className="icon-heart" class={this.props.fav ? 'icon-heart-active' : 'icon-heart'} onClick={() => {this.handleFav()}}/>
+            <FaHeart id="icon-heart" className="icon-heart" class={this.state.fav ? 'icon-heart-active' : 'icon-heart'} onClick={() => {this.handleFav()}}/>
         );
     }
 }

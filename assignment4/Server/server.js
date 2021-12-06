@@ -329,7 +329,7 @@ router.get('/users/:id', (req, res) => {
     JOIN users u
       ON (u.UserID = t.UserID)
     WHERE
-      UserID = ${UserID}
+      t.UserID = ${UserID}
   `;
 
   conn.query(query, (err, rows) => {
